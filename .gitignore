@@ -1,0 +1,23 @@
+# Large simulation output
+output/*.csv
+
+# Archived files
+figures/*
+output/*
+notes/*
+documentation/keypapers/*
+
+# R artifacts
+.Rhistory
+.RData
+.Rproj.user/
+
+# SVG files (can be very large)
+*.svg
+
+# macOS
+.DS_Store
+
+# claude
+*claude*
+*CLAUDE*

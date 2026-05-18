@@ -1,0 +1,28 @@
+ 1. Milligan et al. (2021, PLOS ONE) — A two-population SEIR model showing essential workers face elevated infection risk, with non-public-facing workers (including agricultural) experiencing high personal risk but limited spillover. But: no household structure, no crowding, no production losses, COVID-specific. 
+
+ 2. Henry et al. (2025, Scientific Reports) — The paper Naia flagged (PMC12022078). An agent-based model of COVID-19 in food production facilities evaluating intervention strategies. But: single-facility scale (~100 workers), no household structure, retrospective/COVID-specific, no crop-level production impacts. 
+
+ 3. Lusk & Chandra (2021, PLOS ONE) — Already cited in your manuscript (the $309M figure). They estimated ag worker COVID burden by proportional allocation from county case rates, then translated  to output losses via labor cost-shares. But: no mechanistic disease model, no differential epidemiology, retrospective. 
+
+ 4. Charlton (2022, Applied Economic Perspectives and Policy) — Econometric evidence that agricultural labor concentrations amplified county-level COVID cases. Empirical support for the premise, but not a disease model.
+
+Our model holds transmission rates constant over the course of an outbreak, which does not capture behavioral responses such as social distancing or school closures that typically reduce transmission as an epidemic progresses. However, agricultural workers may have less capacity to modify their behavior during an outbreak due to the in-person nature of their work, limited access to paid sick leave, and employer pressure to maintain operations. The constant-transmission assumption may therefore be more realistic for the agricultural workforce — the population of primary interest — than for the general community. Moreover, while we fix the basic reproduction number at the national level, effective transmission dynamics vary across regions and subpopulations through differences in household size and crowding distributions, capturing an important dimension of heterogeneity even under constant transmission rates.
+
+
+-------------------------------  
+
+
+This derivation gives the pairwise secondary attack rate — the probability that a single susceptible household member is infected by a single infectious index case. In larger households, multiple generations of within-household transmission can produce realized attack rates that exceed this pairwise value. The simulation captures these dynamics fully, as the transmission model tracks all within-household infections over the course of an outbreak; the pairwise SAR is used here only to calibrate the within-household transmission rate τ.
+
+  - Ag households per capita = a / h_a (where a = fraction of population in ag work, h_a = mean ag
+  household size)
+  - Community households per capita = (1−a) / h_c
+  - Corrected household fraction = (a/h_a) / (a/h_a + (1−a)/h_c)
+
+Sample costs to produce and harvest strawberries
+
+These state-level averages mask potentially severe farm-level impacts; individual farms harvesting during concentrated windows could experience losses far exceeding the state mean if an epidemic coincides with their peak harvest.
+
+Agricultural workers live in households that are substantially larger and more crowded than the general population, conditions known to amplify respiratory disease transmission, yet the downstream consequences for food production remain unquantified.
+
+across reproduction numbers from 1.2 to 3.0 and varying assumptions about household transmission

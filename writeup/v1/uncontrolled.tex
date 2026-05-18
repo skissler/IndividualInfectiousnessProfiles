@@ -1,0 +1,249 @@
+\clearpage 
+
+\section{The impact of punctuated infectiousness profiles on uncontrolled epidemics}
+
+\subsection{Punctuated individual infectiousness profiles generate later and more variably-timed epidemics.}
+
+Early-outbreak stochasticity can impact when an epidemic becomes established, which in turn shifts the epidemic's full trajectory \citep{morris_computation_2024}. Simulations demonstrate that narrower $a_i(\tau)$ (\ie, $\psi \rightarrow 0$) cause this time shift's expected value to move later and its variance to increase. For 5,000 simulations across each of the three benchmark pathogens and for $\psi \in \{0, 0.5, 1\}$, we measured the time to reach 5\% cumulative prevalence (\ie, 500 total infections), which we took as a marker of epidemic establishment. For influenza, the mean [5\% quantile, 95\% quantile] time to reach 500 cases was 24.2 days [17.8, 33.8] for $\psi = 1$ and 24.5 [17.2, 34.9] for $\psi = 0$; for omicron, 18.1 days [14.8, 22.9] for $\psi = 1$ and 20.3 days [13.4, 30.4] for $\psi = 0$; and for measles, 31.3 days [28.6, 34.6] for $\psi = 1$ and 32.5 days [26.4, 39.5] for $\psi = 0$. These results indicate that the $\psi$-effect was amplified for pathogens with higher $R_0$ (omicron, measles). This translated into meaningful differences in epidemic timing, particularly for SARS-CoV-2 omicron and measles: on day 20, 82\% of simulated SARS-CoV-2 omicron outbreaks with $\psi = 1$ had reached 500 cases, while only 55\% of outbreaks with $\psi = 0$ had reached the same threshold. Similarly, by day 33, 84\% of simulated measles outbreaks with $\psi = 1$ had reached 500 cases, while only 58\% of outbreaks with $\psi = 0$ had reached the same threshold ({\bf Figure \ref{fig:survival}}). 
+
+% by day , 89\% of simulated SARS-CoV-2 omicron outbreaks with $\psi = 1$ had reached 500 cases, while only 62\% of outbreaks with $\psi = 0$ had reached the same threshold. Similarly, by day 35, 96\% of simulated measles outbreaks with $\psi = 1$ had reached 500 cases, while only 76\% of outbreaks with $\psi = 0$ had reached the same threshold ({\bf Figure \ref{fig:survival}}). 
+
+Analytic results rooted in branching theory confirm that these trends hold more generally. Let $Z(t)$ be the cumulative number of individuals infected at time $t$; then, following \citet{morris_computation_2024}, we can define a rescaled branching process 
+\begin{equation}
+	W(t) = e^{-r t} Z(t)
+\end{equation}
+with initial condition $W(0)$ and growth rate $r$ that describes the epidemic's exponential growth phase. The process $W(t)$ converges almost surely to a random variable $W$, which can be loosely interpreted as random initial condition on the branching process that captures the effect of early-outbreak stochasticity. With a change of variables, this random initial condition can be expressed as a random time shift $\varsigma$, where 
+\begin{equation}
+	\varsigma = \frac{\log W - \log E[W]}{r}
+\end{equation}
+and the branching process can be expressed as 
+\begin{equation}
+	Z(t) \approx e^{r(t + \varsigma)}
+\end{equation}
+For notational simplicity, we assume that epidemics are always seeded with a single infectious case; thus, $E[W] = Z_0 = 1$ and $\varsigma = \log W / r$. 
+
+Under the Gamma time-shift model for $a_i(\tau)$, we can derive the variance of the random initial condition ({\bf Supplementary Methods}): 
+\begin{equation}
+	\text{Var}[W] = \frac{
+		\Bigl(\frac{1 + z}{1 + 2z}\Bigr)^\alpha + \Bigl(\frac{(1 + z)^2}{1 + 2z}\Bigr)^{(1-\psi) \alpha} - 1
+	}{
+		1 - \Bigl(\frac{1 + z}{1 + 2z}\Bigr)^\alpha
+	} := 
+	\frac{\sigma_1^\alpha + \sigma_2^{(1-\psi)\alpha} - 1}{1 - \sigma_1^\alpha}
+	\label{eq:var_W}
+\end{equation}
+where $z = R_0^{1/\alpha} - 1$ and $\sigma_c = ((1+z)^c) / (1 + 2z)$. Thus, $\text{Var}[W]$ depends on $R_0$, $\alpha$ (\ie, the shape/skewness of $A(\tau)$), and $\psi$. The punctuation parameter $\psi$ enters Eq.~\ref{eq:var_W} only once, in the exponent of $\sigma_2$. Since $\sigma_2 > 1$ when $R_0 > 1$, $\text{Var}[W]$ and $\psi$ are monotonically related, where narrower individual infectiousness profiles ($\psi \rightarrow 0$) maximize the variance and broader profiles ($\psi \rightarrow 1$) minimize it. Furthermore, $\sigma_2$ is monotonically increasing in $R_0$ ({\bf Supplementary Methods}), so larger $R_0$ amplifies the dependence of $\text{Var}[W]$ on $\psi$. If we further assume, following \citet{morris_computation_2024}, that the distribution of $W$ is well approximated by a $\text{Gamma}(k, \lambda)$ distribution with first two moments matched to those of $W$, we can derive closed-form expressions for $E[\varsigma]$ and $\text{Var}[\varsigma]$ ({\bf Supplementary Methods}). These confirm that higher $\text{Var}[W]$ --- and thus narrower infectiousness profiles --- lead to more negative $E[\varsigma]$ (\ie, cause the expected time shift to fall later) and higher $\text{Var}[\varsigma]$. 
+
+These analytic results also apply more generally than the Gamma time-shift model for $a_i(\tau)$. For any probability densities $f_l$ and $f_\epsilon$ that define an individual latent period and infectiousness kernel, such that $f_l (\tau)\circ f_\epsilon(\tau) = g(\tau)$, it can be shown that decreasing the variance of $f_\epsilon(\tau)$ increases the variance of $W$, with the effect size modulated by $R_0$ ({\bf Supplementary Methods}). If we assume the distribution of $W$ is well-approximated by a Gamma distribution, the effects of $f_\epsilon$'s variance on $E[\varsigma]$ and $\text{Var}[\varsigma]$ follow as before. 
+
+Intuitively, this $\psi$-dependent difference in the time shift's distribution arises from an order statistics phenomenon combined with exponential growth. For smooth infectiousness profiles ($\psi = 1$), the timing of each secondary infection is drawn independently from $g(\tau)$. As $R_0$ grows, the earliest of these infections happens increasingly sooner, giving the epidemic an early start. In terms of epidemic growth, these early infections matter exponentially more than the later ones. For punctuated profiles ($\psi = 0$), by contrast, all secondary infections cluster around a single random time drawn from $g(\tau)$. While this avoids the smooth profile's late infections, it also misses out on the advantage provided by the early ones --- and that missed advantage turns out to matter more, in terms of the expected time shift. [Something about skewness here is important for the expected time shift.] Similarly, the tight clustering of secondary infections for punctuated infectiousness profiles amplifies the impact of draws from $g(\tau)$ that lie in the tail, increasing the variance of the epidemic's effective start time. 
+
+% The intuition behind these timing effects rests on a temporal diversification argument. Consider an index case who produces $R_0$ secondary infections on average. Under a smooth infectiousness profile ($\psi = 1$), each secondary infection occurs at an independently drawn time from the generation interval distribution $A(\tau)$. As $R_0$ grows, the \emph{earliest} of these independent draws falls increasingly close to the left edge of $A(\tau)$ --- an order-statistic effect --- giving the epidemic a reliably early start. Under a punctuated profile ($\psi \approx 0$), by contrast, all secondary infections cluster around a single random time drawn from $A(\tau)$. There is no diversification: the ``earliest'' transmission is simply the single draw itself, regardless of $R_0$. When this draw falls in the right tail of $A(\tau)$, the entire packet of $\sim R_0$ infections arrives late, delaying the epidemic; when it falls in the left tail, they all arrive early, accelerating it. This all-or-nothing timing inflates both the variance and the mean delay of epidemic establishment.
+
+% The roles of $R_0$ and the shape of $A(\tau)$ follow naturally. Higher $R_0$ amplifies the diversification advantage of smooth profiles --- more independent draws make the order-statistic minimum more extreme --- while offering no such benefit to punctuated profiles, since a single shared draw is a single shared draw regardless of how many infections it carries. More right-skewed generation interval distributions (smaller shape parameter $\alpha$, for fixed mean) extend the right tail of $A(\tau)$, increasing the chance that a punctuated individual's single draw falls far from the mode and creating more extreme timing outliers. Both effects are visible in the simulations: the sensitivity of epidemic timing to $\psi$ is greatest for measles (highest $R_0$) and for SARS-CoV-2 omicron (most right-skewed generation interval).
+
+% Crucially, this diversification mechanism does not depend on the specific time-shifted Gamma model used here. The key structural feature is that punctuated profiles reduce the number of \emph{independent} timing draws contributing to early transmission: when secondary infections share a common latent period or burst time, they lose the variance-reducing benefit of temporal independence. Any model in which narrower infectiousness profiles increase the correlation among an individual's secondary infection times --- whether through a shared latent period, a concentrated burst of infectiousness, or a narrow window of high contact --- will produce the same qualitative pattern. The formal requirement is mild: the generation interval distribution must be non-degenerate and unimodal, so that temporal diversification has scope to operate and a single draw is meaningfully riskier than several independent draws. Under these conditions, the analytic results derived below for the time-shifted Gamma model should be understood as capturing a robust, general phenomenon rather than a model-specific artifact.
+
+\begin{figure}[ht] 
+\centering
+\includegraphics[width=\textwidth]{figures/pdf/survival.pdf}
+\caption{{\bf \boldmath Proportion of epidemics not yet reaching 100 infections for three pathogens.}  }
+\label{fig:survival}
+\end{figure}
+
+% ////////////////////////////////////////////////////////////////////////////////////////////
+
+\subsection{Narrow individual infectiousness profiles yield greater uncertainty in epidemic growth rate and generation interval distribution estimates}
+
+Estimating the epidemic growth rate is a critical task during an emerging outbreak, especially since the growth rate is a key ingredient in formulae to estimate the basic reproduction number. Punctuated individual infectiousness profiles make empirical estimates of the early-epidemic exponential growth rate $r$ more uncertain ({\bf Figure XX}). For each of the three benchmark pathogens, we simulated 5,000 epidemics in infinite populations. We ran each simulation for 7 days after reaching 100 cumulative cases. Then, following standard methods, we fit a Poisson generalized linear model using maximum likelihood to the daily simulated case counts to estimate the epidemic growth rate over one week. For all three pathogens, narrower infectiousness profiles yielded more uncertain growth rate estimates, with the $\psi$-related uncertainty increasing in $R_0$. For influenza, the maximum likelihood growth rate point estimates had standard deviation XX for $\psi = 1$, XX for $\psi = 0.5$, and XX for $\psi = 0$; for SARS-CoV-2 omicron, the growth rate estimates had standard deviation XX for $\psi = 1$, XX for $\psi = 0.5$, and XX for $\psi = 0$; and for measles, the growth rate estimates had standard deviation XX for $\psi = 1$, XX for $\psi = 0.5$, and XX for $\psi = 0$.
+
+A rough argument illustrates why this is the case. Let $\chi_i \sim \text{Poisson}(R_0)$ be the total number of secondary infections produced by infector $i$, infected at time $t_i$. Let $N_i(t)$ be the number of person $i$'s secondary infections that fall on day $t$ (\ie, in the interval $[t, t+1)$), and let $q_{t-t_i} = P(\tau \in [t-t_i,\, t-t_i+1))$ be the probability that a generation interval lands on the calendar day containing time $t - t_i$. In the smooth case ($\psi = 1$), offspring times are mutually independent, so $N_i(t)$ follows a thinned Poisson distribution:
+\begin{equation}
+	N_i(t) \sim \text{Poisson}(R_0 \, q_{t-t_i})
+\end{equation}
+If we let $I(t) = \sum_i N_i(t)$ be the total number of infections occurring on day $t$, where the sum is over all previously infected individuals, then conditional on the epidemic history $\{t_i\}$ the $N_i(t)$ are independent Poisson random variables, so their sum is also Poisson:
+\begin{equation}
+I(t) \mid \{t_i\} \sim \text{Poisson}\!\left(\sum_i R_0 \, q_{t-t_i}\right)
+\end{equation}
+which has index of dispersion
+\begin{equation}
+\text{ID}[I(t) |\{t_i\}] = \frac{\text{Var}[I(t) | \{t_i\}]}{E[I(t) | \{t_i\}]} = 1
+\end{equation}
+
+Alternatively, in the spike case ($\psi = 0$), all $\chi_i$ secondary infections from person $i$ fall at the same random time $\tau^*$. Either all of them land on day $t$ (with probability $q_{t-t_i}$) or none do; thus $N_i(t) = \chi_i \cdot \mathbf{1}(\tau^* \in [t-t_i,\, t-t_i+1))$. The mean is
+\begin{equation}
+	E[N_i(t)] = q_{t-t_i} \, R_0
+\end{equation}
+For the variance, we apply the law of total variance conditioning on $\chi_i$. Given $\chi_i$, $N_i(t)$ takes value $\chi_i$ with probability $q_{t-t_i}$ and $0$ otherwise, so $E[N_i(t)|\chi_i] = q_{t-t_i}\,\chi_i$ and $\text{Var}[N_i(t)|\chi_i] = \chi_i^2\,q_{t-t_i}(1-q_{t-t_i})$. Writing $q = q_{t-t_i}$ for brevity:
+\begin{align}
+	\text{Var}[N_i(t)] &= \text{Var}[E[N_i(t) | \chi_i]] + E[\text{Var}[N_i(t) | \chi_i]] \\
+	&= q^2\,\text{Var}[\chi_i] + q(1-q)\,E[\chi_i^2] \\
+	&= q^2 R_0 + q(1-q)(R_0 + R_0^2) \\
+	&= q\,R_0 + q(1-q)\,R_0^2
+\end{align}
+The index of dispersion of the aggregate $I(t) = \sum_i N_i(t)$, conditional on the epidemic history, is therefore
+\begin{align}
+	\text{ID}[I(t) | \{t_i\}] &= \frac{\sum_i \left[q_{t-t_i}\,R_0 + q_{t-t_i}(1-q_{t-t_i})\,R_0^2\right]}{\sum_i q_{t-t_i}\,R_0} \\
+	&= 1 + R_0\!\left(1 - \bar{q}_w\right)
+\end{align}
+where $\bar{q}_w = \sum_i q_{t-t_i}^2 \big/ \sum_i q_{t-t_i}$ is the intensity-weighted mean landing probability --- the average $q_{t-t_i}$, weighted by each infector's expected contribution to day $t$. The overdispersion is bounded: $\text{ID} \in [1,\, 1 + R_0]$, with ID $\to 1$ when the generation interval is concentrated on a single day ($\bar{q}_w \to 1$) and ID $\to 1 + R_0$ when it is spread over many days ($\bar{q}_w \to 0$). Intuitively, the spike-case overdispersion arises from the randomness of \emph{which} day the burst lands on; when the generation interval is tight enough that the day is nearly deterministic, this source of randomness vanishes.
+
+Thus, conditional on the epidemic history, the number of new infections on day $t$ ranges from Poisson-distributed (variance = mean) when $\psi = 1$ to overdispersed (variance up to $(1 + R_0) \cdot$ mean) when $\psi = 0$. Since the standard Poisson GLM assumes equidispersed counts, and the actual data are overdispersed by a factor of up to $1 + R_0$ when $\psi$ is small, the sampling variability of the estimated growth rate across realizations exceeds what the Poisson model anticipates. The magnitude of this excess variability is roughly proportional to $R_0$, consistent with the simulation results above.
+
+\begin{figure}[ht] 
+\centering
+\includegraphics[width=\textwidth]{figures/pdf/growthrate.pdf}
+\caption{{\bf \boldmath Variation in estimated growth rate as a function of $\psi$.}  }
+\label{fig:growthrate}
+\end{figure}
+
+A similar challenge arises when inferring the generation interval distribution, $g(\tau)$. Simulations show that, for a fixed number of index cases, the precision of estimtes for the distribution parameters $\alpha$ and $\beta$ widens as $\psi \rightarrow 0$. The reasoning for this is the share of the generation interval's variance that is attributed to within- \vs between-individual variation. In the smooth case, all the variation in $g(\tau)$ comes from within-individual variation in infection times --- each person's infectiousness profile is a copy of the population-level intrinsic generation interval distribution. Thus, each secondary infection is an independent sample from $g(\tau)$, providing maximal information about the shape of $g(\tau)$. At the opposite extreme, in the fully punctuated case, all the variation in $g(\tau)$ comes from between-individual variation. Secondary infection times from a single index case are perfectly correlated (identical in timing), and thus are completely redundant with one another. So, in the smooth case, the effective sample size obtained by recruiting $k$ index cases is $k R_0$; this decreases to simply $k$ in the fully punctuated case. Between $\psi = 0$ and $\psi = 1$, this scales as XXX. So, to achieve a similar precision in the estimates of the shape of $g(\tau)$, the number of index cases needed to recruit grows as XXX. 
+
+Importantly, due to delays and uncertainty in infection ascertainment/timinng, it may not be clear whether the individual infectiousnes profile is punctuated or smooth: delays yield variation in the secondary infection timing, and when we see that variation, we won't immediately know if that's from variation in the timing of infections themselves or simply variation in when the infections were ascertaned. So, it is in general difficult to know how to power one's efforts to estimate the generation interval distribution shape beforehand. We turn to the question of estimating $\psi$ itself in Section XX. 
+
+% ////////////////////////////////////////////////////////////////////////////////////////////
+
+\subsection{Narrow intrinsic generation interval distributions interact with periodic contact patterns to generate overdispersion in secondary infections}
+
+When $\nu_i$ varies across individuals, the secondary infection distribution becomes overdispersed. This overdispersion is commonly captured by describing the number of secondary infections $Z_i$ produced by an index case $i$ using a Negative Binomial distribution: 
+\begin{equation}
+	Z_i \sim \text{NegBin}(R_0, k)
+\end{equation}
+which has mean $E[Z_i] = R_0$ and variance $R_0 (1 + R_0 / k)$. Thus, $k$ captures overdispersion, with $k \rightarrow \infty$ yielding Poisson-distributed $Z_i$ and $k \rightarrow 0$ yielding a higher likelihood of ``extreme'' secondary infection counts, \ie, superspreading. For convenience, we introduce the parameter $\text{OD} = 1/k$, such that large OD corresponds to high overdispersion. 
+
+From Eq.~\ref{eq:nu_rel}, we see that variation in $\nu_i$ can arise in three fundamental ways: variation in biological infectiousness, $b_i$; variation in individual contact levels, $E_t[c_i(t)]$; and the variable interaction between infectiousness timing and the contact function, $g_i(\tau) c_i(t_i + \tau)$. The first two contributors to overdispersion (so-called ``super-shedders'' and ``super-contacters'') have been studied extensively; here, we examine the impact of the $g_i$-$c_i$ interaction as a third mechanism of superspreading. 
+
+Simulations demonstrate that narrower $g_i(\tau)$ yield more overdispersion in the presence of time-varying contacts. For the periodic contact function with a period of $c_{per} = 1$ day and amplitude $c_{amp} = 0.5$, empirical estimates of $k$ ranged from XX at $\psi = 1$ to XX at $\psi = 0$ for influenza; from XX at $\psi = 1$ to XX at $\psi = 0$ for SARS-CoV-2 omicron; and from XX at $\psi = 1$ to XX at $\psi = 0$ for measles. For the stochastic contact process, when $k_c = 10$ (corresponding to xx), $k$ ranged from XX at $\psi = 1$ to XX at $\psi = 0$ for influenza; from XX at $\psi = 1$ to XX at $\psi = 0$ for SARS-CoV-2 omicron; and from XX at $\psi = 1$ to XX at $\psi = 0$ for measles. This led to meaningful differences in early-outbreak extinction probabilities: for influenza, the extinction probability was XX for $\psi = 0$ \vs XX for $\psi = 1$; for SARS-CoV-2 omicron, the extinction probability was XX for $\psi = 0$ \vs XX for $\psi = 1$; and for measles, the extinction probability was XX for $\psi = 0$ \vs XX for $\psi = 1$. 
+
+For the periodic contact model, we can derive a simple closed-form expression for $OD = 1/k$ in terms of the model parameters: 
+%
+\begin{equation}
+	% k = \frac{2}{c_{amp}^2}\left(1 + \frac{\omega_0^2}{\beta^2}\right)^{\psi \alpha}
+	% k = \frac{2}{c_{amp}^2}\left(1 + \left( \frac{\omega_0 \bar{g}}{\alpha} \right)^2 \right)^{\psi \alpha}
+	% k = \frac{2}{c_{amp}^2}\left(1 + \left( \frac{2 \pi \bar{g}}{\alpha c_{per}} \right)^2 \right)^{\psi \alpha}
+	\text{OD} = \frac{c_{amp}^2}{2}\left(1 + \left( \frac{2 \pi \bar{g}}{\alpha c_{per}} \right)^2 \right)^{-\psi \alpha}
+	\label{eq:k_periodic_main}
+\end{equation}
+%
+where $c_{amp}$ and $c_{per}$ are the amplitude and period of the contact process, respectively. This reveals a few key features about the relationship between $\psi$ and $k$. First, we note that $c_{amp} \rightarrow 0$ yields $\text{OD} \rightarrow 0$; \ie, in the degenerate case where contacts do not vary over time, we recover the standard Poisson-distributed secondary infection distribution with no overdispersion. Also, $\text{OD}$ is strictly decreasing in $\psi$, so more punctuated profiles ($\psi \rightarrow 0$) yield more overdispersion. The sensitivity of $\text{OD}$ to $\psi$, however, depends on the magnitude of $\eta = 2 \pi \bar{g} / (\alpha c_{per})$. When $\eta \gg 1$, which happens \eg when the mean generation time is much longer than the contact process' period ($\bar{g} \gg c_{per}$), $\text{OD}$ is small regardless of $\psi$. Thus, there is little overdispersion unless $\psi$ is very close to 0. When $\eta \ll 1$, which can happen when $\bar{g}$ is small relative to $c_{per}$, $\text{OD} \approx c_{amp}^2 / 2$ regardless of $\psi$. So, the impact of $\psi$ is greatest when $\eta \approx 1$, in which case $\psi \rightarrow 1$ causes the infectiousness profile to effectively average over the contact variation, while $\psi \rightarrow 0$ translates the contact variability into meaningful overdispersion. For our benchmark pathogens, $\bar{g}$ ranges from 3.2 days to 12.2 days. Thus, weekly variation in contacts ($c_{per} = 7$) causes $\text{OD}$ to vary meaningfully with $\psi$. Daily variation ($c_{per} = 1$) gets averaged out, yielding little overdispersion unless $\psi \approx 0$. Monthly variation ($c_{per} = 30$) leads to $\text{OD} \approx c_{amp}^2 / 2$ regardless of $\psi$. 
+
+\begin{figure}[ht] 
+\centering
+\includegraphics[width=\textwidth]{figures/pdf/heatmaps.pdf}
+\caption{{\bf \boldmath Relationship between infectiousness timing width ($\psi$) and overdispersion ($k$).}  }
+\label{fig:heatmaps}
+\end{figure}
+
+
+
+
+
+% \vspace{3cm} 
+
+
+
+
+
+% When each person has the same inherent infectiousness ($\nu_i \equiv R_0$) and contacts are uniform across individuals and over time ($c_i(t) \equiv \bar{c} = 1$), the timing of a person's secondary infections ($g_i(\tau)$) has no effect on the secondary infection distribution: every person produces a $\text{Poisson}(R_0)$-distributed number of infections. However, if contacts vary over time and/or across individuals, overdispersion may emerge as the interaction between $g_i$ and $c_i(t)$ produce variation in the realized individual reproduction number, $\nu_i^{\text{re}}$. 
+
+% The periodic contact model introduces temporal, but not interpersonal, variation in contacts. 
+
+% Similar results hold under the Gamma contact model, which introduces both temporal and interpersonal variation in contacts, but holds the population-average contact rate at $C(t) = 1$. 
+
+% %
+% \begin{equation}
+% 	k = \frac{2}{A^2}\left(1 + \frac{\omega^2}{\beta^2}\right)^{\psi \alpha}
+% 	\label{eq:k_periodic_main}
+% \end{equation}
+% %
+% where $A$ is the amplitude of the contact oscillation and $\omega$ is its angular frequency. Here, the prefactor $2/A^2$ sets the overall overdispersion scale, and the bracketed factor quantifies the failure of the biological profile's temporal window to average out the contact oscillation, with $(1 + \omega^2/\beta^2)^{-\psi\alpha}$ being exactly the squared characteristic function of the Gamma$(\psi\alpha, \beta)$ density at the contact frequency $\omega$. Since this factor is strictly increasing in $\psi$ for any $\omega > 0$, narrower biological profiles always produce more overdispersion in the presence of periodic contact variation. The effect disappears in the spike limit only if $\omega \rightarrow 0$ or $A \rightarrow 0$ (no temporal contact variation), and grows arbitrarily large in the smooth limit if $\omega/\beta$ is large (contact oscillations much faster than the profile window, so the profile averages them out). Simulations extend this result to heavier-tailed, non-periodic contact heterogeneity, for which the same mechanism holds qualitatively ({\bf Figure XX}).
+
+% Even in large, well-mixed populations, stochasticity can durably impact the trajectory of an epidemic. One way this stochasticity enters is via a random time shift, where epidemics take a variable amount of time to reach the exponential growth phase \citep{morris_computation_2024}, leading to variation in the timing of the entire epidemic trajectory. Here, we address the question of how this time shift distribution depends on the shape of the individual infectiousness profile, holding all else equal. 
+
+% Simulations confirm that narrower infectiousness profiles ($\psi \rightarrow 0$) yield more variable and later-shifted epidemic timings ({\bf Figure XX}, {\bf Supplementary Table Sxx}). Across 10,000 simulated epidemics in a population of size 1000 using SARS-CoV-2 omicron-like parameters, the median time to reach 100 infections was XX days for $\psi = 0$ (IQR: [XX, XX]) vs. XX days for $\psi = 1$ (IQR: [XX, XX]). The impact of $\psi$ on epidemic timing was lessened with lower $R_0$ (influenza-like parameters, median time to 100 infections: XX days for $\psi=0$ [IQR: XX, XX] vs. XX days for $\psi=1$ [IQR: XX, XX]) and increased with higher $R_0$ (measles-like parameters, median time to 100 infections: XX days for $\psi=0$ [IQR: XX, XX] vs. XX days for $\psi=1$ [IQR: XX, XX]). From another perspective: by day XX of the simulated epidemic under measles-like parameters, XX\% of the outbreaks with $\psi = 1$ had reached 100 infections, while only XX\% of the outbreaks with $\psi=0$ had reached 100 infections ({\bf Figure XX}). 
+
+% These observations are confirmed by the underlying theory. The cumulative incidence over time, $Z(t)$, during the early exponential growth phase of an epidemic can be approximated as a deterministic exponential growth function with a random initial condition scaling factor $W$: 
+
+% \begin{equation}
+% 	Z(t) \approx W \cdot ce^{rt}
+% \end{equation}
+
+% with exponential growh rate $r$, and where $c$ is the mean-field initial condition (when $W = 1$). 
+
+% With a change of variables, the cumulative incidence can be expressed as the same deterministic growht function with a random time shift $\varsigma$: 
+
+% \begin{equation}
+% 	Z(t) \approx c e^{r(t+\varsigma)}
+% \end{equation}
+
+% where 
+
+% \begin{equation}
+% 	\varsigma = \frac{\log W - \log E[W]}{r}
+% \end{equation}
+
+% Here, $E[W]$ is the initial condition and $r$ is the exponential growth rate, so $\varsigma \propto \log[W]$. 
+
+% First, we consider the variance of the time shift, $Var[\varsigma]$. For ease of notation, we focus on $Var[W]$, noting that $Var[\varsigma]$ is monotonically related to $Var[W]$. It can be shown that {\bf Supplementary Text}
+
+% \[ 
+% Var[W] = m_2 + R_0^2 \rho^{2 \psi \alpha} [\rho_2^{(1-\psi)\alpha} - \rho^{2(1-\psi)\alpha}]
+% \]
+
+% which is maximized when $\psi = 0$ (the infectiousness profile is narrow) and becomes 0 when $\psi = 1$ (the infectiousness profile is maximally broad). (Can we say something about how this suggests that the variance of the time shift scales roughly linearly with $\psi$?)
+
+% Next, we consider the typical time shift, which we obtain by studying the mode of the distribution of $W$. 
+
+% Let $I_b(t)$ be the (stochastic) number of infections at time $t$ for a single epidemic realization, where the subscript ``b'' marks that it is a branching process. Let $I_d(t)$ be its mean-field deterministic counterpart. Then, we can approximate $I_b(t)$ as $I_d(t+\varsigma)$, {\it i.e.,} the branching process is approximately equal to the deterministic process with a random time shift. 
+
+% The time shift is 
+
+% \[ \varsigma = \frac{\log W - \log E[W]}{r}\]
+
+% where $r$ is the epidemic's exponential growth rate and $W = \lim_{t \rightarrow \infty} W(t)$ is the limiting value of the rescaled branching process $W(t) = e^{-r t I_b(t)}$. The process $W(t)$ is well studied, and knowing its distribution fully determines the distribution of the time shift $\varsigma$. 
+
+% The expectation of $W$ is equal to the initial condition ($E[W] = I_0$). For simplicity, we will assume $I_0 = 1$ throughout this section, though the findings can be easily extended to general initial conditions. Here, we assess the impact of the individual infectiousness profile's breadth, $\phi$, on (a) the variance of $W$ and (b) the mode of a Gamma approximation to W obtained via moment matching. 
+
+% It can be shown that 
+
+% \[ \text{Var}(W) = \frac{c^\alpha + \sigma^{(1-\psi) \alpha} - 1}{1 - c^\alpha} \]
+
+% \noindent where $c$ depends on $R_0$ and $\alpha$ but not $\psi$. Thus, broad profiles ($\psi \rightarrow 1$) minimize $\text{Var}(W)$ and narrow profiles ($\psi \rightarrow 0$) maximize it. 
+
+% We can approximate the distribution of $W$ using moment matching to a generalized Gamma distribution. With the Gamma-shaped individual infectiousness profiles, the moments have closed-form expressions. Using two-moment matching to a Gamma distribution, we find that 
+
+% \[ \text{mode}_\varsigma = \frac{1}{r} \log(1 - \text{CV}^2_\text{cond})] \]
+
+% Here, (description). Again, we see that the mode shifts later as $\psi \rightarrow 0$. 
+
+% The theory aligns well with the simulations. Using generalized gamma distributions fit using moment matching to the first five moments of $W$, we get similar survival curves for the time to 100 infected ({\bf Figure XX}). 
+
+% \subsection{Narrower individual infectiousness profiles yield greater uncertainty in epidemic growth rate estimates.}
+
+% Based on simulations. 
+
+% \subsection{Narrower biological infectiousness profiles interact with periodic contact patterns to generate overdispersion in secondary infections.}
+
+% Closed-form solution: 
+
+% \[ k = \frac{2}{\bar{c}^2}{A^2} \Bigl(1 + \frac{\omega^2}{r^2}\Bigr)^{\psi \alpha} = \frac{2}{\bar{c}^2}{A^2} \Bigl(1 + (\frac{z^*_{per}}{z_{per}})^2\Bigr)^{\psi \alpha} \]
+
+
+
+% \begin{figure}[ht]
+% \centering
+% \includegraphics[width=.5\textwidth]{figures/stock.png}
+% \caption{{\bf Impact of the individual infectiousness profile on epidemic timing.} Survival curves for time-to-100. growth rate estimate box-and-whiskers. Overdispersion/k vs psi heatmap.} 
+% \label{fig:uncontrolled}
+% \end{figure}
+
+
+% Stepwise, smooth, and spike all yield the same mean dynamics
+% Stepwise has higher extinction probability, explained by overdispersion
+% Spike has later and more variable establishment properties, including time-to-n-infected and peak, and exponential growth rate is more variable. We can show this through simulations and through analytic approaches, following Morris' time shift ideas \citep{morris2024}
+
+% With constant contacts, kappa doesn't affect extinction or overdispersion -- only growth timing
+
+% but introduce time-varying contacts and suddenly kappa controls overdispersion
+
+% Spike emphasizes variation in contacts, leading to overdispersion.

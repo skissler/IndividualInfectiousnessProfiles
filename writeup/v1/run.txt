@@ -1,0 +1,4 @@
+pdflatex main && bibtex main && pdflatex main && pdflatex main
+
+- make (or make -C writeup) -- white background, dark text
+- make dark (or make -C writeup dark) -- black background, white text, cyan links

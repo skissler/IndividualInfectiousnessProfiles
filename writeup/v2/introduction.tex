@@ -1,0 +1,285 @@
+\clearpage
+
+\section{Introduction}
+
+Epidemic trajectories are profoundly shaped by individual-level effects. For example, interpersonal variation in pathogen shedding and contact rates can lead to superspreading, which impacts both the likelihood that an epidemic will occur and how explosive it will be if it does \citep{lloyd-smith_superspreading_2005}. Likewise, chance events early in an epidemic can modulate when widespread transmission becomes established, durably shifting the outbreak's overall timing \citep{morris_computation_2024}. Accounting for such effects is vital for public health preparedness: while understanding an epidemic's expected trajectory is useful --- and can be done by largely overlooking individual-level effects --- assessing variation around that mean, including reasonable best- and worst-case scenarios, requires careful attention to individual-level transmission dynamics. 
+
+% To make these ideas precise, we distinguish population-level from individual-level transmission quantities. 
+The mean-field dynamics of an epidemic are determined by two fundamental quantities: the basic reproduction number, $R_0$, and the intrinsic generation interval distribution, $g(\tau)$ \citep{wallinga_how_2007}, where $\tau$ represents time since infection. These can be combined into a single object, the ``infectiousness profile'' $A(\tau) = R_0\,g(\tau)$, which captures both the expected amount of transmission arising from an index case and its timing, and is the key parameter in the renewal equation framework for epidemic modeling \citep{breda_formulation_2012}. Analogously, at the individual level, the individual reproduction number, $\nu_i$, captures the expected number of infections person $i$ would produce in an otherwise susceptible population \citep{lloyd-smith_superspreading_2005}, and the individual-level intrinsic generation interval distribution, $g_i(\tau)$, captures the timing of those infections. These can be combined into the ``individual infectiousness profile'' or the ``infection kernel'', $a_i(\tau) = \nu_i g_i(\tau)$ \citep{champredon_intrinsic_2015, svensson_note_2007}. The population-level quantities are the expectations of the individual-level ones, with $R_0 = E_i[\nu_i]$, $g(\tau) = E_i[g_i(\tau)]$, and $A(\tau) = E_i[a_i(\tau)]$. Substantial work has gone into understanding how variation in $\nu_i$ (\ie, the area under $a_i(\tau)$) impacts epidemic dynamics, but the impact of variation in $g_i(\tau)$ (\ie, how $a_i(\tau)$ is distributed over time), holding $R_0$ and $g(\tau)$ fixed and without confounding from variation in $\nu_i$, is less well understood. 
+
+Since $A(\tau)$ is an expectation over individuals, it need not resemble any single person's $a_i(\tau)$. The standard susceptible-exposed-infectious-recovered (SEIR) model provides a useful illustration: it assumes each person undergoes a latent period of length $x_i \sim \text{Exp}(\gamma_\text{SEIR})$ during which they are not infectious, followed by an infectious period of length $y_i \sim \text{Exp}(\alpha_\text{SEIR})$ during which they transmit at rate $\beta_\text{SEIR}$. The resulting ``stepwise'' individual infectiousness profile is 
+%
+\begin{equation}
+	a_i(\tau) = \begin{cases}
+		\beta_\text{SEIR} & \tau \in [x_i, x_i + y_i] \\ 
+		0 & \text{otherwise}
+	\end{cases}
+	\label{eq:ai_SEIR}
+\end{equation}
+%
+Averaging over individuals yields the population-level infectiousness profile 
+\begin{equation}
+	A_\text{SEIR}(\tau) = E_i[a_i(\tau)] = \beta_\text{SEIR} \frac{\gamma_\text{SEIR}}{\gamma_\text{SEIR} - \alpha_\text{SEIR}}(e^{-\alpha_\text{SEIR} \tau} - e^{-\gamma_\text{SEIR} \tau})
+	\label{eq:A_SEIR}
+\end{equation}
+%
+\ie, a smooth, bell-shaped curve that emerges from a collection of discontinuous $a_i(\tau)$ ({\bf Figure XX}). Other choices of $a_i(\tau)$ can also produce the same $A_\text{SEIR}(\tau)$: for example, setting $a_i(\tau) \equiv A_\text{SEIR}(\tau)$ for all individuals gives a ``smooth'' profile in which each person's infectiousness follows the population average ({\bf Figure XX}). At the opposite extreme, $a_i(\tau) = (\beta_\text{SEIR} / \alpha_\text{SEIR}) \delta_{\tau_i^*}(\tau)$, with $\delta_{\tau_i^*}(\tau)$ a delta function that has mass at $\tau_i^*$ drawn from $g(\tau) = A_\text{SEIR}(\tau) / R_0$, gives a ``spike'' profile in which each person's infectiousness is concentrated at a single moment ({\bf Figure XX}). All three families --- stepwise, smooth, and spike --- produce the same $A_\text{SEIR}(\tau)$ and hence the same deterministic, mean-field epidemic dynamics, but the resulting stochastic dynamics may differ. 
+
+While estimates of $R_0$ and $g(\tau)$, and thus $A(\tau)$, are commonplace for most pathogens, we often have little understanding of $a_i(\tau)$'s shape. Viral kinetics offer an indirect window into the individual-level timing and intensity of infectiousness, but the precise mapping is poorly understood. Contact tracing data are often used to inform $\nu_i$, but capturing $g_i(\tau)$ from the same data is challenging due to uncertainty in infection onset times and imperfect case ascertainment. Nevertheless, we can reason about the potential shapes of $a_i(\tau)$: the full variability in $g(\tau)$ must arise from both within-individual and between-individual variation in infection timing, suggesting that $a_i(\tau)$ is generally narrower than $A(\tau)$. Some evidence indicates that, for SARS-CoV-2 and influenza, the window of peak transmissibility at the individual level may be extremely short --- even less than a day --- which is substantially narrower than the pathogens' overall generation interval distributions \cite{goyal_viral_2021}. So, while estimates of $a_i(\tau)$ are lacking, the available evidence suggests that the shape of $a_i(\tau)$ may differ meaningfully from that of $A(\tau)$. 
+
+% However, a central question remains: to what extent does the shape of $a_i(\tau)$, relative to $A(\tau)$, impact epidemic dynamics? 
+
+However, a central question remains: to what extent does the shape of $a_i(\tau)$, holding $A(\tau)$ fixed, impact epidemic dynamics? Several lines of evidence suggest it could matter substantially, but the question has not been studied systematically. Within the SEIR framework (which assumes a stepwise individual infectiousness profile), replacing exponentially-distributed latent and infectious periods with more realistic distributions can dramatically alter epidemic trajectories, changing peak size, epidemic duration, growth rate, outbreak probability, and estimates of $R_0$, even when the mean periods are held fixed \citep{lloyd_realistic_2001, wearing_appropriate_2005, britton_epidemic_2009}. Replacing the stepwise $a_i(\tau)$ with a time-varying, viral kinetics-informed infectiousness profile can generate significant variability in epidemic peak size and timing \citep{li_epidemic_2023}. In applied settings, the shape of $a_i(\tau)$ enters implicitly: models of contact tracing effectiveness depend on ``the course of individual infectivity'' as a key input \citep{klinkenberg_effectiveness_2006}, and models of testing-based interventions rely on assumptions about the connection between viral load and infectiousness, which generally produce individual infectiousness profiles that are substantially narrower than the population average \citep{larremore_test_2021}. Yet in each of these cases, the shape of $a_i(\tau)$ is either a modeling assumption adopted for a different purpose or a feature varied at the population level; no study has systematically isolated  the impact of variation in $g_i(\tau)$ on epidemic  dynamics while holding $R_0$, $g(\tau)$, and $A(\tau)$ constant at the population level.
+% At the population level, the shape of $g(\tau)$, and thus $A(\tau)$, determines the mapping between epidemic growth rate and $R_0$ \citep{wallinga_how_2007}. 
+
+Here, we address this gap by conducting a systematic analysis of how the shape of $a_i(\tau)$ (\ie, the decomposition of $g(\tau)$'s variability into within- \vs between-individual components) affects epidemic behavior, holding all population-level quantities constant. To do so, we introduce a flexible modeling framework, parameterized by a smoothness parameter $\psi \in [0,1]$, that interpolates between the ``spike'' and ``smooth'' extremes. This approach extends the renewal equation framework to accommodate individual-level variation in infectiousness timing \citep{breda_formulation_2012}. We assess how the shape of $a_i(\tau)$, independent of other factors, creates variation in epidemic establishment times, impacts the inference of the epidemic growth rate $r$ and the generation interval distribution $g(\tau)$, and introduces additional overdispersion in secondary infection counts. We also determine how $a_i(\tau)$'s shape modulates the effectiveness of detect-and-isolate interventions and gathering size restrictions. We illustrate these findings using three respiratory pathogens --- influenza, SARS-CoV-2 omicron, and measles --- but emphasize that the methods and findings are general. We also address the question of whether the shape of $a_i(\tau)$ can be inferred from contact-tracing data, and conclude with a discussion of implications for epidemiological modeling and outbreak control. 
+
+
+% punctuated \vs broad individual infectiousness profiles impact epidemic dynamics, holding all population-level quantities ($R_0$, $g(\tau)$, $A(\tau)$) constant --- or equivalently, asking how the decomposition of $g(\tau)$'s variability into within-individual \vs between-individual components affects epidemic behavior. To do so, we introduce a flexible modeling framework, parameterized by a smoothness parameter $\psi \in [0,1]$ that interpolates between the ``spike'' and ``smooth'' extremes, which extends the renewal equation framework to accommodate individual-level variation in infectiousness timing \citep{breda_formulation_2012}. We find that more punctuated profiles generate more variably-timed epidemics and can substantially alter the effectiveness of detect-and-isolate interventions, even when population-level transmission parameters are identical. We illustrate these findings using three respiratory pathogens --- influenza, SARS-CoV-2, and measles --- but emphasize that the methods and findings are general. We also address the question of whether the shape of $a_i(\tau)$ can be inferred from contact-tracing data, and we conclude with a discussion of implications for epidemiological modeling and outbreak control.
+
+% Here, we address this gap by conducting a systematic analysis of how punctuated \vs broad individual infectiousness profiles impact epidemic dynamics, holding all population-level quantities ($R_0$, $g(\tau)$, $A(\tau)$) constant --- or equivalently, asking how the decomposition of $g(\tau)$'s variability into within-individual \vs between-individual components affects epidemic behavior. To do so, we introduce a flexible modeling framework, parameterized by a smoothness parameter $\psi \in [0,1]$ that interpolates between the ``spike'' and ``smooth'' extremes, which extends the renewal equation framework to accommodate individual-level variation in infectiousness timing \citep{breda_formulation_2012}. We find that more punctuated profiles generate more variably-timed epidemics and can substantially alter the effectiveness of detect-and-isolate interventions, even when population-level transmission parameters are identical. We illustrate these findings using three respiratory pathogens --- influenza, SARS-CoV-2, and measles --- but emphasize that the methods and findings are general. We also address the question of whether the shape of $a_i(\tau)$ can be inferred from contact-tracing data, and we conclude with a discussion of implications for epidemiological modeling and outbreak control.
+
+% Here, we conduct a comprehensive analysis of how punctuated \vs broad individual infectiousness profiles impact both uncontrolled and controlled epidemic dynamics, holding all population-level quantities ($R_0$, $g(\tau)$, $A(\tau)$) constant. This is equivalent to asking how the decomposition of $g(\tau)$'s variability into within-individual \vs between-individual components affects epidemic behavior. To achieve this, we introduce a general modeling framework that flexibly captures this decomposition of infection timing, which generalizes the renewal equation framework for transmission modeling to the individual level \citep{breda_formulation_2012}. In our illustrations, we focus on three important respiratory pathogns --- influenza, SARS-CoV-2, and measles --- but we emphasize that the methods an findings are general. In the penultimate section, we briefly address the question of how to infer the punctuatedness of the individual infectiousness profile from contact tracing data, and we conclude with a discussion of implications for epidemiological modeling and outbreak control. 
+
+
+ % hough these findings may be partially conflated with shifts in the population-level $g(\tau)$ induced by chagnes in the distribution of the latent and infectious periods. 
+
+ % even though the basic reproduction number and the final size of major outbreaks are largely insensitive --- demonstrating that distributional assumptions invisible to deterministic, mean-field models can nonetheless shape stochastic dynamics. 
+%  In SEIR-type models, the variance of latent and infectious period distributions affects outbreak probability and early growth rate, though this also changes the population-level generation interval distribution\citep{}. 
+
+% A major gap remains: to what extent does the punctuatedness of $g_i(\tau)$ (and thus $a_i(\tau)$), relative to $g(\tau)$, matter for epidemic dynamics? This question has been addressed in a few specific settings. XXXX. However, we lack a comprehensive understanding of whether, and to what extent, within- \vs between-individual variation in the timing of infectiousness translates into meaningful differences in epidemic trajectories, in part because we have lacked a modeling framework able to capture these individual-level differences while maintaining the same $R_0$ and $g(\tau)$ at the population level. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  % ---
+  % Literature Review: Shape of the Individual Infectiousness Profile and Epidemic Dynamics
+
+  % Core finding: Your assessment is correct
+
+  % The question of how the shape of $a_i(\tau)$ — holding $R_0$, $g(\tau)$, and $A(\tau)$ fixed —
+  % affects epidemic dynamics has not been studied systematically. The existing literature touches on
+  % closely related questions, but always with a different primary focus. Here are the most relevant
+  % papers, organized by category:
+
+  % ---
+  % 1. Papers that directly study the impact of infectious/latent period distribution shape on epidemic
+  %  dynamics (closest to your question, but not quite it)
+
+  % *Lloyd (2001), "Realistic distributions of infectious periods in epidemic models," Theor. Pop.
+  % Biol.; and "Destabilization of epidemic models with the inclusion of realistic distributions of
+  % infectious periods," Proc. R. Soc. B.*
+  % Lloyd showed that replacing exponentially-distributed infectious periods with more realistic
+  % (gamma-distributed) ones — using the method of stages — destabilizes endemic equilibria and changes
+  %  persistence dynamics. This is one of the earliest demonstrations that the shape of the infectious
+  % period distribution matters for epidemic dynamics, even when the mean is held constant. However,
+  % the focus is on the population-level infectious period distribution, not on isolating the
+  % individual-level profile $a_i(\tau)$ while holding $A(\tau)$ constant.
+
+  % Wearing, Rohani, & Keeling (2005), "Appropriate models for the management of infectious diseases,"
+  % PLOS Medicine.
+  % Extended Lloyd's work, showing that the gamma shape parameter for latent and infectious periods has
+  %  substantial quantitative consequences: exponentially-distributed periods (the standard SIR/SEIR
+  % assumption) produce dramatically slower epidemic takeoff, ~56% smaller peak, and nearly double the
+  % duration compared to more peaked distributions, even with the same $R_0$. They also showed that
+  % exponential assumptions lead to underestimates of $R_0$ from growth rate data. Again, this is about
+  %  the population-level distribution shape, not the within- vs. between-individual decomposition you
+  % study.
+
+  % *Britton & Lindenstrand (2009), "Epidemic modelling: aspects where stochasticity matters," Math.
+  % Biosci..*
+  % Showed that in stochastic SIR models, the randomness (i.e., variance) of latent and infectious
+  % period distributions affects outbreak probability and initial epidemic growth rate, even though
+  % $R_0$ and the final size of major outbreaks are largely insensitive. This is the closest in spirit
+  % to your paper: it demonstrates that stochastic dynamics depend on distributional assumptions that
+  % are invisible to deterministic models. However, it studies the marginal distributions of the
+  % latent/infectious periods rather than the decomposition of $g(\tau)$ into within- vs.
+  % between-individual components.
+
+  % *Li, Wu, & Moghadas (2023), "Epidemic dynamics with time-varying transmission risk reveal the role
+  % of disease stage-dependent infectiousness," J. Theor. Biol..*
+  % Replaced the constant transmission rate in an SEIR-type model with a continuous,
+  % viral-dynamics-informed time-varying transmission rate. Found significant differences in epidemic
+  % trajectories (magnitude and peak timing) even when $R_0$ was matched, and showed that isolation
+  % strategies can appear deceptively effective under constant-rate assumptions. This is relevant
+  % because it shows the temporal profile of infectiousness matters, but it does not decompose the
+  % profile into within- vs. between-individual variation.
+
+  % ---
+  % 2. Papers that acknowledge the individual-level kernel but integrate it out
+
+  % Park, Champredon, & Dushoff (2020), "Inferring generation-interval distributions from
+  % contact-tracing data," J. R. Soc. Interface.
+  % As you suspected, this paper explicitly defines an individual-level intrinsic infection kernel
+  % $k(\tau; a)$ that depends on individual "aspects" $a$, and then immediately integrates over
+  % individual aspects to get the population-level kernel: $K(\tau) = \int k(\tau; a) f(a) , da$ (their
+  %  Eq. 2.1). They clearly acknowledge that the population-level generation interval is an average
+  % over heterogeneous individuals, but do not investigate how the individual-level shape affects
+  % dynamics.
+
+  % Champredon & Dushoff (2015), "Intrinsic and realized generation intervals in infectious-disease
+  % transmission," Proc. R. Soc. B.
+  % Already cited in your manuscript. Their framework treats $K(\tau)$ as a deterministic
+  % population-level function. They acknowledge in the Discussion that "heterogeneity is often very
+  % important in practice... and could affect the patterns found here," but do not develop the
+  % individual-level kernel analytically.
+
+  % *Svensson (2007), "A note on generation times in epidemic models," Math. Biosci..*
+  % Also already cited. Defines $K$ as a random positive measure (the individual infectiousness
+  % profile) and $\lambda$ as the total amount of infectivity, then derives generation time
+  % distributions for a general class of models. The framework could support individual-level variation
+  %  in the shape of $K$, but the paper does not investigate how different shapes of individual-level
+  % kernels affect epidemic dynamics.
+
+  % ---
+  % 3. Papers that model individual-level infectiousness over time (from viral dynamics) but don't
+  % isolate its epidemic-dynamic consequences
+
+  % *Larremore et al. (2021), "Test sensitivity is secondary to frequency and turnaround time for
+  % COVID-19 screening," Sci. Adv..*
+  % As you suspected, this paper models individual-level viral load trajectories stochastically (each
+  % person gets a different viral load curve), and assumes infectiousness is proportional to log viral
+  % load above a threshold. They test three different infectiousness-viral load mappings as sensitivity
+  %  analyses (log-proportional, proportional, and threshold). The results depend on the
+  % individual-level temporal profile of infectiousness, but the paper's focus is on screening policy,
+  % not on characterizing how the shape of $a_i(\tau)$ affects epidemic dynamics per se. The most
+  % relevant aspect is that they explicitly simulate individual-level infectiousness curves that are
+  % narrower/more peaked than the population average.
+
+  % Goyal, Reeves, Cardozo-Ojeda, Schiffer, & Mayer (2021), "Viral load and contact heterogeneity
+  % predict SARS-CoV-2 transmission and super-spreading events," eLife.
+  % Linked within-host viral dynamics to between-host transmission, finding that peak infectivity lasts
+  %  only ~1-2 days at the individual level — far narrower than the population-level generation
+  % interval. They showed that superspreading events depend on high contact rates during this narrow
+  % window. This provides empirical motivation for studying punctuated profiles but doesn't hold
+  % $A(\tau)$ constant while varying the shape of $a_i(\tau)$.
+
+  % Ke et al. (2021), "In vivo kinetics of SARS-CoV-2 infection and its relationship with a person's
+  % infectiousness," PNAS.
+  % Developed a mechanistic within-host model showing that log viral load is an appropriate surrogate
+  % for infectiousness, with substantial inter-individual variation in viral kinetics. Provides further
+  %  empirical evidence that individual infectiousness profiles are narrower and more variable than
+  % population averages.
+
+  % *Kissler et al. (2021), "Viral dynamics of acute SARS-CoV-2 infection and applications to
+  % diagnostic and public health strategies," PLOS Biol..*
+  % Characterized individual-level SARS-CoV-2 viral trajectories with rapid peak (~3.3 days) and
+  % variable clearance, with applications to testing. Further evidence of narrow individual-level
+  % infectiousness windows.
+
+  % ---
+  % 4. Papers on superspreading that decompose heterogeneity in transmission amount (not timing)
+
+  % Lloyd-Smith, Schreiber, Kopp, & Getz (2005), "Superspreading and the effect of individual variation
+  %  on disease emergence," Nature.
+  % Already cited in your manuscript. The foundational paper on variation in $\nu_i$, using
+  % contact-tracing data from eight diseases to demonstrate overdispersion in individual reproduction
+  % numbers. This is about the amount of transmission heterogeneity, not the temporal shape.
+
+  % Hébert-Dufresne, Althouse, Scarpino, & Allard (2020), "Beyond $R_0$: heterogeneity in secondary
+  % infections and probabilistic epidemic forecasting," J. R. Soc. Interface.
+  % Extended Lloyd-Smith by showing that heterogeneity in secondary infections (even with the same
+  % $R_0$) affects outbreak sizes and epidemic probabilities — more homogeneous transmission leads to
+  % larger outbreaks. This is about variation in $\nu_i$, not in the timing/shape of $g_i(\tau)$.
+
+  % Dushoff & Park (2022; the paper in PLOS Comp. Biol. on "Different forms of superspreading lead to
+  % different outcomes").
+  % Compared superspreading driven by heterogeneity in infectiousness vs. contact behavior, finding
+  % qualitatively different epidemic outcomes. This is closer to your question in that it decomposes
+  % sources of heterogeneity, but the decomposition is about contact vs. biological infectiousness
+  % rather than the temporal shape of individual profiles.
+
+  % ---
+  % 5. Papers on contact tracing effectiveness that depend on the infectiousness profile
+
+  % Klinkenberg, Fraser, & Heesterbeek (2006), "The effectiveness of contact tracing in emerging
+  % epidemics," PLOS ONE.
+  % Showed that contact tracing effectiveness depends on "the course of individual infectivity" —
+  % explicitly using the temporal profile of infectiousness as an input. They compared diseases with
+  % different profiles (smallpox, SARS, influenza) and showed the profile shape matters for whether
+  % contact tracing can control an outbreak. This is relevant because it demonstrates that the temporal
+  %  shape of individual infectiousness affects interventions, but the focus is on comparing different
+  % diseases rather than systematically varying the individual-level shape while holding
+  % population-level quantities constant.
+
+  % Ferretti et al. (2020), "Quantifying SARS-CoV-2 transmission suggests epidemic control with digital
+  %  contact tracing," Science.
+  % Estimated the generation time distribution and contributions of presymptomatic, symptomatic, and
+  % environmental transmission, using an infectiousness profile. The profile's shape determines which
+  % interventions can work, but they don't vary it systematically.
+
+  % ---
+  % 6. The Wallinga-Lipsitch connection
+
+  % Wallinga & Lipsitch (2007), "How generation intervals shape the relationship between growth rates
+  % and reproductive numbers," Proc. R. Soc. B.
+  % Showed that the shape of the generation interval distribution determines the mapping between
+  % epidemic growth rate $r$ and $R_0$. Different assumptions about the generation interval (fixed vs.
+  % exponential vs. gamma) give different $R_0$ values for the same $r$. This is analogous to your
+  % point: the shape matters even when the mean is the same. However, this is about the
+  % population-level $g(\tau)$, not the individual-level decomposition.
+
+  % ---
+  % Summary: What's missing
+
+  % Across all of these papers, I did not find any that:
+
+  % 1. Fix $R_0$, $g(\tau)$, and $A(\tau)$ at the population level, and
+  % 2. Systematically vary the shape of $a_i(\tau)$ (i.e., the within- vs. between-individual
+  % decomposition of $g(\tau)$'s variance), and
+  % 3. Study how this affects stochastic epidemic dynamics (outbreak probability, epidemic variability,
+  %  intervention effectiveness, etc.)
+
+  % That is exactly what your paper does. The closest existing work is:
+  % - Britton & Lindenstrand (2009): varies the shape of period distributions, finds stochastic
+  % effects, but doesn't do the decomposition you describe
+  % - Lloyd (2001) / Wearing et al. (2005): shows distributional shape matters, but at the population
+  % level
+  % - Li et al. (2023): uses time-varying individual infectiousness, finds it matters, but doesn't hold
+  %  $A(\tau)$ constant
+  % - Larremore et al. (2021): explicitly simulates individual-level profiles, but as a modeling
+  % assumption for screening, not as the object of study
+
+  % Your paper appears to be the first to provide the systematic framework (via the $\psi$ parameter)
+  % and comprehensive analysis that isolates this specific effect. The gap is real.
+
+  % ---
+  % Suggested references for the gap paragraph
+
+  % For the "XXXX" in line 33, you could cite examples like:
+  % - Wearing et al. (2005) and Lloyd (2001): showed the shape of the infectious period distribution
+  % matters at the population level
+  % - Britton & Lindenstrand (2009): showed randomness of period distributions affects outbreak
+  % probability in stochastic models
+  % - Klinkenberg et al. (2006): showed the temporal course of individual infectivity determines
+  % contact tracing effectiveness
+  % - Li et al. (2023): showed time-varying individual-level infectiousness changes epidemic
+  % trajectories relative to constant-rate assumptions
+  % - Larremore et al. (2021): modeled individual-level infectiousness trajectories (narrower than
+  % population average) as inputs to a screening model
+  % - Goyal et al. (2021): demonstrated the narrow (~1-2 day) individual-level peak infectiousness
+  % window
+
+  % These collectively illustrate that the question has been touched on in various specific settings
+  % but never studied as the primary object with all population-level quantities held constant.

@@ -1,0 +1,53 @@
+\section{Discussion}
+
+\begin{itemize}
+	\item For the $\varsigma$ section, the shift in $E[\varsigma]$ is minor; the inflation of $\text{Var}[\varsigma]$ is the real story. 
+	\item For the sensitivity of TE: note that shifts in symptom timing are commonplace (happend with SARS-CoV-2), and small changes in testing frequency are easy operational decisions. 
+	\item Flesh out the counter-intuitive impact of TE/GE contraction/overdispersion for detect-and-isolate, and Reff/overdispersion for gathering size restrictions. 
+\end{itemize}
+
+  % How generation interval inference is done in practice
+
+  % There are essentially two tiers of methods:
+
+  % 1. Population-level / naive pooling (most common). All observed generation intervals (or serial
+  % intervals) are treated as iid draws from a parametric distribution, typically Gamma. Parameters are
+  %  estimated by MLE. This is the "population-level method" in Park et al. 2020 (Section 7.4):
+  % estimate the mean and shape of a Gamma from the aggregated data, optionally correcting for
+  % right-truncation by exponential reweighting (their Eq. 7.7). This approach is used by the majority
+  % of empirical studies — for example, the widely-cited COVID-19 generation interval estimates from
+  % Ganyani et al. and others.
+
+  % 2. Individual-level Poisson process models (more sophisticated). Each infector j's transmission is
+  % modeled as a non-homogeneous Poisson process with rate proportional to the GI density. This is Park
+  %  et al.'s Eq. 7.8–7.11. The likelihood for infector j with n_j offspring at generation intervals
+  % s_{i,j} is:
+
+  % L_j ∝ Λ^{n_j} exp(−Λ F₀(t_trunc − t_j)) × ∏ᵢ f₀(s_{i,j})
+
+  % This accounts for right-truncation and the number of offspring. Hart et al. (2022, eLife) extend
+  % this further using data-augmentation MCMC for household data, jointly estimating infection times
+  % and transmission trees.
+
+  % The critical point: in both approaches, generation intervals from the same infector are treated as
+  % conditionally independent. Park et al. acknowledge this explicitly after their Eq. 7.11:
+
+  % "In theory, the forward generation intervals arising from the same infector may be correlated
+  % because of non-independence in the contact process [35]; although we do not account for this
+  % potential correlation in our likelihood..."
+
+  % They note this is a known gap but find empirically that the iid approximation works adequately for
+  % their purposes (estimating R₀ from r).
+
+  % No published method I found accounts for within-infector correlation of the kind your model
+  % introduces. The correlation Park et al. reference (from the contact process) is a network effect.
+  % Your model introduces a more fundamental source: the shared latent component l_i from the
+  % infectiousness profile itself.
+
+  %   Sources:
+  % - https://royalsocietypublishing.org/doi/10.1098/rsif.2019.0719
+  % - https://elifesciences.org/articles/70767
+  % - https://royalsocietypublishing.org/doi/10.1098/rspb.2015.2026
+  % - https://royalsocietypublishing.org/doi/10.1098/rsif.2020.0756
+  % - https://journals.plos.org/ploscompbiol/article?id=10.1371%2Fjournal.pcbi.1014239
+  % - https://pmc.ncbi.nlm.nih.gov/articles/PMC10990235/

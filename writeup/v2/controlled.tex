@@ -1,0 +1,96 @@
+\section{The impact of punctuated infectiousness profiles on controlled epidemics.}
+
+\subsection{Detect-and-isolate interventions.}
+
+Detect-and-isolate interventions are among the most important non-pharmaceutical interventions available for curbing an epidemic. The goal of these interventions is to detect individuals at an early stage of infection, prior to peak infectiousness, so that they can shift their behavior (isolate) and prevent onward spread. Detection can happen {\it via} the development of symptoms and/or diagnostic testing; thus, the timing of symptom onset and the window of test-based detectability, relative to the infectiousness profile, are critical factors influencing the success of such interventions [Fraser]. 
+
+The efficacy of detect-and-isolate interventions can be summarized in terms of {\it testing effectiveness} (TE), defined as the expected proportion by which a detect-and-isolate intervention reduces population-level transmission  \citep{middleton_modeling_2024}. Formally, TE can be expressed as 
+\begin{equation}
+	\text{TE} = \rho \eta P(\tau > D)
+\end{equation}
+where $\rho \in [0,1]$ is the participation rate, $\eta \in [0,1]$ is the effectiveness of isolation (so that post-detection transmission attempts succeed with probability $1 - \eta$), $\tau$ is the time of a transmission attempt relative to the index case's infection time, and $D$ is the detection time. When $D$ is anchored to the index case's infection time (\eg, the detectability window spans 2--7 days after infection), TE depends only on the shape of the generation interval distribution; the shape of the individual infectiousness profile integrates out ({\bf Supplementary Methods}). If, however, $D$ is anchored to the individual infectiousness profile (\eg, the window of detectability extends $\pm$ 3 days from peak infectiousness), TE depends on the width of the individual infectiousness profile, as we illustrate here. Anchoring $D$ to the infectiousness profile is arguably the more realistic scenario since symptom onset, test-based detectability, and peak pathogen shedding are all linked to viral load, which in turn shapes the individual's infectiousness trajectory [Boyer]. 
+
+% The efficacy of detect-and-isolate interventions can be summarized in terms of {\it testing effectiveness} (TE), defined as the expected proportion by which a detect-and-isolate intervention reduces population-level transmission  \citep{middleton_modeling_2024}. Formally, TE can be expressed as 
+% \begin{equation}
+% 	\text{TE} = \rho \eta P(\tau > D)
+% \end{equation}
+% where $\rho \in [0,1]$ is the fraction of the population participating in the intervention, such that $\rho = 1$ implies full participation; $\eta \in [0,1]$ is the effectiveness of isolation, such that transmission attempts that happen after time $D$ succeed with probability $1 - \eta$; $\tau$ is the (random) time of a transmission attempt relative to the index case's infection time ($\tau = 0$); and $D$ is the (random) detection time. When $D$ is anchored to the index case's infection time (\eg, the detectability window spans 2--7 days after infection), TE depends only on the shape of the generation interval distribution; the shape of the individual infectiousness profile integrates out ({\bf Supplementary Methods}). If, however, $D$ is anchored to the individual infectiousness profile (\eg, the window of detectability extends $\pm$ 3 days from peak infectiousness) --- a reasonable assumption given known correlations between infectiousness, pathogen load, symptom onset, and test-based detectability [Boyer] --- the shape of the individual infectiousness profile matters. 
+
+To illustrate how TE depends on the shape of the individual infectiousness profile, we considered two detection mechanisms: symptom-based isolation and regular screening with a diagnostic test. For the symptom-based detection mechanism, we assumed symptoms arose at a Normally-distributed time relative to peak infectiousness with mean offset $\delta_\text{symp}$ and standard deviation $\sigma_\text{symp}$, with isolation occurring immediately upon developing symptoms. For the testing-based strategy, we assumed the window of detectability ran from $\delta_\text{pre}$ days before peak infectiousness to $\delta_{post}$ days after peak infectiousness, and that diagnostic tests were administered at even intervals of length $\Delta_{test}$ with uniform-random offset relative to the start of the detectability window.  We included a $\text{Exp}(\lambda_{act})$-distributed test turnaround delay before isolation. To cover various widths of the infectiousness profile, we considered $\psi \in \{0, 0.2, 0.5, 0.8, 1\}$. For each scenario, we numerically integrated the expression $\text{TE} = \eta \rho \int_{-\infty}^\infty (1-F_\epsilon(t)) f_\text{det}(t) \, dt$, where $F_\epsilon$ is the CDF of the infectiousness kernel ($f_\epsilon \sim \text{Gamma}(\psi \alpha, \beta)$) and $f_\text{det}$ is the PDF of the detection time distribution, with time indexed from the peak of the individual infectiousness profile. 
+
+These experiments demonstrate that narrow infectiousness profiles ($\psi \rightarrow 0$) make TE sensitive to small shifts in detection time. When symptoms arise at a $\text{Normal}(\delta_\text{symp}, \sigma_\text{symp}^2)$-distributed time after peak infectiousness, the drop in TE as $\delta_\text{symp}$ shifts from negative to positive (average detection happens before \vs after peak infectiousness) is sharpest for narrow infectiousness profiles ({\bf Figure XX}). When $\sigma_\text{symp} = 0.5$ and $\delta_\text{symp} = 3$, TE ranged from XX for $\psi = 1$ to XX for $\psi = 0$ against influenza, XX for $\psi = 1$ to XX for $\psi = 0$ against SARS-CoV-2 omicron, XX for $\psi = 1$ to XX for $\psi = 0$ against measles. When $\delta_\text{symp} = -1$, the trends reversed:  TE ranged from XX for $\psi = 1$ to XX for $\psi = 0$ against influenza, XX for $\psi = 1$ to XX for $\psi = 0$ against SARS-CoV-2 omicron, XX for $\psi = 1$ to XX for $\psi = 0$ against measles. Similarly, when the window of test-based detectability extended from $\delta_\text{pre} = 3$ days prior to peak infectiousness to $\delta_{post} = 7$ days after, and when testing occurred weekly with an $\text{Exp}(0.5)$-distributed turnaround time, TE ranged from XX for $\psi = 1$ to XX for $\psi = 0$ against influenza, XX for $\psi = 1$ to XX for $\psi = 0$ against SARS-CoV-2 omicron, and XX for $\psi = 1$ to XX for $\psi = 0$ against measles. When testing occurred daily, TE ranged from XX for $\psi = 1$ to XX for $\psi = 0$ against influenza, XX for $\psi = 1$ to XX for $\psi = 0$ against SARS-CoV-2 omicron, and XX for $\psi = 1$ to XX for $\psi = 0$ against measles. Incomplete participation and imperfect isolation scale these effects, but the qualitative patterns remain ({\bf Supplementary Figure XX}). In short, these findings reveal how narrower profiles cause detect-and-isolate protocols to become increasingly ``all-or-nothing'', where a detection prior to peak infectiousness averts a person's entire infectious potential while a detection after peak infectiousness averts none. 
+
+Beyond the direct reduction in transmission captured by TE, detect-and-isolate interventions produce two additional $\psi$-dependent effects that act in opposite directions: generation interval truncation (which can accelerate epidemic growth) and increased overdispersion in secondary infection counts (which increases the probability of epidemic extinction). First, detect-and-isolate interventions re-shape the generation interval distribution and cause the mean generation time to contract --- an effect that is most pronounced for smooth profiles and disappears as $\psi \rightarrow 0$. Under a detect-and-isolate protocol, the generation interval distribution becomes 
+\begin{equation}
+\text{[Distorted GI]} g^*(\tau) = 
+\end{equation}
+For smooth infectiousness profiles, detection reliably cuts off the tail of transmission; any surviving transmission attempts thus fall earlier in expectation, shortening the mean generation interval. For punctuated profiles, the all-or-nothing nature of detection causes some individuals' infectiousness to be cut off entirely, while others are fully missed --- and, among those that are missed, their secondary infection times follow $g^*(\tau) = g(\tau)$ on average, yielding no shortening of the mean generation interval. Since shorter mean generation times with fixed $R_\text{eff}$ yield faster epidemic growth  \citep{wallinga_how_2007}, epidemics controlled by detect-and-isolate interventions are expected to grow faster than those simulated ``naively'' with reproduction number $R_0 (1 - TE)$ and generation interval $g(\tau)$, with the smoothest individual infectiousness profiles yielding the greatest discrepancies.
+
+Second, detect-and-isolate interventions also increase overdispersion in secondary infection counts, with punctuated infectiousness profiles yielding the most pronounced increases in overdispersion. In the $\psi \rightarrow 0$ limit, the variance of the individual reproduction number $\nu_i$ is maximized, with 
+\begin{equation}
+	\nu_i = \begin{cases}
+		0 & \text{w.p.}  \text{TE} \\ 
+		R_0  & \text{w.p.} 1-\text{TE}
+	\end{cases}
+\end{equation}
+\ie, a distribution consisting of two point masses at 0 and $R_0$. Overdispersion increases the probability of early-epidemic extinction, so epidemics controlled by detect-and-isolate interventions are expected to go extinct more frequently than those simulated naively with matching reproduction number $R_0 (1-TE)$ and generation interval $g(\tau)$, with the most punctuated individual infectiousness profiles yielding the highest extinction probability. 
+
+Simulations confirm these expected trends. We simulated epidemics under detect-and-isolate interventions, assuming 50\% participation ($\rho= 0.5$), perfect isolation ($\eta = 1$), and a deterministic isolation time 1 day before peak infectiousness (equivalent to $\delta_\text{symp} = -1$ and $\sigma_\text{symp} = 0$). We also simulated an analogous set of epidemics generated by setting $R_\text{eff} = (1-\text{TE})R_0$, but keeping the generation interval $g(\tau)$ unchanged and introducing no overdispersion ($\nu_i \equiv R_0$). We ran 5,000 epidemic simulations in a population of size 10,000 for each of $\psi \in \{0, 0.5, 1\}$ and for each of the three benchmark pathogens. For the detect-and-isolate simulations, the mean ([5\% quantile, 95\% quantile]) time to reach 500 infections was XX [XX, XX] for influenza, XX [XX, XX] for SARS-CoV-2 omicron, and XX [XX, XX] for measles; while for the naive TE-adjusted simulations the time to reach 500 infections was XX [XX, XX] for influenza, XX [XX, XX] for SARS-CoV-2 omicron, and XX [XX, XX] for measles. The proportion of epidemics that never reached 500 cases in the detect-and-isolate simulations was XX for influenza, XX for SARS-CoV-2 omicron, and XX for measles; and in the naive TE-adjusted simulations, the proportions were XX for influenza, XX for SARS-CoV-2 omicron, and XX for measles. 
+
+Together, these findings reveal that the impact of a detect-and-isolate intervention on an outbreak's trajectory depends sensitively, and through multiple mechanisms, on the shape of the individual infectiousness profile. For smooth individual infectiousness profiles, the reduction in $R_\text{eff}$ captured by the testing effectiveness can be partially counteracted by generation interval truncation, which can cause the epidemic to grow faster than one might expect. For punctuated individual infectiousness profiles, the reduction in $R_\text{eff}$ may be compounded by elevated overdispersion in secondary case counts, so that epidemics are not only less intense, but also less likely to establish in the first place. 
+
+\subsection{Gathering size restrictions.}
+
+Gathering size restrictions are another important class of non-pharmaceutical interventions, aimed at limiting opportunities for major transmission events. Gathering size restrictions truncate the ``tail'' of the interpersonal contact distribution, reducing the mean contact rate (and thus the effective reproduction number) as well as reducing overdispersion. Since the individual infectiousness profile's shape is connected with overdispersion in the presence of time-varying contacts, there is reason to believe that gathering size restrictions may play out differently for punctuated \vs smooth individual infectiousness profiles. Here, we show that gathering size restrictions yield two main effects: a reduction in mean transmission that is independent of the infectiousness profile's shape, and a reduction in overdispersion whose magnitude depends on $\psi$.
+
+To investigate this, we considered a modification of the stochastic contact process. As before, the contact level $c_i(t)$ for person $i$ switches at $\text{Exp}(\lambda)$-distributed times, but the new levels are  drawn from a truncated $\text{Gamma}(\sigma, \sigma)$ distribution, rather than from the full distribution. The truncation threshold, $c_\text{max}$, captures the severity of the restriction. 
+
+Truncation reduces the effective reproduction number by the same factor regardless of the individual infectiousness profile's shape. The effective reproduction number is 
+\begin{equation}
+	R_\text{eff} = \mu_T R_0 \qquad \text{ where } \qquad \mu_T = \frac{F_\text{Gamma}(c_\text{max}; \sigma+1, \sigma)}{F_\text{Gamma}(c_\text{max}; \sigma, \sigma)}
+\end{equation}
+where $F_\text{Gamma}(c; a, b)$ is the $\text{Gamma}(a, b)$ CDF evaluated at $c$. 
+
+It is possible to derive simple expressions for the relative and absolute difference in overdispersion between the uncontrolled and the gathering-size-restricted scenarios ({\bf Supplementary Methods}). These are 
+\begin{equation}
+\frac{\text{OD}_\text{new}}{\text{OD}_\text{old}} = \frac{\sigma}{\mu_T^2 / V_T}
+\qquad \text{ and } \qquad
+\text{OD}_\text{new} - \text{OD}_\text{old} = \text{OD}_\text{old} \left[ \frac{\sigma}{\mu_T^2 / V_T} - 1 \right]
+\end{equation}
+where $V_T$ is the variance of the $\text{Gamma}(\sigma, \sigma)$ distribution truncated at $c_\text{max}$. The relative difference in overdispersion does not depend on the individual infectiousness profile's shape; however, the absolute difference does, insofar as $\text{OD}_\text{old}$ depended on the punctuation parameter $\psi$. Concretely: if $\text{OD}_\text{old}$ is small ($\approx 0$), which is more likely for smooth individual infectiousness profiles, then $\text{OD}_\text{new} - \text{OD}_\text{old} \approx 0$, \ie, gathering size restrictions cause little practical difference in an already-small overdispersion. If, however, $\text{OD}_\text{old}$ is large, which is more likely for punctuated individual infectiousness profiles, the absolute difference in overdispersion may be meaningful: gathering size restrictions may cause a previously large $\text{OD}_\text{old}$to shrink to a meaningfully smaller $\text{OD}_\text{new}$. 
+
+To investigate the impact of gathering size restrictions on outbreak trajectories, we simulated 5,000 epidemics in a population of size 10,000 using the stochastic contact model with $\sigma = XX$ and with gathering sizes truncated at $c_\text{max} = XX$. We also simulated two parallel sets of ``naive'' epidemic simulations, both with $R_\text{eff} = \mu_T R_0$: one with the full (non-truncated) stochastic contact model, and one with time-uniform contacts ($c_i(t) \equiv 1$). We considered $\psi \in \{0, 0.5, 1\}$ for the three benchmark pathogens. Across simulations, the $R_\text{eff}$-adjusted, stochastic contact model over-estimated the epidemic extinction probability and the $R_\text{eff}$-adjusted, time-uniform contact model under-estimated it relative to the truncated contact model, and the discrepancies were largest for the narrowest individual infectiousness profiles ($\psi \rightarrow 0$) ({\bf Figure XX}). In the $\psi = 0$ boundary case, the proportion of simulated influenza epidemics that failed to establish was XX for the truncated contact model, XX for the $R_\text{eff}$-adjusted full stochastic contact model, and XX for the $R_\text{eff}$-adjusted time-uniform contact model; for SARS-CoV-2 omicron, XX for the truncated contact model, XX for the $R_\text{eff}$-adjusted full stochastic contact model, and XX for the $R_\text{eff}$-adjusted time-uniform contact model; and for measles, XX for the truncated contact model, XX for the $R_\text{eff}$-adjusted full stochastic contact model, and XX for the $R_\text{eff}$-adjusted time-uniform contact model. 
+
+Similar to detect-and-isolate interventions, these findings indicate that gathering size restrictions can have additional overdispersion-mediated impacts on epidemic trajectories that go beyond their reduction of mean contact rates, and these impacts are sensitive to the shape of the individual infectiousness profile. Previously, we showed that punctuated profiles generate more overdispersion under time-varying contacts; here, we find that gathering size restrictions attenuate this overdispersion, with the largest absolute reductions occurring precisely when the baseline overdispersion is highest, \ie, with narrow individual infectiousness profiles. Failing to account for this can lead to either over- or under- estimates of the epidemic extinction probability, depending on which model is used. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

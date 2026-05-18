@@ -1,0 +1,85 @@
+% make -C writeup/v2
+% make -C writeup/v2 dark
+
+\documentclass[10pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+\usepackage{courier}
+\usepackage{xcolor}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{xspace}
+\usepackage{lineno}
+\renewcommand\linenumberfont{\normalfont\footnotesize\ttfamily\color{gray}}
+
+% Dark mode: activated via \def\darkmode{} on the command line
+\ifdefined\darkmode
+  \definecolor{darkbg}{HTML}{1D1E1E}
+  \definecolor{darkfg}{HTML}{C8C8C8}
+  \pagecolor{darkbg}
+  \color{darkfg}
+  \hypersetup{colorlinks=true, linkcolor=cyan, citecolor=cyan, urlcolor=cyan}
+\fi
+
+% Caption formatting: bold label, small text
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf}
+
+% Uniform font size for title and sections
+\usepackage{titlesec}
+\titleformat{\section}{\normalsize\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries\itshape}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
+
+% Abbreviations
+\newcommand{\ie}{\textit{i.e.}\@\xspace}
+\newcommand{\eg}{\textit{e.g.}\@\xspace}
+\newcommand{\vs}{\textit{vs.}\@\xspace}
+
+\setlength{\parskip}{0.5em}
+\setstretch{1.2}
+\linenumbers
+
+\begin{document}
+
+\noindent\textbf{The impact of punctuated infectiousness on infectious disease dynamics}
+\vskip 1.5em
+
+\input{authors}
+\vskip 1.5em
+
+\begin{abstract}
+\noindent\small
+\input{abstract}
+\end{abstract}
+\vskip 1.5em
+
+\input{introduction}
+
+\input{model}
+
+\input{uncontrolled}
+
+\input{controlled}
+
+\input{identifiability}
+
+\input{discussion}
+
+\clearpage
+\bibliographystyle{plainnat}
+\bibliography{../zotero}
+
+\clearpage
+\input{acknowledgements}
+
+\clearpage
+\input{supplementary}
+
+\end{document}

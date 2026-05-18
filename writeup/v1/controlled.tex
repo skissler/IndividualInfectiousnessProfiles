@@ -1,0 +1,100 @@
+\clearpage
+
+\section{The impact of punctuated individual infectiousness on detect-and-isolate interventions}
+
+The impact of a detect-and-isolate protocol can be measured in terms of its ``test efficacy'' (TE) \citep{middleton_modeling_2024}.  The TE measures the amount of infectiousness that a detection protocol (possibly test-based, but this extends also to symptom-based isolation and other general isolation triggers) prevents. 
+
+When detection is unrelated to the timing of a person's infectiousness, the individual infectiousness profile cancels out, and the generation interval distribution is all that is neede to calculate TE. In the realistic scenario that detectability is anchored to the person's infectiousness somehow --- \eg, symptoms arise at a time related to peak infectiousness, or detectability can occur during some window that extends before and after a person's peak infectiousness -- the shape of the individual infectiousness profile impacts TE. In general, when detection tends to occur before peak infectiousness, TE is higher for narrower infectiousness profiles; when detection usually happens after peak infectiousness, TE is lower for narrow infectiousness profiles ({\bf Figure XX}). 
+
+TE, however, only reflects part of the story with individual infectiousness. Detect-and-isolate protocols have two additional impacts whose strength depends on the shape of the individual infectiousness profile: they re-shape the overall generation interval distribution by cutting off late transmissions (this happens moreso for smooth profiles than for spiky ones), and they can increase overdispersion in the secondary infection distribution (this happens moreso for smooth profiles). As a result, the naive simulations of epidemics using $R_{\text{eff}} = R_0 (1-\text{TE})$ fail to capture key elements of epidemics that result when the detect-and-isolate protocol is explicitly modeled and the individual infectiousness profile is accounted for. 
+
+We illustrate this using two specific detect-and-isolate protocols: one in which symptoms arise with some lag $\mu$ relative to peak infectiousness and variance $\sigma^2$, and one where there exists a detectability window around the peak infectiousness and people participate in regular testing. 
+
+Results for $g$, $k$, and TE for symptom-based screening. 
+
+Results for $g$, $k$, and TE for test-based screening. 
+
+Epidemic simulations illustrating differences. 
+
+% \begin{itemize}
+% 	\item The biologically anchored detection model 
+% 	\item For fixed detection offset, TE depends on psi. Skewed profiles buy a bit of detection time after the peak where TE is still greater for spikier profiles (within reason). 
+% 	\item Symptoms arising somewhat randomly smooth out the effect. For spikier profiles, they boost TE when mean detection is after the peak infectiousness and reduce TE when mean detection is beffore peak infectiousness -- meaningfully. 
+% 	\item Regular screening: TE is sensitive to screening frequency and delays in response, especially in specific regions of sensitivitiy-frequency-window size combinations. 
+% 	\item TE is only part of the story: isolation shrinks generation intervals (moreso for smooth profiles), and increases overdispersion (moreso for spike profiles), which has an impact on epidemic dynamics that differ from what you'd expect if you simply ran an epidemic with $R_{\text{eff}} = R_0 (1-TE)$. Give some simulations to demonstrate. 
+% \end{itemize}
+
+\section{The impact of individual infectiousness on gathering size restrictions}
+
+Gathering size restrictions may have differential impacts on epidemic dynamics depending on the punctuation of the individual infectiousness profile. To model gathering size restrictions, we considered an extension of the stochastic contact model where contact levels are drawn from a $\text{Gamma}(k_c, k_c)$ distribution truncated at $c_{max}$. Cutting off this tail reduces the mean contact rate to $\mu_T < 1$, where 
+\begin{equation}
+	\mu_T = \frac{F_{k_c+1, k_c}(c_{max})}{F_{k_c, k_c}(c_{max})}
+\end{equation}
+and $F_{a,b}(x)$ is the Gamma CDF with shape $a$ and rate $b$.  The effective reproduction number under the gathering size restriction is simply 
+\begin{equation}
+	R_0^{gs} = \mu_T R_0
+\end{equation}
+The truncated contact process mean $\mu_T$ does not depend on $\psi$, so the effect of gathering size restrictions on the reproduction number is invariant to the shape of the individual infectiousness kernel. 
+
+Truncating the contact process tail has a second effect, however: it also reduces the variance of the contact process, which in turn reduces the overdispersion of the secondary infection distribution. It can be shown that the ratio of the truncated-to-original overdispersion factors is 
+\begin{equation}
+	\frac{\text{OD}_{\text{new}}}{\text{OD}_{\text{old}}} = \frac{k_c}{\mu_T^2/V_T}
+\end{equation}
+This ratio (\ie, the relative difference between $OD_{new}$ and $OD_{old}$) is also mathematically invariant to $\psi$. However, the absolute difference is 
+\begin{equation}
+	\text{OD}_{new} - \text{OD}_{old} = \text{OD}_{old} [\frac{k_c}{\mu_T^2/V_T} - 1]
+\end{equation}
+which indicates that the absolute difference in overdispersion caused by gathering size restrictions is proportional to the overdispersion of the original process. In other words, if the original process had a high overdispersion, the absolute difference in overdispersion caused by tuncation is higher than the if the original process already had a low overdispersion. Practically, this means that punctuated infectiousness profiles --- which tend to have higher overdispersion at baseline --- are more impacted by gathering size restrictions. 
+
+Gathering size restrictions thus have a partially self-defeating impact, where the tradeoff increases as the pucntuation of the individual infectiousness profile becomes sharper. Gathering size restrictions reduce the effective reproduction number  --- inhibiting transmission --- but also reduce overdispersion, which makes stochastic die-out less likely. This phenomenon is borne out by simulations. We simulated XXXX outbreaks in a population of XXXX for each of our three benchmark pathogens, using both the truncated contact process and the original process but with lower $R_0$ to match the effective $R_0$ of the truncated process. (Results). 
+
+% Briefly, we also consider epidemic control by restricting gathering sizes. 
+% \begin{itemize}
+% 	\item The theory 
+% 	\item The model 
+% 	\item Like with detect-and-isolate, the reduction in $R_{\text{eff}}$ isn't the whole story: gathering size restrictions impact overdispersion, and again do so more for spike than for smooth profiles. 
+% \end{itemize}
+
+% \section{Notes on detect and isolate}
+
+% We first consider the detect-and-isolate interventions. Detection may occur through various mechanisms, e.g., the onset of symptoms or a positive diagnostic test. 
+
+% We can express the effectiveness of a detect-and-isolate intervention in terms of the {\it test effectiveness} \citep{middleton_modeling_2024}.
+
+% If the detection mechanism is independent of the individual infectiousness profile (e.g., detection is anchored to the infection time but does not depend on what happens thereafter), the imapct of the individual infectiousness profile washes out ({\bf Supplementary Text}). However, if detectability is anchored somehow to the infectiousness profile -- which is likely to be the case in general -- the individual profile begins to matter. 
+
+% Here, we consider detection strategies that are anchored to the mode of the individual infectiousness profile (i.e., the time of peak infectiousness). Let $D(\tau)$ be the cumulative probability that a person has been detected by time $\tau$. 
+
+% To begin, we consider a fixed, deterministic detection time relative to the mean - this might correspond to symptoms arriving deterministically some amount of time prior to (or after) peak infectiousness. 
+
+% Maybe: just show a TE profile for a spike, smooth, and $\psi = 0.5$ profile for a deterministic offset (size of offset on the horizontal axis, TE on the vertical); and then show the analogous curves for when the detection profile is random (say, normal, where now the horizontal axis captures the mean of the distribution, and we pick some reasonable standard deviation). This should illustrate how the timing of detection (with variation) interplays with the punctuation of the infectiousness profile. That might be enough here. 
+
+% Then we can focus on the implications for the generation interval distribution and secondary infection distribution. 
+
+% I want to try my hand at making this figure: what do we need? 
+
+
+
+% Detection and isolation is more effective for punctuated kernels
+% Detect-and-isolate policies shift the overall generation interval distribution in a way that depends on kappa -- leading to a partially self-defeating intervention.
+
+% \begin{itemize}
+% 	\item The general detection distribution framework
+% 	\item Narrower infectiousness profiles transfer detection into an all-or-nothing proposition 
+% 	\item Detection and isolation shorten the generation interval distribution, moreso for smoooth profiles, which means that epidemics may grow (and shrink) faster than a naive application of TE would suggest...
+% 	\item while detection and isolation increases overdispersion in secondary infections, moreso for spike profiles, so that epidemics are less likely to take off (but more explosive) than would be expected with a naive application of TE. 
+% 	\item The takehome: detection and isolation reduce $R_{eff}$ via TE, but a simple application of TE won't tell us everything we need to know: instead, we need to know something about the individual infectiousness profile to properly anticipate how detect-and-isolate interventions will impact epidemic dynamics. 
+% 	\item Furthermore: narrower infectiousness profiles make detect-and-isolate interventions sensitive to small shifts, especially near the infectiousnesss profile itself. So, if symptoms move from slightly after to slighlty before infectiousness on average, this will have an outsize impact on narrow profiles vs. smooth ones. Similarly, if a small increase in testing cadence could have a huge impact for spike profiles, if we shift the mean of D from slightly after to slightly before peak infectiousness; but in other areas, it'll hardly have any impact on spike profiles, whereas the change in effectiveness for smooth profiles should be more gradual. 
+% 	\item This last point is relevant for when detection is anchored to the mode (or otherwise anchored to the individual infectiousness profile); otherwise, using the population average I think should be fine (e.g. if detection depends only on time of infection but not subsequent infectiousness). 
+% 	\item The takeaway from this: if we want to know the impact of shifting biology (changes in the symptom timing) or shifts in recommendations (changes in the cadence of testing), we should know something about the individual infectiousness profile (and how it relates to detectability). 
+% 	\item Adding in delays/turnaround time will also impact all this. 
+% \end{itemize}
+
+
+% {\bf }
+
+
+
+% \subsection{Gathering size restrictions}
+
+% More effective for smooth profiles, since they reduce mean transmission without losing the overdispersion that was suppressing outbreak probability for spiky profiles.

@@ -1,0 +1,160 @@
+\clearpage
+\section*{Narrative outline (working document --- remove before submission)}
+
+\noindent\rule{\textwidth}{0.4pt}
+
+\subsection*{Core argument in one paragraph}
+
+The population-level infectiousness profile $A(\tau)$ is an expectation over individuals, and many different individual-level profiles $a_i(\tau)$ can produce the same $A(\tau)$. The ``punctuatedness'' of $a_i(\tau)$ --- how concentrated in time each person's infectiousness is --- is a free parameter ($\psi$) that is invisible to standard surveillance but controls stochastic epidemic dynamics. We introduce a framework for studying this, show that $\psi$ affects epidemic timing, overdispersion, and intervention effectiveness, and discuss how $\psi$ might be inferred.
+
+\noindent\rule{\textwidth}{0.4pt}
+
+\subsection*{1. Introduction}
+
+\begin{description}
+    \item[Message:] The individual infectiousness profile $a_i(\tau)$ is a fundamental but neglected object. Different $a_i(\tau)$ can yield the same $A(\tau)$, so standard methods cannot distinguish them --- but they may matter for epidemic dynamics. This paper asks: do they matter, and how would we know?
+
+    \item[Structure (existing, largely in place):]~
+    \begin{enumerate}
+        \item $A(\tau) = R_0 g(\tau)$ is the fundamental object driving epidemic dynamics.
+        \item $A(\tau) = E_i[a_i(\tau)]$: the population profile is an average over individuals.
+        \item Since $A$ is an average, many different $a_i$ can produce the same $A$. SEIR example: stepwise, smooth, and spike profiles all yield the same bell-shaped $A$ (Figure 1A--C).
+        \item We don't know what $a_i(\tau)$ looks like in general, and it's hard to measure.
+        \item But there are good reasons to think it matters: it interacts with contact patterns, detection timing, and early-outbreak stochasticity.
+        \item Our goals: (a) introduce a framework for parameterizing $a_i$'s ``punctuatedness'' $\psi$, (b) characterize how $\psi$ impacts epidemic dynamics holding $A(\tau)$ fixed, (c) assess identifiability of $\psi$.
+    \end{enumerate}
+\end{description}
+
+\noindent\rule{\textwidth}{0.4pt}
+
+\subsection*{2. Model}
+
+\begin{description}
+    \item[Message:] The time-shifted Gamma family provides a one-parameter continuum between spike and smooth individual infectiousness profiles, all sharing the same population-level $A(\tau)$. This is the tool that lets us isolate the effect of punctuatedness.
+
+    \item[Structure (existing, largely in place):]~
+    \begin{enumerate}
+        \item The decomposition $a_i(\tau) = \nu_i\, b_i(\tau)\, c_i(t_i + \tau)$: biological intensity ($\nu_i$), biological timing ($b_i$), and contact modulation ($c_i$). This decomposition separates \textit{how much} from \textit{when} from \textit{who's around}.
+        \item The time-shifted Gamma model for $b_i(\tau)$: latent period $l_i \sim \text{Gamma}((1-\psi)\alpha, \beta)$, then biological profile $f_\epsilon \sim \text{Gamma}(\psi\alpha, \beta)$. Gamma additivity guarantees $E_i[b_i] = g(\tau)$ for any $\psi$.
+        \item Contact models: the \textbf{reference} process ($c_i \equiv 1$), plus two models used as test beds when needed:
+        \begin{itemize}
+            \item \textit{Periodic}: $c_i(t) = 1 - A\cos(\omega t)$, capturing diurnal contact rhythms. [Introduced briefly; the reader should see this as ``the simplest nontrivial contact variation.'']
+            \item \textit{Lomax--Poisson}: piecewise-constant with heavy-tailed levels. [Introduced briefly; used only in simulations to show robustness.]
+        \end{itemize}
+    \end{enumerate}
+
+    \item[Key framing note:] The contact models are \textit{supporting actors}, not co-equal model components. They exist to create settings where $\psi$ can bite. Keep their exposition short (1--2 paragraphs each) and position them as ``we need \textit{some} source of contact variation; here are the simplest choices.''
+\end{description}
+
+\noindent\rule{\textwidth}{0.4pt}
+
+\subsection*{3. Uncontrolled epidemics}
+
+\begin{description}
+    \item[Message:] Even in uncontrolled epidemics, $\psi$ shapes observable features of outbreak dynamics. The effects escalate with model complexity: first timing, then overdispersion.
+
+    \item[Structure --- three subsections of increasing complexity:]~
+
+    \begin{enumerate}
+        \item \textbf{Epidemic timing (constant contacts, $c_i \equiv 1$).} \\
+        \textit{Punchline:} Narrower $a_i$ $\Rightarrow$ later and more variable epidemic establishment. \\
+        \textit{Content:} The random time shift $\varsigma$ from branching process theory (Morris et al.\ 2024). Closed-form expressions for $\text{Var}[W]$ and $\text{Mode}[\varsigma]$ as functions of $\psi$ (Eqs.\ in current draft). $\psi$ enters only through $(({(1+z)^2}/({1+2z}))^{(1-\psi)\alpha}$. Amplified by $R_0$. Simulations confirm. \\
+        \textit{Deliverables:} Survival curves for time-to-100 infections (influenza, omicron, measles $\times$ spike/smooth). \\
+        \textit{Status:} Analytically complete; simulations and figure needed.
+
+        \item \textbf{Growth rate estimation uncertainty (constant contacts).} \\
+        \textit{Punchline:} Narrower $a_i$ $\Rightarrow$ more uncertain empirical estimates of $r$. \\
+        \textit{Content:} Brief simulation-based result. Logically follows from the time-shift variance result. \\
+        \textit{Deliverables:} Box-and-whisker or density plots of estimated $r$ across $\psi$. \\
+        \textit{Status:} Simulations needed.
+
+        \item \textbf{Overdispersion from contact variation.} \\
+        \textit{Punchline:} When contacts vary over time, narrower $a_i$ ``see'' more of that variation, generating overdispersion in secondary infections --- a new mechanism for superspreading that doesn't require individual-level differences in infectiousness or contacts. \\
+        \textit{Content:}
+        \begin{itemize}
+            \item \textit{Setup (2--3 sentences):} With $c_i \equiv 1$, there's no overdispersion regardless of $\psi$. But real contacts aren't constant. What happens when we add temporal contact variation?
+            \item \textit{Analytic result (periodic model):} $k = (2/A^2)(1 + \omega^2/\beta^2)^{\psi\alpha}$. State the formula, interpret the two factors (contact amplitude $\times$ Fourier averaging), note monotonicity in $\psi$. Reference Supplementary Methods for derivation.
+            \item \textit{Simulation confirmation (Lomax model):} Same qualitative pattern under realistic heavy-tailed contacts. One sentence + figure panel.
+            \item \textit{General principle (optional, one sentence):} For any stationary contact process with spectral density $S_c(\omega)$, overdispersion equals the spectral overlap between contact noise and the profile window.
+        \end{itemize}
+        \textit{Deliverables:} $k$ vs.\ $\psi$ for the periodic model (analytic curve + simulation dots); a panel showing the same under Lomax contacts. \\
+        \textit{Status:} Analytic result and derivation complete; simulations needed.
+    \end{enumerate}
+\end{description}
+
+\noindent\rule{\textwidth}{0.4pt}
+
+\subsection*{4. Controlled epidemics}
+
+\begin{description}
+    \item[Message:] $\psi$ doesn't just affect ``background'' stochastic properties --- it changes how interventions work, in ways that can't be captured by a single effectiveness number.
+
+    \item[Structure:]~
+
+    \begin{enumerate}
+        \item \textbf{Detect-and-isolate interventions.} \\
+        \textit{Punchline:} Test efficacy (TE) depends on $\psi$ when detection is anchored to infectiousness timing. But TE is only part of the story: isolation also reshapes $g(\tau)$ and increases overdispersion, both $\psi$-dependently. \\
+        \textit{Content:}
+        \begin{itemize}
+            \item TE for symptom-based detection (deterministic offset, then random offset): narrow profiles make detection an all-or-nothing proposition; smooth profiles degrade gracefully.
+            \item TE for regular testing: sensitivity to screening frequency depends on $\psi$.
+            \item Beyond TE: isolation shortens generation intervals (more for smooth) and increases overdispersion (more for spike). Naive simulations using $R_\text{eff} = R_0(1 - \text{TE})$ miss these effects.
+            \item Epidemic simulations illustrating the discrepancy.
+        \end{itemize}
+        \textit{Deliverables:} TE curves vs.\ detection offset (for spike/intermediate/smooth); $g(\tau)$ and $k$ under isolation; paired epidemic trajectories (naive $R_\text{eff}$ vs.\ explicit isolation model). \\
+        \textit{Status:} Framework described; analytics and simulations needed.
+
+        \item \textbf{Gathering size restrictions.} \\
+        \textit{Punchline:} Gathering size caps interact with $\psi$ in a potentially counter-intuitive way: they reduce mean transmission for everyone, but smooth profiles lose more overdispersion (which was suppressing outbreak probability for spike profiles). \\
+        \textit{Content:} Brief analytic or simulation-based treatment. \\
+        \textit{Deliverables:} Outbreak probability and/or effective $k$ under gathering caps vs.\ $\psi$. \\
+        \textit{Status:} Conceptual; needs development.
+    \end{enumerate}
+\end{description}
+
+\noindent\rule{\textwidth}{0.4pt}
+
+\subsection*{5. Identifiability and inference}
+
+\begin{description}
+    \item[Message:] $\psi$ is hard to estimate from epidemic data alone, but identifiable from sufficiently detailed contact-tracing data --- especially when $R_0$ is high (which is exactly when $\psi$ matters most).
+
+    \item[Structure:]~
+    \begin{enumerate}
+        \item When is $\psi$ identifiable? Conditions on data quality (precise infection times, known contact histories).
+        \item Bayesian inference framework for $\psi$ given contact-tracing data. Knowing the ``negatives'' (contacts that didn't transmit) dramatically improves power.
+        \item Power analysis: sample sizes needed to distinguish $\psi$ values, as a function of $R_0$.
+    \end{enumerate}
+    \textit{Deliverables:} Posterior distributions for $\psi$ under simulated data; power curves. \\
+    \textit{Status:} Framework described; implementation needed.
+\end{description}
+
+\noindent\rule{\textwidth}{0.4pt}
+
+\subsection*{6. Discussion}
+
+\begin{description}
+    \item[Key points to make:]~
+    \begin{enumerate}
+        \item The individual infectiousness profile is a ``hidden variable'' that shapes observable epidemic features. Standard surveillance data ($R_0$, $g(\tau)$) cannot distinguish it, but it controls stochastic dynamics, intervention effectiveness, and even the interpretation of superspreading.
+        \item The ``temporal superspreading'' mechanism is novel: overdispersion arising not from who is more infectious, but from \textit{when} infectiousness falls relative to contact variation. There is no ``superspreader'' to identify --- it's a timing coincidence.
+        \item Intervention planning requires knowledge of $a_i(\tau)$: TE alone is insufficient because isolation reshapes $g(\tau)$ and $k$ in $\psi$-dependent ways, leading to dynamics that a naive $R_\text{eff}$ calculation cannot predict.
+        \item Identifiability of $\psi$ is better when it matters most (high $R_0$), which is encouraging.
+        \item Limitations: we assume a shared $\psi$ (but the Gamma additivity holds for heterogeneous $\psi_i$); we don't model individual-level variation in $\nu_i$ jointly with $\psi$; we focus on respiratory-like pathogens with unimodal kernels.
+    \end{enumerate}
+\end{description}
+
+\noindent\rule{\textwidth}{0.4pt}
+
+\subsection*{Figures (planned)}
+
+\begin{enumerate}
+    \item \textbf{Schematic} (3$\times$3): smooth/stepwise/spike $a_i(\tau)$ (A--C); cumulative infections (D--F); daily infections (G--I). [Partially complete in Mathematica.]
+    \item \textbf{Uncontrolled --- epidemic timing:} Survival curves for time-to-100 infections across $\psi$ and $R_0$.
+    \item \textbf{Uncontrolled --- overdispersion:} $k$ vs.\ $\psi$ (periodic analytic + Lomax simulation).
+    \item \textbf{Controlled --- detect-and-isolate:} TE, post-isolation $g(\tau)$ and $k$, and epidemic simulations (naive vs.\ explicit).
+    \item \textbf{Controlled --- gathering size restrictions:} Outbreak probability or effective $k$ vs.\ gathering cap.
+    \item \textbf{Identifiability:} Posterior distributions for $\psi$; power curves vs.\ sample size and $R_0$.
+\end{enumerate}
+
+\clearpage

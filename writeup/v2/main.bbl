@@ -1,0 +1,163 @@
+\begin{thebibliography}{15}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Breda et~al.(2012)Breda, Diekmann, De~Graaf, Pugliese, and
+  Vermiglio]{breda_formulation_2012}
+D.~Breda, O.~Diekmann, W.~F. De~Graaf, A.~Pugliese, and R.~Vermiglio.
+\newblock On the formulation of epidemic models (an appraisal of {Kermack} and
+  {McKendrick}).
+\newblock \emph{Journal of Biological Dynamics}, 6\penalty0 (sup2):\penalty0
+  103--117, September 2012.
+\newblock ISSN 1751-3758, 1751-3766.
+\newblock \doi{10.1080/17513758.2012.716454}.
+\newblock URL
+  \url{http://www.tandfonline.com/doi/abs/10.1080/17513758.2012.716454}.
+
+\bibitem[Britton and Lindenstrand(2009)]{britton_epidemic_2009}
+Tom Britton and David Lindenstrand.
+\newblock Epidemic modelling: {Aspects} where stochasticity matters.
+\newblock \emph{Mathematical Biosciences}, 222\penalty0 (2):\penalty0 109--116,
+  December 2009.
+\newblock ISSN 00255564.
+\newblock \doi{10.1016/j.mbs.2009.10.001}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S0025556409001643}.
+
+\bibitem[Champredon and Dushoff(2015)]{champredon_intrinsic_2015}
+David Champredon and Jonathan Dushoff.
+\newblock Intrinsic and realized generation intervals in infectious-disease
+  transmission.
+\newblock \emph{Proceedings of the Royal Society B: Biological Sciences},
+  282\penalty0 (1821):\penalty0 20152026, December 2015.
+\newblock ISSN 0962-8452, 1471-2954.
+\newblock \doi{10.1098/rspb.2015.2026}.
+\newblock URL
+  \url{https://royalsocietypublishing.org/doi/10.1098/rspb.2015.2026}.
+
+\bibitem[Goyal et~al.(2021)Goyal, Reeves, Cardozo-Ojeda, Schiffer, and
+  Mayer]{goyal_viral_2021}
+Ashish Goyal, Daniel~B Reeves, E~Fabian Cardozo-Ojeda, Joshua~T Schiffer, and
+  Bryan~T Mayer.
+\newblock Viral load and contact heterogeneity predict {SARS}-{CoV}-2
+  transmission and super-spreading events.
+\newblock \emph{eLife}, 10:\penalty0 e63537, February 2021.
+\newblock ISSN 2050-084X.
+\newblock \doi{10.7554/eLife.63537}.
+\newblock URL \url{https://elifesciences.org/articles/63537}.
+
+\bibitem[Klinkenberg et~al.(2006)Klinkenberg, Fraser, and
+  Heesterbeek]{klinkenberg_effectiveness_2006}
+Don Klinkenberg, Christophe Fraser, and Hans Heesterbeek.
+\newblock The {Effectiveness} of {Contact} {Tracing} in {Emerging} {Epidemics}.
+\newblock \emph{PLoS ONE}, 1\penalty0 (1):\penalty0 e12, December 2006.
+\newblock ISSN 1932-6203.
+\newblock \doi{10.1371/journal.pone.0000012}.
+\newblock URL \url{https://dx.plos.org/10.1371/journal.pone.0000012}.
+
+\bibitem[Larremore et~al.(2021)Larremore, Wilder, Lester, Shehata, Burke, Hay,
+  Tambe, Mina, and Parker]{larremore_test_2021}
+Daniel~B. Larremore, Bryan Wilder, Evan Lester, Soraya Shehata, James~M. Burke,
+  James~A. Hay, Milind Tambe, Michael~J. Mina, and Roy Parker.
+\newblock Test sensitivity is secondary to frequency and turnaround time for
+  {COVID}-19 screening.
+\newblock \emph{Science Advances}, 7\penalty0 (1):\penalty0 eabd5393, January
+  2021.
+\newblock ISSN 2375-2548.
+\newblock \doi{10.1126/sciadv.abd5393}.
+\newblock URL \url{https://www.science.org/doi/10.1126/sciadv.abd5393}.
+
+\bibitem[Li et~al.(2023)Li, Wu, and Moghadas]{li_epidemic_2023}
+Ao~Li, Jianhong Wu, and Seyed~M. Moghadas.
+\newblock Epidemic dynamics with time-varying transmission risk reveal the role
+  of disease stage-dependent infectiousness.
+\newblock \emph{Journal of Theoretical Biology}, 573:\penalty0 111594,
+  September 2023.
+\newblock ISSN 00225193.
+\newblock \doi{10.1016/j.jtbi.2023.111594}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S0022519323001911}.
+
+\bibitem[Lloyd(2001)]{lloyd_realistic_2001}
+Alun~L. Lloyd.
+\newblock Realistic {Distributions} of {Infectious} {Periods} in {Epidemic}
+  {Models}: {Changing} {Patterns} of {Persistence} and {Dynamics}.
+\newblock \emph{Theoretical Population Biology}, 60\penalty0 (1):\penalty0
+  59--71, August 2001.
+\newblock ISSN 00405809.
+\newblock \doi{10.1006/tpbi.2001.1525}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S0040580901915254}.
+
+\bibitem[Lloyd-Smith et~al.(2005)Lloyd-Smith, Schreiber, Kopp, and
+  Getz]{lloyd-smith_superspreading_2005}
+J.~O. Lloyd-Smith, S.~J. Schreiber, P.~E. Kopp, and W.~M. Getz.
+\newblock Superspreading and the effect of individual variation on disease
+  emergence.
+\newblock \emph{Nature}, 438\penalty0 (7066):\penalty0 355--359, November 2005.
+\newblock ISSN 0028-0836, 1476-4687.
+\newblock \doi{10.1038/nature04153}.
+\newblock URL \url{https://www.nature.com/articles/nature04153}.
+
+\bibitem[Middleton and Larremore(2024)]{middleton_modeling_2024}
+Casey Middleton and Daniel~B. Larremore.
+\newblock Modeling the transmission mitigation impact of testing for infectious
+  diseases.
+\newblock \emph{Science Advances}, 10\penalty0 (24):\penalty0 eadk5108, June
+  2024.
+\newblock ISSN 2375-2548.
+\newblock \doi{10.1126/sciadv.adk5108}.
+\newblock URL \url{https://www.science.org/doi/10.1126/sciadv.adk5108}.
+
+\bibitem[Morris et~al.(2024)Morris, Maclean, and
+  Black]{morris_computation_2024}
+Dylan Morris, John Maclean, and Andrew~J. Black.
+\newblock Computation of random time-shift distributions for stochastic
+  population models.
+\newblock \emph{Journal of Mathematical Biology}, 89\penalty0 (3):\penalty0 33,
+  September 2024.
+\newblock ISSN 0303-6812, 1432-1416.
+\newblock \doi{10.1007/s00285-024-02132-6}.
+\newblock URL \url{https://link.springer.com/10.1007/s00285-024-02132-6}.
+
+\bibitem[Papoulis(1965)]{papoulis_probability_1965}
+Athanasios Papoulis.
+\newblock \emph{Probability, random variables and stochastic processes}.
+\newblock {McGraw}-{Hill} series in systems science. McGraw-Hill, New York,
+  1965.
+\newblock ISBN 978-0-07-048448-1.
+
+\bibitem[Svensson(2007)]{svensson_note_2007}
+Åke Svensson.
+\newblock A note on generation times in epidemic models.
+\newblock \emph{Mathematical Biosciences}, 208\penalty0 (1):\penalty0 300--311,
+  July 2007.
+\newblock ISSN 00255564.
+\newblock \doi{10.1016/j.mbs.2006.10.010}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S0025556406002094}.
+
+\bibitem[Wallinga and Lipsitch(2007)]{wallinga_how_2007}
+J~Wallinga and M~Lipsitch.
+\newblock How generation intervals shape the relationship between growth rates
+  and reproductive numbers.
+\newblock \emph{Proceedings of the Royal Society B: Biological Sciences},
+  274\penalty0 (1609):\penalty0 599--604, February 2007.
+\newblock ISSN 0962-8452, 1471-2954.
+\newblock \doi{10.1098/rspb.2006.3754}.
+\newblock URL
+  \url{https://royalsocietypublishing.org/doi/10.1098/rspb.2006.3754}.
+
+\bibitem[Wearing et~al.(2005)Wearing, Rohani, and
+  Keeling]{wearing_appropriate_2005}
+Helen~J Wearing, Pejman Rohani, and Matt~J Keeling.
+\newblock Appropriate {Models} for the {Management} of {Infectious} {Diseases}.
+\newblock \emph{PLoS Medicine}, 2\penalty0 (7):\penalty0 e174, July 2005.
+\newblock ISSN 1549-1676.
+\newblock \doi{10.1371/journal.pmed.0020174}.
+\newblock URL \url{https://dx.plos.org/10.1371/journal.pmed.0020174}.
+
+\end{thebibliography}
