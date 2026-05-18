@@ -52,6 +52,85 @@ Measles & 12 & 12.2 & 13.10 & 11.36 & 0.93 \\
 
 
 
+\clearpage
+\subsubsection{Overdispersion in daily infection counts from punctuated infectiousness profiles}
+\label{sec:supp_daily_overdispersion}
+
+Here we derive the index of dispersion of the daily infection count attributable to a single infector, show that it is monotonically decreasing in the punctuation parameter $\psi$, and show that the overdispersion aggregates to the population level.
+
+\paragraph{Setup.}
+Fix an index case $i$, infected at time $t_i$, who generates $\chi_i \sim \text{Poisson}(R_0)$ total secondary infections. Under the Gamma time-shift model, the generation interval for each secondary infection is $\tau = l_i + \epsilon$, where $l_i \sim \text{Gamma}((1-\psi)\alpha, \beta)$ is a shared latent period and $\epsilon \sim \text{Gamma}(\psi\alpha, \beta)$ is an independent individual jitter. Let $N_i(\tau)$ be the number of person $i$'s secondary infections that fall on day-since-infection $[\tau, \tau+1)$, and define the random landing probability
+\begin{equation}
+	Q_i(\tau) = \int_\tau^{\tau+1} f_\epsilon(u - l_i) \, du
+\end{equation}
+where $f_\epsilon$ is the $\text{Gamma}(\psi\alpha, \beta)$ density. The randomness in $Q_i(\tau)$ arises from the draw of $l_i$.
+
+\paragraph{Mean of $Q_i(\tau)$.}
+Taking the expectation over $l_i$ and applying Fubini's theorem:
+\begin{equation}
+	E[Q_i(\tau)] = \int_\tau^{\tau+1} E_{l_i}[f_\epsilon(u - l_i)] \, du = \int_\tau^{\tau+1} (f_l * f_\epsilon)(u) \, du = \int_\tau^{\tau+1} g(u) \, du \equiv q(\tau)
+\end{equation}
+since $f_l * f_\epsilon = g$ by construction. Thus $E[Q_i(\tau)]$ depends only on the population-level generation interval distribution and is independent of $\psi$.
+
+\paragraph{Index of dispersion of $N_i(\tau)$.}
+Conditional on $Q_i(\tau)$, the $\chi_i$ offspring are independently assigned to day $[\tau, \tau+1)$ with probability $Q_i(\tau)$. By the Poisson thinning property (marginalizing over $\chi_i$):
+\begin{equation}
+	N_i(\tau) \mid Q_i(\tau) \sim \text{Poisson}(R_0 \, Q_i(\tau))
+\end{equation}
+Applying the law of total variance:
+\begin{align}
+	\text{Var}[N_i(\tau)] &= E[\text{Var}[N_i(\tau) \mid Q_i(\tau)]] + \text{Var}[E[N_i(\tau) \mid Q_i(\tau)]] \nonumber \\
+	&= R_0 \, E[Q_i(\tau)] + R_0^2 \, \text{Var}[Q_i(\tau)]
+\end{align}
+Since $E[N_i(\tau)] = R_0 \, E[Q_i(\tau)] = R_0 \, q(\tau)$, the index of dispersion is
+\begin{equation}
+	\text{ID}[N_i(\tau)] = \frac{\text{Var}[N_i(\tau)]}{E[N_i(\tau)]} = 1 + R_0 \, \frac{\text{Var}[Q_i(\tau)]}{E[Q_i(\tau)]}
+	\label{eq:ID_individual}
+\end{equation}
+
+\paragraph{Extreme cases.}
+In the smooth case ($\psi = 1$), $f_\epsilon = g$ and $l_i = 0$ deterministically, so $Q_i(\tau) = q(\tau)$ is constant across individuals. Thus $\text{Var}[Q_i(\tau)] = 0$ and $\text{ID}[N_i(\tau)] = 1$.
+
+In the spike case ($\psi = 0$), $f_\epsilon$ is a point mass at zero. Then $Q_i(\tau) = \mathbf{1}(l_i \in [\tau, \tau+1))$, which is Bernoulli with parameter $q(\tau)$. Thus $\text{Var}[Q_i(\tau)] = q(\tau)(1 - q(\tau))$ and
+\begin{equation}
+	\text{ID}[N_i(\tau)] = 1 + R_0(1 - q(\tau))
+\end{equation}
+
+% \paragraph{Monotonicity of $\text{Var}[Q_i(\tau)]$ in $\psi$.}
+% We show that for $\psi_1 < \psi_2$, $\text{Var}[Q_i^{(\psi_1)}(\tau)] \geq \text{Var}[Q_i^{(\psi_2)}(\tau)]$, where the superscript makes the $\psi$-dependence explicit. The proof uses a coupling argument.
+
+% Since Gamma distributions with the same rate parameter are additive, and $(1-\psi_1)\alpha > (1-\psi_2)\alpha$, we can write
+% \begin{equation}
+% 	L_{\psi_1} \stackrel{d}{=} L_{\psi_2} + \Delta
+% \end{equation}
+% where $L_{\psi_j} \sim \text{Gamma}((1-\psi_j)\alpha, \beta)$ and $\Delta \sim \text{Gamma}((\psi_2 - \psi_1)\alpha, \beta)$ is independent of $L_{\psi_2}$.
+
+% Under this coupling, we establish a smoothing relationship. Let $Y = \mathbf{1}(\tau_{\text{gen}} \in [\tau, \tau+1))$ where $\tau_{\text{gen}} = L + \epsilon$ is a secondary infection's generation interval. Then $Q_i^{(\psi)}(\tau) = P(\tau_{\text{gen}} \in [\tau, \tau+1) \mid L_\psi) = E[Y \mid L_\psi]$. By the tower property:
+% \begin{align}
+% 	Q_i^{(\psi_2)}(\tau) &= E[Y \mid L_{\psi_2}] = E\!\left[E[Y \mid L_{\psi_2}, \Delta] \mid L_{\psi_2}\right] \nonumber \\
+% 	&= E\!\left[E[Y \mid L_{\psi_1}] \mid L_{\psi_2}\right] = E\!\left[Q_i^{(\psi_1)}(\tau) \mid L_{\psi_2}\right]
+% \end{align}
+% where the third equality uses the fact that, given $(L_{\psi_2}, \Delta)$, we know $L_{\psi_1} = L_{\psi_2} + \Delta$, and $Y$ depends on $L_{\psi_1}$ and $\epsilon_{\psi_1}$ only, with $\epsilon_{\psi_1}$ independent of $(L_{\psi_2}, \Delta)$.
+
+% Thus $Q_i^{(\psi_2)}(\tau)$ is a conditional expectation of $Q_i^{(\psi_1)}(\tau)$. Applying the law of total variance to $Q_i^{(\psi_1)}(\tau)$, conditioning on $L_{\psi_2}$:
+% \begin{equation}
+% 	\text{Var}[Q_i^{(\psi_1)}(\tau)] = \text{Var}[Q_i^{(\psi_2)}(\tau)] + E[\text{Var}[Q_i^{(\psi_1)}(\tau) \mid L_{\psi_2}]] \geq \text{Var}[Q_i^{(\psi_2)}(\tau)]
+% \end{equation}
+% which establishes the claimed monotonicity.
+
+% \paragraph{Aggregation to population-level daily counts.}
+% On calendar day $t$, the total number of new infections is $I(t) = \sum_i N_i(t - t_i)$, summing over all previously infected individuals $i$. Conditional on the epidemic history $\{t_i\}$, the $N_i(t - t_i)$ are independent (each infector generates offspring independently). Writing $q_i = q(t - t_i)$ for the population-level landing probability specific to infector $i$:
+% \begin{equation}
+% 	\text{Var}[I(t) \mid \{t_i\}] = \sum_i \text{Var}[N_i(t - t_i)]
+% \end{equation}
+% In the smooth case ($\psi = 1$), each $N_i(t-t_i) \sim \text{Poisson}(R_0 q_i)$, so $I(t) \mid \{t_i\} \sim \text{Poisson}(\sum_i R_0 q_i)$ and $\text{ID}[I(t) \mid \{t_i\}] = 1$.
+
+% In the spike case ($\psi = 0$), using $\text{Var}[N_i(t-t_i)] = R_0 q_i + R_0^2 q_i(1-q_i)$:
+% \begin{align}
+% 	\text{ID}[I(t) \mid \{t_i\}] &= \frac{\sum_i \left[R_0 q_i + R_0^2 q_i(1-q_i)\right]}{\sum_i R_0 q_i} = 1 + R_0\!\left(1 - \frac{\sum_i q_i^2}{\sum_i q_i}\right) = 1 + R_0(1 - \bar{q}_w)
+% 	\label{eq:ID_aggregate}
+% \end{align}
+% where $\bar{q}_w = \sum_i q_i^2 / \sum_i q_i$ is the intensity-weighted mean landing probability. Since $q_i \in [0,1]$, we have $q_i^2 \leq q_i$ for all $i$, so $\bar{q}_w \leq 1$. In a growing epidemic, infectors have a spread of ages since infection, so the $q_i$ values are generally well below 1, making $\bar{q}_w$ small and the overdispersion substantial. The aggregate index of dispersion is bounded: $\text{ID}[I(t) \mid \{t_i\}] \in [1, 1 + R_0]$, with ID $\to 1$ when the generation interval concentrates on a single day and ID $\to 1 + R_0$ when it is spread over many days.
 
 \clearpage
 
