@@ -10,7 +10,7 @@ source('code/parameters.R')
 source('code/episims.R')
 source('code/survival.R')
 source('code/growthrate.R')
-source('code/g_identifiability.R')
+source('code/g_identifiability_2.R')
 source('code/overdispersion.R')
 
 # Controlled epidemics 

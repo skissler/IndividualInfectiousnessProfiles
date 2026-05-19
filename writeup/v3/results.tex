@@ -1,0 +1,123 @@
+\clearpage
+\section{Results}
+
+\subsection{A time-shifted Gamma model flexibly captures individual-level variation in infectiousness timing}
+
+We begin by introducing a decomposition of $g(\tau)$ into within- and between-individual components. We seek an analytically tractable definition of $g_i(\tau)$ such that $g(\tau) = E_i[g_i(\tau)]$, and where the width of $g_i(\tau)$ is governed by a single smoothness parameter $\psi \in [0,1]$ that interpolates between the ``spike'' and ``smooth'' extremes ({\bf Figure XX}). 
+
+To achieve this, we first assume that $g(\tau)$ follows a $\text{Gamma}(\alpha, \beta)$ distribution with rate $\beta = \alpha  / \bar{g}$, where $\bar{g}$ is the mean generation time. The Gamma distribution is a natural and common choice for modeling generation interval distributions. Next, we define each person's individual intrinsic generation interval distribution as 
+%
+\begin{equation}
+	g_i(\tau) = \begin{cases}
+		0 & \tau \leq l_i \\ 
+		f_\epsilon(\tau - l_i) & \tau > l_i
+	\end{cases}
+\end{equation}
+%
+where $l_i \sim \text{Gamma}((1-\psi)\alpha, \beta)$ is a random latent period and $f_\epsilon$ is the $\text{Gamma}(\psi \alpha, \beta)$ density ({\bf Figure XX}). Equivalently, in terms of random variables, the secondary infections $j$ from an index case $i$ are distributed at times $\tau_{ij} = l_i + \epsilon_j$, where $l_i \sim \text{Gamma}((1-\psi)\alpha, \beta)$ and $\epsilon_j \overset{iid}{\sim} \text{Gamma}(\psi \alpha, \beta)$. 
+
+Since $l_i$ and $\epsilon_j$ are independent Gamma-distributed random variables with common rate $\beta$, their sum follows a $\text{Gamma}((1-\psi) \alpha + \psi \alpha, \beta) = \text{Gamma}(\alpha, \beta)$ distribution; thus $E_i[g_i(\tau)] = g(\tau)$, as required. Furthermore, when $\psi \rightarrow 1$, the latent period vanishes ($l_i \rightarrow 0$) and $f_\epsilon$ approaches the full $\text{Gamma}(\alpha, \beta)$ density, which gives the ``smooth'' extreme (no between-individual variation). Similarly, when $\psi \rightarrow 0$, $f_\epsilon$ concentrates to a point mass and $g_i(\tau)$ becomes a delta function at $l_i \sim \text{Gamma}(\alpha, \beta)$, which gives the ``spike'' extreme (no within-individual variation). We generally assume that $\psi$ is a single value shared by all individuals for a given pathogen, but the framework is more general: the Gamma addition property ensures that drawing individual $\psi_i$ from a distribution on $[0,1]$ still yields $E_i[g_i(\tau)] = g(\tau)$; thus, it is possible to model scenarios where individuals have a mixture of narrow and broad individaul infectiousness profiles. 
+
+\subsection{Expressing the individual reproduction number in terms of $g_i(\tau)$}
+
+The individual reproduction number, $\nu_i$, is the expected number of secondary infections that an index case $i$ is expected to produce in an otherwise susceptible population; it is the individual-level analog of $R_0$. Intuitively, $\nu_i$ depends on a person's baseline ``biological'' infectiousness (\eg, the amount of pathogen shed over the course of infection) and on the overlap between their infectiousness timing and their contact patterns. Formally, 
+\begin{equation}
+	\nu_i = b_i \int_0^\infty g_i(\tau) c_i(t_i + \tau) d\tau
+\end{equation}
+Here, $b_i$ is the ``biological infectiousness'', defined as the expected number of secondary infections person $i$ would produce under a time-uniform reference contact process, which we denote $\bar{c} \equiv 1$. To account for time-varying contacts, we introduce a contact proces $\mathbf{c}(t)$: a nonnegative, wide-sense stationary stochastic process with time-mean $E_t[\mathbf{c}(t)] = 1$. Each person's contacts follow a draw from this stochastic process, $c_i(t)$, representing the proportional scaling of that person's contact rate relative to the reference level (1) at calendar time $t$. The constraint $E_t[\mathbf{c}(t)]$ is an ensemble average over all possible realizations at time $t$; individual realizations $c_i$ need not have time-average 1, allowing for individuals with persistently higher or lower contact rates than the population average. 
+
+
+% their mean contact rate, and on the overlap between their infectiousness window and their particular contact patterns. 
+
+
+% Superspreading arises when secondary infection counts are overdispersed, \ie,  when the variance in the number of secondary infections produced by an individual exceeds the mean. Formally, if the number secondary infections $\chi_i$ produced by person $i$ are $\text{Poisson}(\nu_i)$-distributed, overdispersion arises when $\nu_i$ varies across individuals. This overdispersion can powerfully impact epidemic dynamics, making epidemics less likely to establish but potentially more explosive when they do \citep{lloyd-smith_superspreading_2005}. 
+
+
+
+\subsection{Punctuated infectiousness profiles generate more variably-timed epidemics}
+Early-outbreak stochasticity can impact when an epidemic becomes established, which in turn shifts the epidemic's full trajectory \citep{morris_computation_2024}. Formally, the cumulative number of infections $Z(t)$ in the early stage of an epidemic can be described as a branching process
+\begin{equation}
+	Z(t) = W(t) e^{rt}
+\end{equation}
+where $W(t)$ is a stationary stochastic process with initial condition $W(0)$ and growth rate $r$. The process $W(t)$ converges almost surely to a random variable $W$ as $t \rightarrow \infty$, which can be interpreted as a random initial condition on the branching process. Large values of $W$ correspond to random successful early transmission events, inflating the effective initial condition. With a change of variables, this random initial condition can be expressed as a random time shift $\varsigma$, where 
+\begin{equation}
+	\varsigma = \frac{\log W - \log E[W]}{r}
+\end{equation}
+and the branching process can be expressed as 
+\begin{equation}
+	Z(t) \approx e^{r(t + \varsigma)}
+\end{equation}
+Thus, $W$, and $\varsigma$ by extension, provide a window into the long-term impact of early-outbreak stochasticity \citep{morris_computation_2024}. 
+
+Narrow individual infectiousness profiles ($\psi \rightarrow 0$) inflate $\text{Var}[W]$ relative to smooth profiles ($\psi \rightarrow 1$), which makes epidemic timing more variable (increases $\text{Var}[\varsigma]$) and shifts the typical epidemic slightly later ($E[\varsigma]$ more negative). Analytic results confirm that 
+\begin{equation}
+	\text{Var}[W] \propto c(R_0, \alpha)^{(1-\psi)\alpha}
+\end{equation}
+Here, $c(R_0, \alpha)$ is a constant that depends on $R_0$ and $\alpha$; it is monotonically increasing in $R_0$ and is greater than 1 when $R_0 > 1$. Thus, $\text{Var}[W]$ is largest when $R_0$ is high and $\psi$ is small (\ie, $g_i(\tau)$ is narrow), with the impact of $\psi$ modulated by $\alpha$ (the shape/skewness of $g(\tau)$). If we assume, following \citet{morris_computation_2024}, that the distribution of $W | \text{surv}$ (\ie, conditioning on epidemic non-extinction) is well-approximated by a Gamma distribution, the inflated $\text{Var}[W]$ translates into higher $\text{Var}[\varsigma | \text{surv}]$ and more negative $E[\varsigma | \text{surv}]$ ({\bf Supplementary Methods}). 
+
+Simulations indicate that these $\psi$-driven changes in the distribution of $W$ and $\varsigma$ yield meaningful differences in epidemic trajectories ({\bf Figure XX}). We simulated 5,000 epidemics in a population of size 10,000 for each of three benchmark pathogens: influenza, SARS-CoV-2 omicron, and measles, with $R_0$ and $g(\tau)$ informed by literature values ({\bf Table XX}). We varied $\psi \in \{0, 0.5, 1\}$ and measured the time to reach a cumulative prevalence of 5\% (500 total infections), which we used as a marker of epidemic establishment. By day 20, only 55\% of simulated SARS-CoV-2 epidemics with $\psi = 0$ had reached 5\% prevalence, while 82\% of epidemics with $\psi = 1$ had reached the same threshold ($\bf Figure XX$). Similarly, by day 33, just 58\% of simulated measles epidemics with $\psi = 0$ had reached 5\% prevalence, while 85\% of epidemics with $\psi = 1$ had reached the same threshold ({\bf Figure XX}). These differences reflect the higher likelihood of late-shifted epidemics for when the individual infectiousness profile is narrow ($\psi \rightarrow 0$). The effect is strongly modulated by $R_0$: for influenza, with the lowest $R_0$ of 2, differences in epidemic timing across $\psi$-values were hardly discernible ({\bf Figure XX}). 
+
+\subsection{Punctuated infectiousness profiles make estimates of $r$ and $g(\tau)$ less certain}
+
+Inferring the growth rate $r$ and the generation interval distribution $g(\tau)$ are critical tasks during an emerging epidemic and are key ingredients for calculating $R_0$. Punctuated individual infectiousness profiles make both tasks more challenging. First, punctuated infectiousness profiles cause daily case counts to be more variable (overdispersed relative to the mean), translating into greater uncertainty in $r$. Assuming $\text{Poisson}(R_0)$-distributed secondary infection counts, we can calculate the index of dispersion of $N(\tau)$, the number of infections generated by a single person falling on the day $[\tau, \tau+1)$ after infection: 
+\begin{equation}
+	\text{ID}[N(\tau)] \equiv \frac{\text{Var}[N(\tau)]}{E[N(\tau)]} = 1 + R_0 \frac{\text{Var}[Q(\tau)]}{E[Q(\tau)]}
+\end{equation}
+Here, $Q(\tau) = \int_\tau^{\tau+1} f_\epsilon(u - l) du$ is the probability that a secondary infection lands on day $[\tau, \tau+1)$, with $l \sim \text{Gamma}((1-\psi)\alpha, \beta)$. In the smooth extreme ($\psi = 1$), $l_i = 0$ and $f_\epsilon = g$, so $Q(\tau)$ is deterministic: thus, $\text{Var}[Q(\tau)] = 0$ and $\text{ID}[N(\tau)] = 1$. In the spike extreme ($\psi = 0$), $f_\epsilon$ is a point mass, so $Q(\tau)$ is Bernoulli, equalling 1 with probability $q(\tau) \equiv \int_\tau^{\tau + 1} g(u) du$ (\ie, the probability that $l$ falls in $[\tau, \tau+1)$) and 0 otherwise; thus, $\text{Var}[Q_i(\tau)] = q(\tau) (1 - q(\tau))$ and $\text{ID}[N(\tau)] = 1 + R_0 (1 - q(\tau)) > 1$. Thus, narrower infectiousness profiles increase overdispersion in daily case counts, with the effect size modulated by $R_0$. Since infectors contribute independently to the population-wide daily case count, this overdispersion carries through to the aggregate daily case count and translates into increased uncertainty in the estimate for $r$. 
+
+Simulations illustrate the additional uncertainty in estimates of $r$ that arises from narrow individual infectiousness profiles. We simulated 5,000 epidemics in infinite populations (to avoid depletion-of-susceptibles effects) for each of the three benchmark pathogens (influenza, SARS-CoV-2 omicron, measles). We ran each simulation for 7 days after reaching 100 cumulative cases, then binned infections into daily counts. To estimate growth rate, we fit a Poisson generalized linear model to the daily infection counts \citep{}. Punctuated individual infectiousness profiles systematically increased variability in the estimates of $r$: across the simulations, the standard deviation in $\hat{r}_{\text{MLE}}$ (the maximum-likelihood estimate of $r$) was between xx and xx times higher for $\psi = 0$ than for $\psi = 1$, with the largest effect for measles, which has the highest $R_0$ (12) ({\bf Figure XX}). 
+
+Punctuated individual infectiousness profiles can also make estimates of $g(\tau)$ more uncertain. Typically, $g(\tau)$ is estimated using contact tracing data capturing serial intervals, from which generation intervals are inferred by assuming an observation delay model. For $n$ observed serial intervals, Kish's design effect for cluster sampling \citep{} gives an effective sample size of $n_{\text{eff}} = n / (1 +(R_0 - 1) \, \text{ICC})$, where ICC is the intraclass correlation coefficient. Under the time-shifted Gamma model, and assuming an independent $\text{Gamma}(a_\text{obs}, b_\text{obs})$ observation delay applied to each infection time, the intraclass correlation coefficient is ({\bf Supplementary Materials})
+\begin{equation}
+	\text{ICC} = \frac{
+	(1 - \psi) \alpha / \beta^2 + (a_\text{obs} / b_\text{obs}^2)^2
+	}{
+	\alpha / \beta^2 + 2 (a_\text{obs} / b_\text{obs}^2)^2}
+\end{equation}
+Thus, $n_\text{eff}$ is minimized when $\psi \rightarrow 0$, with the size of the $\psi$-effect modulated by the variance of $g(\tau)$ (\ie, $\alpha / \beta^2$). 
+
+Simulations demonstrate that, if within-cluster correlations are ignored and serial intervals are instead treated as noisy $iid$ draws from $g(\tau)$, punctuated individual infectiousness profiles cause posterior estimates of $\alpha$ and $\beta$ to frequently miss the true value ({\bf Figure XX}). We simulated the offspring of 100 index cases, introduced Gamma-distributed observation noise with mean and variance of 4 days ($a_{obs} = 4$, $b_{obs} = 1$), and extracted the serial intervals. We then used these serial intervals to estimate posterior distributions for $\alpha$ and $\beta$, treating the observations as independent. We repeated this process 500 times for each of the three benchmark pathogens. The posterior coverage, defined as when 95\% credible interval contained the true value, decreased dramatically as the individual infectiousness profile narrowed. Across pathogens, coverage ranged from XX--XX for $\alpha$ and XX--XX for $\beta$ when $\psi = 1$. This dropped to XX--XX for $\alpha$ and XX--XX for $\beta$ when $\psi = 0$. This reduced coverage is a direct consequence of treating the serial intervals as overly informative about $g(\tau)$, whereas when $\psi \rightarrow 0$, the offspring of an index case reflect effectively just one draw from $g(\tau)$. 
+
+\subsection{Punctuated infectiousness profiles interact with time-varying contacts produce superspreading}
+
+Superspreading arises when secondary infection counts are overdispersed, \ie,  when the variance in the number of secondary infections produced by an individual exceeds the mean. Formally, if the number secondary infections $\chi_i$ produced by person $i$ are $\text{Poisson}(\nu_i)$-distributed, overdispersion arises when $\nu_i$ varies across individuals. This overdispersion can powerfully impact epidemic dynamics, making epidemics less likely to establish but potentially more explosive when they do \citep{lloyd-smith_superspreading_2005}. 
+
+
+
+
+
+\subsection{Detect-and-isolate interventions are sensitive to individual infectiousness timing}
+
+\subsection{Gathering size restrictions are sensitive to individual infectiousness timing}
+
+\subsection{Identifiability of the individual infectiousness profile's shape depends on $R_0$ and detection delays}
+
+\subsection{Estimates of individual infectiousness timing for various pathogens}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
