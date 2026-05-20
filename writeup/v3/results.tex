@@ -100,7 +100,7 @@ The efficacy of D\&I interventions can be summarized in terms of testing effecti
 \end{equation}
 where $\rho \in [0,1]$ is the participation rate, $\eta \in [0,1]$ is the effectiveness of isolation (so that post-detection transmission attempts succeed with probability $ 1 - \eta$), $\tau$ is the time of a transmission attempt relative to the index case's infection time, and $D$ is the detection time. When $D$ is anchored to the index case's infection time (\eg, the detectability window spans 2--7 days after infection), TE depends only on the shape of the generation interval distribution; the shape of the individual infectiousness profile integrates out ({\bf Supplementary Methods}). If, however, $D$ is anchored to the individual infectiousness profile (\eg, the window of detectability extends $\pm$ 3 days from peak infectiousness), TE depends on the width of the individual infectiousness profile, as we illustrate here. Anchoring $D$ to the infectiousness profile is arguably the more realistic scenario since symptom onset, test-based detectability, and peak pathogen shedding are all linked to viral load, which in turn shapes the individual's infectiousness trajectory [Boyer]. 
 
-Narrow infectiousness profiles make TE sensitive to small shifts in detection time. To illustrate this, we considered two detection mechanisms: symptom-based isolation, where symptoms arise at a $\text{Normal}(\delta_{symp}, \sigma_{symp})$-distributed offset from the peak infectiousness and isolation is immediate; and test-based screening, where diagnostic tests are administered at fixed intervals of length $\Delta_{test}$, and the first test that falls within a detectability window spanning $\delta_{pre}$ through $\delta_{post}$ days before/after peak infectiousness triggers isolation after a $\Exp(\lambda_{act})$-distributed turnaround delay. TE can then be calclulated {\it via} numerical integration ({\bf Methods}). For both testing scenarios, TE dropped as the typical detection time shifted from before to after peak infectiousness, with the sharpest drops corresponding to the narrowest individual infectiousness profiles ({\bf Figure XX}). When the typical detection time was near the time of peak infectiousness, this led to substantial differences in TE across $\psi$-values; for symptom-based screening, the absolute discrepancy reached as much as xx\% (TE = XX for $\psi = 1$, TE = XX for $\psi = 0$) for measles(?) when $\delta_{symp} = XX$ and $\sigma_{symp} = XX$. 
+Narrow infectiousness profiles make TE sensitive to small shifts in detection time. To illustrate this, we considered two detection mechanisms: symptom-based isolation, where symptoms arise at a $\text{Normal}(\delta_{symp}, \sigma_{symp})$-distributed offset from the peak infectiousness and isolation is immediate; and test-based screening, where diagnostic tests are administered at fixed intervals of length $\Delta_{test}$, and the first test that falls within a detectability window spanning $\delta_{pre}$ through $\delta_{post}$ days before/after peak infectiousness triggers isolation after a $\text{Exp}(\lambda_{act})$-distributed turnaround delay. TE can then be calclulated {\it via} numerical integration ({\bf Methods}). For both testing scenarios, TE dropped as the typical detection time shifted from before to after peak infectiousness, with the sharpest drops corresponding to the narrowest individual infectiousness profiles ({\bf Figure XX}). When the typical detection time was near the time of peak infectiousness, this led to substantial differences in TE across $\psi$-values; for symptom-based screening, the absolute discrepancy reached as much as xx\% (TE = XX for $\psi = 1$, TE = XX for $\psi = 0$) for measles(?) when $\delta_{symp} = XX$ and $\sigma_{symp} = XX$. 
 
 Beyond TE, D\&I interventions produce two additional $\psi$-dependent effects: generation inteval truncation, which can accelerate epidemic growth; and increased overdispersion in secondary infection counts, which increases the probability of epidemic extinction. Under a D\&I intervention, the effective generation interval distribution becomes ({\bf Supplementary Methods})
 \begin{equation}
@@ -112,10 +112,18 @@ g^*(\tau) = \frac{
 \end{equation}
 For smooth infectiousness profiles, detection reliably cuts off the tail of transmission; any surviving transmission attempts thus fall earlier in expectation, shortening the mean generation interval ({\bf Figure XX}). For punctuated profiles, detection is all-or-nothing: infectiousness is either cut off entirely or is entirely missed --- and, among those that are missed, the generation intervals follow $g^*(\tau) = g(\tau)$, \ie, there is no generation interval truncation. 
 
+[Overdispersion]
 
-
+[Simulations]
 
 \subsection{Gathering size restrictions are sensitive to individual infectiousness timing}
+
+Gathering size restrictions are another important class of non-pharmaceutical intervention, aimed at limiting opportunities for major transmission events. Gathering size restrictions truncate the tail of the interpersonal contact distribution, reducing the mean contact rate and thus the effective reproduction number. This truncation also reduces overdispersion in secondary infection counts; and, since we have already observed a relationship between $\psi$ and overdispersion in uncontrolled epidemics, we might guess that the change in overdispersion caused by gathering size restrictions might also depend on $\psi$. 
+
+
+
+
+
 
 \subsection{Identifiability of the individual infectiousness profile's shape depends on $R_0$ and detection delays}
 
