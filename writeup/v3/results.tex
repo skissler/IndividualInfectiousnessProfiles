@@ -102,7 +102,7 @@ where $\rho \in [0,1]$ is the participation rate, $\eta \in [0,1]$ is the effect
 
 Narrow infectiousness profiles make TE sensitive to small shifts in detection time. To illustrate this, we considered two detection mechanisms: symptom-based isolation, where symptoms arise at a $\text{Normal}(\delta_{symp}, \sigma_{symp})$-distributed offset from the peak infectiousness and isolation is immediate; and test-based screening, where diagnostic tests are administered at fixed intervals of length $\Delta_{test}$, and the first test that falls within a detectability window spanning $\delta_{pre}$ through $\delta_{post}$ days before/after peak infectiousness triggers isolation after a $\Exp(\lambda_{act})$-distributed turnaround delay. TE can then be calclulated {\it via} numerical integration ({\bf Methods}). For both testing scenarios, TE dropped as the typical detection time shifted from before to after peak infectiousness, with the sharpest drops corresponding to the narrowest individual infectiousness profiles ({\bf Figure XX}). When the typical detection time was near the time of peak infectiousness, this led to substantial differences in TE across $\psi$-values; for symptom-based screening, the absolute discrepancy reached as much as xx\% (TE = XX for $\psi = 1$, TE = XX for $\psi = 0$) for measles(?) when $\delta_{symp} = XX$ and $\sigma_{symp} = XX$. 
 
-Beyond TE, D\&I interventions produce two additional $\psi$-dpeendent effects: generation inteval truncation, which can accelerate epidemic growth; and increased overdispersion in secondary infection counts, which increases the probability of epidemic extinction. Under a D\&I intervention, the effective generation interval distribution becomes ({\bf Supplementary Methods})
+Beyond TE, D\&I interventions produce two additional $\psi$-dependent effects: generation inteval truncation, which can accelerate epidemic growth; and increased overdispersion in secondary infection counts, which increases the probability of epidemic extinction. Under a D\&I intervention, the effective generation interval distribution becomes ({\bf Supplementary Methods})
 \begin{equation}
 g^*(\tau) = \frac{
 	(1 - \eta \sigma) g(\tau) + \eta \sigma \int_0^{\min{(\tau,D)}} f_l(\tau - \epsilon) f_\epsilon(\epsilon) \, d\epsilon
@@ -110,7 +110,7 @@ g^*(\tau) = \frac{
 	1 - \text{TE}
 }
 \end{equation}
-For maximally punctuated individual infectiousness profiles, $f_\epsilon$ is a delta function, yielding $g^*(\tau) = g(\tau)$; that is, 
+For smooth infectiousness profiles, detection reliably cuts off the tail of transmission; any surviving transmission attempts thus fall earlier in expectation, shortening the mean generation interval ({\bf Figure XX}). For punctuated profiles, detection is all-or-nothing: infectiousness is either cut off entirely or is entirely missed --- and, among those that are missed, the generation intervals follow $g^*(\tau) = g(\tau)$, \ie, there is no generation interval truncation. 
 
 
 
