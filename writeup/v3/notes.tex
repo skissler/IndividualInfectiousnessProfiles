@@ -115,3 +115,135 @@
 \end{itemize}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ---
+  1. Benchmark pathogen parameters
+  - Table of $R_0$, $\bar{g}$, $\text{Var}[g]$, $\alpha$, $\beta$ for influenza, SARS-CoV-2 omicron,
+  and measles. (Referenced as "Table XX" in results.tex line 62 and model.tex line 93; already
+  appears in supplementary.tex but needs a main-text version or cross-reference.)
+  - Literature sources for each pathogen's parameters.
+
+  2. Simulation details
+  - Already summarized in model.tex (simulation approach subsection), but results.tex refers to
+  "Methods" for additional details in several places. The current model.tex section points to
+  "Supplementary Methods" for full details. Methods should at minimum cross-reference or briefly
+  restate the key simulation parameters: $N = 10{,}000$, $n_\text{sim} = 5{,}000$, epidemic
+  establishment threshold of 500 infections.
+
+  3. Growth rate estimation procedure
+  - Results.tex line 80: "we fit a Poisson generalized linear model to the daily infection counts."
+  Methods should specify: infinite population, 7 days of data after 100 cumulative cases, daily
+  binning, Poisson GLM with log link and day as covariate.
+
+  4. Generation interval estimation procedure
+  - Results.tex lines 82–93: Simulated offspring from index cases, applied Gamma observation noise
+  ($a_\text{obs}$, $b_\text{obs}$), extracted serial intervals, estimated posterior for $(\alpha,
+  \beta)$ treating observations as independent. Methods should specify: number of index cases (100 in
+   results.tex line 93, but 5,000 in uncontrolled.tex line 80), the posterior estimation approach
+  (what prior, what likelihood), the coverage calculation (95% credible interval containing the true
+  value), and the observation delay parameters ($a_\text{obs} = 4$, $b_\text{obs} = 1$ from
+  results.tex line 83).
+
+  5. ICC and effective sample size (Kish's design effect)
+  - Results.tex lines 82–89: The ICC formula and $n_\text{eff} = n / (1 + (R_0 - 1) \cdot
+  \text{ICC})$. Methods (or supplementary methods) should derive this. The ICC formula itself is
+  stated in results.tex but the derivation is promised as "Supplementary Materials."
+
+  6. Overdispersion estimation from simulations
+  - Results.tex line 121: "We estimated OD by moment-matching the mean and variance of the offspring
+  counts to a Negative Binomial distribution." Methods should state this explicitly.
+  - Also specify: 10,000 index cases per scenario, range of $c_\text{amp}$, $\sigma$, $\psi$ values
+  swept.
+
+  7. Testing effectiveness (TE) numerical integration
+  - Results.tex line 141: "TE can then be calculated via numerical integration (Methods)." This is
+  explicitly promised.
+  - Controlled.tex lines 19–21 give the integral: $\text{TE} = \eta \rho \int_{-\infty}^\infty (1 -
+  F_\epsilon(t)) f_\text{det}(t) , dt$. Methods should specify:
+    - The two detection mechanisms (symptom-based and test-based)
+    - Symptom-based: $D \sim \text{Normal}(\delta_\text{symp}, \sigma_\text{symp}^2)$ relative to
+  peak infectiousness, immediate isolation
+    - Test-based: tests at intervals $\Delta_\text{test}$, detectability window $[\delta_\text{pre},
+  \delta_\text{post}]$ around peak, $\text{Exp}(\lambda_\text{act})$ turnaround delay
+    - How $f_\text{det}$ is constructed for each mechanism
+    - Default parameter values used in figures
+
+  8. Detect-and-isolate simulation details
+  - Results.tex line 167: Simulation parameters for D&I epidemic simulations ($\rho = 0.5$?, $\eta =
+  1$?, $\delta_\text{symp}$, $\sigma_\text{symp}$, $\Delta_\text{test}$, etc.). The controlled.tex
+  draft (line 42) specifies $\rho = 0.5$, $\eta = 1$, deterministic isolation 1 day before peak.
+  Methods should state these and the comparison setup (naive $R_\text{eff}$-matched simulations).
+
+  9. Generation interval truncation formula
+  - Results.tex lines 151–159: $g^*(\tau)$ formula. The derivation is promised as "Supplementary
+  Methods."
+
+  10. $\nu_i^*$ under D&I and overdispersion
+  - Results.tex lines 161–165: $\nu_i^* = \nu_i F_\epsilon(m_\epsilon + \iota_i)$. Methods or
+  supplementary should derive this and the associated dispersion index expressions.
+
+  11. Gathering size restriction details
+  - Results.tex lines 174–188: The truncated stochastic contact model, $R_\text{eff} = \mu_T R_0$, OD
+   formulas. Methods should specify the truncation mechanism, the values of $\sigma$ and
+  $c_\text{max}$ used, and the three-way comparison setup (truncated vs. $R_\text{eff}$-adjusted
+  stochastic vs. $R_\text{eff}$-adjusted uniform).
+
+  12. Psi identifiability: simulation-based power calculation
+  - Results.tex lines 196–198: 10/25/50/100 index cases, $\psi \in {0, 0.5, 1}$, three pathogens,
+  Gamma observation delays (fast/medium/slow), flat prior on $\psi$, 200 replicates, power defined as
+   >80% of simulations with 95% posterior mass within 0.2 of true $\psi$. Methods should detail:
+    - The posterior computation (likelihood, prior, grid)
+    - The power criterion
+    - The observation delay parameters (mean 1, 2, 4 days)
+
+  13. Empirical $\psi$ estimation
+  - Results.tex lines 209–211 (your new section): Methods should describe:
+    - Data extraction from OutbreakTrees database
+    - Supplementary COVID-19 data sources (Ganyani, Hart)
+    - Cluster formation (grouping by index case, restricting to $\geq 2$ secondaries)
+    - Likelihood: integration over shared $l_i$, product of SI densities within cluster
+    - Prior: flat on $\psi \in [0, 1]$, grid of 101 points
+    - Fixed GI parameters from literature (and their sources, per pathogen)
+    - Incubation period parameters used
+    - Summary statistics: posterior mode, mean, 95% CI
+
+  14. Items from the older draft that the results reference as "Supplementary Methods"
+  These are derivations already partly present in supplementary.tex but should be cross-referenced
+  from Methods:
+  - Deriving population-level quantities from individual-level components (supplementary.tex line 4)
+  - $\text{Var}[W]$ derivation and the Gamma approximation for $W|\text{surv}$ (already in
+  supplementary.tex)
+  - Overdispersion in daily infection counts (already in supplementary.tex)
+  - OD formula for periodic contacts (already in supplementary.tex)
+  - OD formula for stochastic contacts (already in supplementary.tex)
+  - TE integration details
+  - $g^*(\tau)$ derivation
+  - Gathering size restriction OD formulas
+
+  15. Software and reproducibility
+  - R version, key packages (odin for simulations, tidyverse, etc.)
+  - Code availability statement

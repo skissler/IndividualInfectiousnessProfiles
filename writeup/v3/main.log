@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.3.29)  20 MAY 2026 22:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.3.29)  21 MAY 2026 09:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -742,19 +742,64 @@ L/zplm/m/it/10 b[]$\T1/ppl/m/n/10 ) or ``super-contactors'' (vari-a-tion in con
 Package natbib Warning: Citation `taube_outbreaktrees_2022' on page 19 undefine
 d on input line 20.
 
-[19]) (./methods.tex [20]) (./model.tex [21
+[19]) (./methods.tex [20]
+LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 8
+.
 
-] [22
+(/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/ts1ppl.fd
+File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
+) [21
 
-] [23]) (./uncontrolled.tex
-[24] [25] [26] [27]) (./controlled.tex [28] [29] [30] [31])
-(./identifiability.tex) [32] (./main.bbl
+]
+Overfull \hbox (0.70865pt too wide) in paragraph at lines 62--63
+\T1/ppl/m/n/10 plic-itly promised. - Con-trolled.tex lines 19^^U21 give the in-
+te-gral: $[] \OT1/zplm/m/n/10 = \OML/zplm/m/it/10 ^^Q^^Z [][]\OT1/zplm/m/n/10 (
+\OT1/ppl/m/n/10 1 \OMS/zplm/m/n/10 ^^@ \OML/zplm/m/it/10 F[]\OT1/zplm/m/n/10 (\
+OML/zplm/m/it/10 t\OT1/zplm/m/n/10 ))\OML/zplm/m/it/10 f[]\OT1/zplm/m/n/10 (\OM
+L/zplm/m/it/10 t\OT1/zplm/m/n/10 )\OT1/ppl/m/n/10 , \OML/zplm/m/it/10 dt$\T1/pp
+l/m/n/10 .
+ []
+
+[22]
+Overfull \hbox (1.32985pt too wide) in paragraph at lines 77--78
+[]\T1/ppl/m/n/10 Describe how the mean and vari-ance of $\OML/zplm/m/it/10 g[]\
+OT1/zplm/m/n/10 (\OML/zplm/m/it/10 ^^\\OT1/zplm/m/n/10 )$ \T1/ppl/m/n/10 are co
+m-puted (nu-mer-i-cal in-te-gra-tion or simulation-
+ []
+
+
+LaTeX Warning: Reference `sec:results_identifiability' on page 23 undefined on 
+input line 99.
+
+[23]
+
+LaTeX Warning: Reference `sec:results_empirical' on page 24 undefined on input 
+line 108.
+
+
+Overfull \hbox (1.32045pt too wide) in paragraph at lines 130--131
+[]\T1/ppl/m/n/10 Index which an-a-lyt-i-cal re-sults are de-rived in the Sup-pl
+e-men-tary Meth-ods (\T1/ppl/m/it/10 e.g.\T1/ppl/m/n/10 , the $[]\OT1/zplm/m/n/
+10 [\OML/zplm/m/it/10 W\OT1/zplm/m/n/10 ]$ \T1/ppl/m/n/10 deriva-
+ []
+
+
+Overfull \hbox (0.35912pt too wide) in paragraph at lines 135--136
+[]\T1/ppl/m/n/10 - De-riv-ing population-level quan-ti-ties from individual-lev
+el com-po-nents (sup-ple-men-tary.tex
+ []
+
+[24]) (./model.tex [25] [26
+
+] [27]) (./uncontrolled.tex [28] [29] [30] [31])
+(./controlled.tex [32] [33] [34] [35]) (./identifiability.tex) [36] (./main.bbl
+
 Underfull \hbox (badness 1014) in paragraph at lines 85--94
 []\T1/ppl/m/n/10 Alun L. Lloyd.  Re-al-is-tic Dis-tri-bu-tions of In-fec-tious 
 Pe-ri-ods in Epi-demic Mod-els: Chang-ing Pat-
  []
 
-[33
+[37
 
 ]
 Underfull \hbox (badness 1242) in paragraph at lines 144--153
@@ -763,7 +808,7 @@ the Royal So-ci-ety B: Bi-o-log-i-cal Sci-ences\T1/ppl/m/n/10 , 274(1609):599--
 
  []
 
-) [34] (./acknowledgements.tex) (./supplementary.tex [35
+) [38] (./acknowledgements.tex) (./supplementary.tex [39
 
 
 ]
@@ -774,19 +819,19 @@ MS/zplm/m/n/10 2 f\OT1/ppl/m/n/10 0, 0.2, 0.5, 0.8, 1\OMS/zplm/m/n/10 g$\T1/ppl
 /m/n/10 . 
  []
 
-[36] [37
+[40] [41
 
-] [38
+] [42
 
-] [39
+] [43
 
-] [40] [41] [42] [43] [44] [45
+] [44] [45] [46] [47] [48] [49
 
-] [46] [47] [48] [49] [50])
+] [50] [51] [52] [53] [54])
 
 Package natbib Warning: There were undefined citations.
 
-[51
+[55
 
 ] (./main.aux)
 
@@ -799,13 +844,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 066CC2922FB6C9744C617A1696507DC5;11229.
  ) 
 Here is how much of TeX's memory you used:
- 12950 strings out of 478994
- 190430 string characters out of 5858184
+ 12995 strings out of 478994
+ 190971 string characters out of 5858184
  513177 words of memory out of 5000000
- 29915 multiletter control sequences out of 15000+600000
- 460577 words of font info for 164 fonts, out of 8000000 for 9000
+ 29937 multiletter control sequences out of 15000+600000
+ 460890 words of font info for 165 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 71i,13n,74p,2186b,477s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,13n,74p,2186b,565s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/local/t
 exlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/te
@@ -823,10 +868,10 @@ pe1/urw/palatino/uplb8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw
 /palatino/uplbi8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/palat
 ino/uplr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/palatino/upl
 ri8a.pfb>
-Output written on main.pdf (51 pages, 5396671 bytes).
+Output written on main.pdf (55 pages, 5412344 bytes).
 PDF statistics:
- 20798 PDF objects out of 22161 (max. 8388607)
- 8966 compressed objects within 90 object streams
- 238 named destinations out of 1000 (max. 500000)
+ 20844 PDF objects out of 22161 (max. 8388607)
+ 9007 compressed objects within 91 object streams
+ 257 named destinations out of 1000 (max. 500000)
  294 words of extra memory for PDF output out of 10000 (max. 10000000)
 

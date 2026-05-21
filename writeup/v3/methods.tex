@@ -1,2 +1,155 @@
 \clearpage
 \section{Methods}
+
+\begin{enumerate}
+
+\item \textbf{Benchmark pathogen parameters}
+  \begin{itemize}
+    \item Table of $R_0$, $\bar{g}$, $\text{Var}[g]$, $\alpha$, $\beta$ for influenza, SARS-CoV-2 omicron, and measles. (Referenced as "Table XX" in results.tex line 62 and model.tex line 93; already appears in supplementary.tex but needs a main-text version or cross-reference.)
+    \item Literature sources for each pathogen's parameters.
+  \end{itemize}
+
+\item \textbf{Simulation framework}
+  \begin{itemize}
+    \item Describe the individual-level branching process simulation: how infection times $\tau_{ij}$ are generated from the Gamma time-shifted model ($\tau_{ij} = l_i + \varepsilon_j$, with $l_i \sim \text{Gamma}((1-\psi)\alpha, \beta)$ and $\varepsilon_j \sim \text{Gamma}(\psi\alpha, \beta)$).
+    \item Explain the Poisson offspring model: $\chi_i \sim \text{Poisson}(\nu_i)$, where $\nu_i = R_0$ in the uncontrolled case.
+    \item Describe the contact process integration: how $c_i(t)$ modulates transmission timing.
+    \item State the number of replicates, seeds, and any burn-in or warm-up conventions.
+     \item Already summarized in model.tex (simulation approach subsection), but results.tex refers to "Methods" for additional details in several places. The current model.tex section points to "Supplementary Methods" for full details. Methods should at minimum cross-reference or briefly restate the key simulation parameters: $N = 10{,}000$, $n_\text{sim} = 5{,}000$, epidemic establishment threshold of 500 infections.
+  \end{itemize}
+
+\item \textbf{Growth rate estimation (Section~\ref{sec:results_r-g-uncertainty})}
+  \begin{itemize}
+    \item Describe the Poisson GLM approach: daily case counts regressed on time with a log link to estimate $r$.
+    \item Specify the observation window (first $N$ days of each replicate epidemic).
+    \item Explain how $\hat{r}$ and its standard error are extracted, and how bias and variance are summarized across replicates.
+    \item Results.tex line 80: "we fit a Poisson generalized linear model to the daily infection counts." Methods should specify: infinite population, 7 days of data after 100 cumulative cases, daily binning, Poisson GLM with log link and day as covariate.
+  \end{itemize}
+
+\item \textbf{Generation interval estimation from serial intervals (Section~\ref{sec:results_r-g-uncertainty})}
+  \begin{itemize}
+    \item Explain the relationship between serial intervals and generation intervals assumed here (serial interval $\approx$ generation interval when incubation periods are ignored or symmetric).
+    \item Describe how serial intervals are collected from simulated transmission trees: each observed pair $(i \to j)$ yields one serial interval $s_{ij} = \tau_{ij}$.
+    \item Specify the MLE fitting procedure: fitting a Gamma distribution to pooled serial intervals to estimate $\hat{\alpha}$ and $\hat{\beta}$.
+    \item Describe the cluster structure of the data and why naive MLE treats correlated observations as independent.
+    \item   Results.tex lines 82–93: Simulated offspring from index cases, applied Gamma observation noise ($a_\text{obs}$, $b_\text{obs}$), extracted serial intervals, estimated posterior for $(\alpha, \beta)$ treating observations as independent. Methods should specify: number of index cases (100 in  results.tex line 93, but 5,000 in uncontrolled.tex line 80), the posterior estimation approach (what prior, what likelihood), the coverage calculation (95\% credible interval containing the true value), and the observation delay parameters ($a_\text{obs} = 4$, $b_\text{obs} = 1$ from results.tex line 83).
+  \end{itemize}
+
+\item \textbf{Intraclass correlation coefficient and design effect (Section~\ref{sec:results_r-g-uncertainty})}
+  \begin{itemize}
+    \item Define the ICC for serial intervals within clusters (secondary infections from the same index case).
+    \item Derive or state the effective sample size formula: $n_{\text{eff}} = n / (1 + (\bar{m} - 1) \cdot \text{ICC})$, where $\bar{m}$ is the mean cluster size.
+    \item Explain how the ICC is estimated from simulated data (one-way ANOVA decomposition or moment-based estimator).
+    \item Describe how the design effect inflates confidence intervals for $\hat{\alpha}$ and $\hat{\beta}$.
+    \item Results.tex lines 82–89: The ICC formula and $n_\text{eff} = n / (1 + (R_0 - 1) \cdot \text{ICC})$. Methods (or supplementary methods) should derive this. The ICC formula itself is stated in results.tex but the derivation is promised as "Supplementary Materials."
+  \end{itemize}
+
+\item \textbf{Overdispersion from contact variation (Section~\ref{sec:results_overdispersion})}
+  \begin{itemize}
+    \item Define the periodic and stochastic contact models: $c_i(t) = 1 + c_{\text{amp}} \sin(2\pi t / c_{\text{per}} + \phi_i)$ for the periodic model; specify the stochastic model.
+    \item State the overdispersion metric used (dispersion index $D = \text{Var}[\chi] / E[\chi]$, or equivalently the negative binomial $k$ parameter).
+    \item Describe the analytical formula for $D$ under periodic contacts and how it depends on $\psi$.
+    \item Explain the simulation procedure for estimating $D$ under stochastic contacts.
+    \item   Results.tex line 121: "We estimated OD by moment-matching the mean and variance of the offspring counts to a Negative Binomial distribution." Methods should state this explicitly. Also specify: 10,000 index cases per scenario, range of $c_\text{amp}$, $\sigma$, $\psi$ values swept.
+  \end{itemize}
+
+\item \textbf{Testing effectiveness under detect-and-isolate interventions (Section~\ref{sec:results_detect-and-isolate})}
+  \begin{itemize}
+    \item Define testing effectiveness: $\text{TE} = 1 - R_{\text{eff}} / R_0$.
+    \item Describe the detection time model: $D_i = l_i + \delta + \varepsilon_i$, where $\delta$ is the mean offset from the mode of $a_i(\tau)$ and $\varepsilon_i$ is detection noise.
+    \item Distinguish symptom-based detection (mode-anchored: $D_i$ depends on $l_i$) from test-based detection (calendar-anchored: $D_i$ independent of $l_i$).
+    \item Explain the numerical integration procedure for computing TE as a function of $\psi$ and $\delta$.
+    \item Results.tex line 141: "TE can then be calculated via numerical integration (Methods)." This is explicitly promised. - Controlled.tex lines 19–21 give the integral: $\text{TE} = \eta \rho \int_{-\infty}^\infty (1 - F_\epsilon(t)) f_\text{det}(t) , dt$. Methods should specify:   - The two detection mechanisms (symptom-based and test-based)   - Symptom-based: $D \sim \text{Normal}(\delta_\text{symp}, \sigma_\text{symp}^2)$ relative to peak infectiousness, immediate isolation   - Test-based: tests at intervals $\Delta_\text{test}$, detectability window $[\delta_\text{pre}, \delta_\text{post}]$ around peak, $\text{Exp}(\lambda_\text{act})$ turnaround delay   - How $f_\text{det}$ is constructed for each mechanism   - Default parameter values used in figures
+  \end{itemize}
+
+\item \textbf{Detect-and-isolate simulation details (Section~\ref{sec:results_detect-and-isolate})}
+  \begin{itemize}
+    \item Describe how individual epidemics are simulated under isolation: each infection $j$ from index $i$ occurs only if $\tau_{ij} < D_i$.
+    \item State how $\nu_i^* = R_0 \cdot P(\varepsilon_j < D_i - l_i)$ is computed for each individual.
+    \item Explain the simulation of $\chi_i^* \sim \text{Poisson}(\nu_i^*)$ and how epidemic trajectories are generated.
+    \item State the metrics recorded: $R_{\text{eff}}$, generation interval distribution $g^*(\tau)$, overdispersion.
+    \item   - Results.tex line 167: Simulation parameters for D\&I epidemic simulations ($\rho = 0.5$?, $\eta = 1$?, $\delta_\text{symp}$, $\sigma_\text{symp}$, $\Delta_\text{test}$, etc.). The controlled.tex draft (line 42) specifies $\rho = 0.5$, $\eta = 1$, deterministic isolation 1 day before peak. Methods should state these and the comparison setup (naive $R_\text{eff}$-matched simulations).
+  \end{itemize}
+
+\item \textbf{Generation interval truncation under isolation (Section~\ref{sec:results_detect-and-isolate})}
+  \begin{itemize}
+    \item State the truncated generation interval formula: $g^*(\tau) \propto g(\tau) \cdot P(\tau < D)$, and how this depends on $\psi$.
+    \item Describe how the mean and variance of $g^*(\tau)$ are computed (numerical integration or simulation-based).
+    \item Explain the feedback loop: truncated $g^*(\tau)$ shortens the generation interval, which accelerates transmission among those who escape detection.
+    \item   - Results.tex lines 151–159: $g^*(\tau)$ formula. The derivation is promised as "Supplementary Methods."
+  \end{itemize}
+
+\item \textbf{Overdispersion from detect-and-isolate interventions (Section~\ref{sec:results_detect-and-isolate})}
+  \begin{itemize}
+    \item Derive or state $\text{Var}[\nu_i^*] = R_0^2 \cdot \text{Var}[Q_i]$, where $Q_i = P(\varepsilon_j < D_i - l_i \mid l_i)$.
+    \item Explain why overdispersion arises: variation in detection timing across individuals creates variation in $\nu_i^*$.
+    \item Describe how the dispersion index $D_{\chi^*} = 1 + R_0 \cdot D_{\nu^*}$ is computed from simulation output.
+    \item   - Results.tex lines 161–165: $\nu_i^* = \nu_i F_\epsilon(m_\epsilon + \iota_i)$. Methods or supplementary should derive this and the associated dispersion index expressions.
+  \end{itemize}
+
+\item \textbf{Gathering size restrictions (Section~\ref{sec:results_detect-and-isolate})}
+  \begin{itemize}
+    \item Define the gathering size restriction model: contacts are drawn from a distribution truncated at a maximum gathering size $G_{\max}$.
+    \item State the $R_{\text{eff}}$ formula under gathering size restrictions.
+    \item Derive or state the overdispersion formula and its dependence on $\psi$.
+    \item Describe the simulation procedure for verifying the analytical results.
+    \item   - Results.tex lines 174–188: The truncated stochastic contact model, $R_\text{eff} = \mu_T R_0$, OD  formulas. Methods should specify the truncation mechanism, the values of $\sigma$ and $c_\text{max}$ used, and the three-way comparison setup (truncated vs. $R_\text{eff}$-adjusted stochastic vs. $R_\text{eff}$-adjusted uniform).
+  \end{itemize}
+
+\item \textbf{Identifiability and power analysis for $\psi$ (Section~\ref{sec:results_identifiability})}
+  \begin{itemize}
+    \item Describe the simulation-based power analysis: for each combination of pathogen, $\psi$, and sample size, simulate serial interval clusters and estimate $\hat{\psi}$.
+    \item State the Bayesian estimation procedure: prior on $\psi$, likelihood based on Gamma time-shifted model, posterior computation.
+    \item Define the posterior grid and marginalization procedure for $(\alpha, \beta, \psi)$ or $(\psi)$.
+    \item Specify the power criterion: proportion of replicates in which the 95\% credible interval excludes a reference value.
+    \item   - Results.tex lines 196–198: 10/25/50/100 index cases, $\psi \in {0, 0.5, 1}$, three pathogens, Gamma observation delays (fast/medium/slow), flat prior on $\psi$, 200 replicates, power defined as  >80\% of simulations with 95\% posterior mass within 0.2 of true $\psi$. Methods should detail:   - The posterior computation (likelihood, prior, grid)   - The power criterion   - The observation delay parameters (mean 1, 2, 4 days)
+  \end{itemize}
+
+\item \textbf{Empirical estimation of $\psi$ (Section~\ref{sec:results_empirical})}
+  \begin{itemize}
+    \item Describe the data sources: OutbreakTrees database, plus Ganyani and Hart datasets for COVID-19.
+    \item Explain the cluster formation procedure: grouping secondary infections by index case.
+    \item State the likelihood: product over clusters of the Gamma time-shifted density, with generation interval parameters $(\alpha, \beta)$ fixed from published estimates.
+    \item Describe the posterior computation: grid-based evaluation over $\psi \in [0, 1]$ with a uniform prior.
+    \item List the eight pathogens analyzed and their literature GI parameter sources.
+    \item   - Results.tex lines 209–211 (your new section): Methods should describe:
+    \begin{itemize}
+      \item  - Data extraction from OutbreakTrees database
+      \item  - Supplementary COVID-19 data sources (Ganyani, Hart)
+      \item  - Cluster formation (grouping by index case, restricting to $\geq 2$ secondaries)
+      \item  - Likelihood: integration over shared $l_i$, product of SI densities within cluster
+      \item  - Prior: flat on $\psi \in [0, 1]$, grid of 101 points
+      \item  - Fixed GI parameters from literature (and their sources, per pathogen)
+      \item  - Incubation period parameters used
+      \item  - Summary statistics: posterior mode, mean, 95\% CI
+  \end{itemize}
+  \end{itemize}
+
+\item \textbf{Cross-references to supplementary derivations}
+  \begin{itemize}
+    \item Index which analytical results are derived in the Supplementary Methods (\eg, the $\text{Var}[W]$ derivation, the overdispersion formulas, the generality proof for arbitrary $g(\tau)$ decompositions).
+    \item Clarify what is proved analytically \vs verified by simulation.
+    \item   These are derivations already partly present in supplementary.tex but should be cross-referenced
+  from Methods:
+  \begin{itemize}
+    \item - Deriving population-level quantities from individual-level components (supplementary.tex line 4)
+  \item   - $\text{Var}[W]$ derivation and the Gamma approximation for $W|\text{surv}$ (already in
+  \item   supplementary.tex)
+  \item   - Overdispersion in daily infection counts (already in supplementary.tex)
+  \item   - OD formula for periodic contacts (already in supplementary.tex)
+  \item   - OD formula for stochastic contacts (already in supplementary.tex)
+  \item   - TE integration details
+  \item   - $g^*(\tau)$ derivation
+  \item   - Gathering size restriction OD formulas
+\end{itemize}
+  \end{itemize}
+
+\item \textbf{Software and reproducibility}
+  \begin{itemize}
+    \item State the programming language (R), key packages used, and version information. (odin for simulations, tidyverse, etc.)
+    \item Reference the code repository and the master script (\texttt{run\_analysis.R}).
+    \item Describe the parallelization strategy (number of cores, packages used).
+    \item Code availability statement
+  \end{itemize}
+
+\end{enumerate}
