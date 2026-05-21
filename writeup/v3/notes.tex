@@ -1,0 +1,117 @@
+
+  % How generation interval inference is done in practice
+
+  % There are essentially two tiers of methods:
+
+  % 1. Population-level / naive pooling (most common). All observed generation intervals (or serial
+  % intervals) are treated as iid draws from a parametric distribution, typically Gamma. Parameters are
+  %  estimated by MLE. This is the "population-level method" in Park et al. 2020 (Section 7.4):
+  % estimate the mean and shape of a Gamma from the aggregated data, optionally correcting for
+  % right-truncation by exponential reweighting (their Eq. 7.7). This approach is used by the majority
+  % of empirical studies — for example, the widely-cited COVID-19 generation interval estimates from
+  % Ganyani et al. and others.
+
+  % 2. Individual-level Poisson process models (more sophisticated). Each infector j's transmission is
+  % modeled as a non-homogeneous Poisson process with rate proportional to the GI density. This is Park
+  %  et al.'s Eq. 7.8–7.11. The likelihood for infector j with n_j offspring at generation intervals
+  % s_{i,j} is:
+
+  % L_j ∝ Λ^{n_j} exp(−Λ F₀(t_trunc − t_j)) × ∏ᵢ f₀(s_{i,j})
+
+  % This accounts for right-truncation and the number of offspring. Hart et al. (2022, eLife) extend
+  % this further using data-augmentation MCMC for household data, jointly estimating infection times
+  % and transmission trees.
+
+  % The critical point: in both approaches, generation intervals from the same infector are treated as
+  % conditionally independent. Park et al. acknowledge this explicitly after their Eq. 7.11:
+
+  % "In theory, the forward generation intervals arising from the same infector may be correlated
+  % because of non-independence in the contact process [35]; although we do not account for this
+  % potential correlation in our likelihood..."
+
+  % They note this is a known gap but find empirically that the iid approximation works adequately for
+  % their purposes (estimating R₀ from r).
+
+  % No published method I found accounts for within-infector correlation of the kind your model
+  % introduces. The correlation Park et al. reference (from the contact process) is a network effect.
+  % Your model introduces a more fundamental source: the shared latent component l_i from the
+  % infectiousness profile itself.
+
+  %   Sources:
+  % - https://royalsocietypublishing.org/doi/10.1098/rsif.2019.0719
+  % - https://elifesciences.org/articles/70767
+  % - https://royalsocietypublishing.org/doi/10.1098/rspb.2015.2026
+  % - https://royalsocietypublishing.org/doi/10.1098/rsif.2020.0756
+  % - https://journals.plos.org/ploscompbiol/article?id=10.1371%2Fjournal.pcbi.1014239
+  % - https://pmc.ncbi.nlm.nih.gov/articles/PMC10990235/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  \clearpage
+\section{Discussion}
+
+\begin{itemize}
+  \item Brief summary of what we did 
+  \item High level: the share of within- vs. between-individual variation in infection timing has a substantial impact on both uncontrolled and controlled epidemics. 
+  \item To illustrate this, we introduce a novel modeling framework, the gamma time-shifted model. 
+  \item We combine this with a general contact process model that extends to the individual level the basic renewal equation epidemic model. 
+  \item We expect this will have implications for gathering contact tracing data and for building projection and forecasting models, highlighting a key point of underexplored uncertainty and setting forth a way of dealing with it parsimoniously, even if just in sensitivity analyses. 
+\end{itemize}
+
+\begin{itemize}
+  \item Why have we gone so long without really caring about $\psi$? One: it doesn't impact mean-field dynamics, by design. We can get good assessments of the overall behavior of an epidemic without it. Also, we've dealt with it implicitly a lot, we just haven't isolated it as an independent axis of variation
+  \item For example: individual-based models make assumptions about $\psi$ all the time, as  do the papers we referenced in the second-to-last paragraph of the intro. 
+  \item We can also adjust $\psi$ using methods like the linear chain trick, stringing together sets of dummy exposed and infectious categories; but this also changes the generation interval distribution. Figuring out how to vary the individual ifnectiousness profile without affecting the population-level generation interval distribution is the main contribution of this work. 
+\end{itemize}
+
+\begin{itemize}
+  \item For the time shift story: the shift in $E[\varsigma]$ is minor; the inflation of $\text{Var}[\varsigma]$ is the real story. 
+  \item For the inference of generation intervals and r: this suggets we need to develop good statistical tools and we need to be careful as we collect our data. 
+  \item for the overdispersion bit: this a fundamentally new mechanism of superspreading that we should be aware of. A key point: ``super-shedders' and ``super-contacters'' are theoretically identifiable as individuals, but when superspreading arises due to poorly timed infectiousness, that's not necessarily something we can anticipate. It suggests there might be a limit to which superspreading can be targeted, and opens up the need for us to bettter understand the relative contributions of these mechanisms to overdispersion. 
+  \end{itemize
+
+\begin{itemize}
+  \item  For the sensitivity of TE: note that shifts in symptom timing are commonplace (happend with SARS-CoV-2), and small changes in testing frequency are easy operational decisions. So, understanding the shape of the individual infectiousness profile is important for anticipating how these small shifts might impact epidemic behavior. Also, something we didn't explore here but could be fleshed out more is that we might even use these kinds of shifts, or maybe testing, to assess the shape of the individual infectiousness profile -- they might give us information beyond just simple contact tracing data. 
+  \item More details on the counter-intuitive impact of TE/GE contraction/overdispersion for detect-and-isolate, and Reff/overdispersion for gathering size restrictions. We often think of interventions in terms of how they reduce $R_{eff}$, but that's a bit dangerous, because the full effect can work in multiple directions (reduction in $R_{eff}$ but not a commensurate drop in epidemic growth rate, for example). The framework here gives a robust way of dealing with this beyond just naive reductions in R. 
+\end{itemize}
+
+\begin{itemize}
+  \item Identifiability is a challenge, but seeems theoretically possible under reasonably good circumstances. 
+  \item Available data suggests that there may be a spectrum of $\psi$-values across pathogens, though there are huge limitations to the data and the inference methods we've used here, which we discuss in a moment. 
+  \item That said, there are reasons to believe there could be differences in $\psi$ across pathogens; some we know generate long-term shedding while others might be short and fast, and our findings roughly align with this taxonomy. 
+  \item There are local-level impacts that could influence the observed $\psi$, like local susceptible depletion: for measles, maybe we have a short infectiousness window because everybody gets infected immediately. In theory, a person could go on infecting, but they've already burned through  all their contacts as soon as they reach the infectious stage. That's one thing that could happen and is hard to disentangle with existing data. (mabye epidemiological challenge studies, like when they stuck hamsters in the air vents of people with tuberculosis?) 
+\end{itemize}
+
+\begin{itemize} 
+  \item Limitations abound: the gamma time shift model is just one choice 
+  \item the contact process model is hard to ground empirically 
+  \item Lots more could be done with test-based control assessments 
+  \item inference is wayyyyy over-simplified; we should talk in detail about all the various confounders that could imapct this, many of which are in the comments at the end of code/psi_empirical_litgi.R. 
+\end{itemize }
+
+\begin{itemize}
+  \item But, we still think this will have an impact. It opens up new avenues of research and highlights a fundamental epidemiological quantitiy worth studying in its own right. 
+  \item We need better data, and better ways of understanding how to use existing data to get at $\psi$. 
+  \item We expect this will help generate better projections and forecasts -- or at least projections and forecasts that are more honest about unertainty, and clearar about a potential mechanism driving some of that uncertainty. Thus, we hope it will impact public health practice overall. 
+\end{itemize}
+
+

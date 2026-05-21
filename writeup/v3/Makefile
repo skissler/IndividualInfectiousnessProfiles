@@ -1,4 +1,4 @@
-TEXFILES = main.tex abstract.tex introduction.tex model.tex uncontrolled.tex \
+TEXFILES = main.tex abstract.tex introduction.tex results.tex methods.tex model.tex uncontrolled.tex \
            controlled.tex identifiability.tex discussion.tex acknowledgements.tex \
            supplementary.tex ../zotero.bib
 

@@ -4,9 +4,12 @@ The top-level auxiliary file: main.aux
 The style file: plainnat.bst
 Database file #1: ../zotero.bib
 Warning--I didn't find a database entry for ""
+Warning--I didn't find a database entry for "taube_outbreaktrees_2022"
+Warning--I didn't find a database entry for "ganyani_estimating_2020"
+Warning--I didn't find a database entry for "hart_generation_2022"
 You've used 15 entries,
             2773 wiz_defined-function locations,
-            734 strings with 8961 characters,
+            737 strings with 9028 characters,
 and the built_in function-call counts, 7929 in all, are:
 = -- 764
 > -- 453
@@ -45,4 +48,4 @@ warning$ -- 0
 while$ -- 65
 width$ -- 0
 write$ -- 289
-(There was 1 warning)
+(There were 4 warnings)
