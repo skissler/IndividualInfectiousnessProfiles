@@ -247,3 +247,157 @@
   15. Software and reproducibility
   - R version, key packages (odin for simulations, tidyverse, etc.)
   - Code availability statement
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ---
+  The core parallel to Lloyd-Smith and where it breaks down
+
+  Lloyd-Smith 2005 works because it has a ruthlessly simple structure: one new parameter (k), one
+  empirical finding (k is small for many diseases), and one punch line (individual-specific control
+  beats population-wide control). The paper is 4 pages. Every figure advances the same argument. The
+  reader walks away knowing exactly what k is, why it matters, and what to do about it.
+
+  Your paper has the same potential with psi, but the current structure doesn't deliver it with the
+  same force. Here are the specific issues:
+
+  ---
+  1. The paper has too many results and no clear headline
+
+  You have seven results subsections, each presenting a different consequence of psi. This breadth is
+   intellectually impressive but strategically diluting. The reader is left with "psi affects a lot
+  of things" rather than one crystallized takeaway. Lloyd-Smith's Figure 1 puts the empirical
+  evidence front and center on page 1; by the end of page 2 you know superspreading is the norm. Your
+   most novel finding --- that psi generates a new mechanism of superspreading through the g_i-c_i
+  interaction (Section 3) --- is buried as the fourth results subsection, after time shifts and
+  inference, which are less paradigm-shifting.
+
+  Consider reorganizing the results around a hierarchy:
+  - Lead with the new superspreading mechanism. This is the finding that will make modelers sit up.
+  It's genuinely new, it connects directly to Lloyd-Smith's framework (psi generates overdispersion
+  in offspring counts through a mechanism invisible to the existing k framework), and it has a clean
+  analytic expression. If you want psi to play the role that k plays, you need to show early that psi
+   creates overdispersion --- not just that it inflates variance in other quantities.
+  - Then show the empirical estimates. Lloyd-Smith puts data in Figure 1. Your empirical psi
+  estimates across 8 pathogens (currently the last results subsection) should come much earlier,
+  ideally right after establishing why psi matters. This gives the reader concrete numbers to anchor
+  to: "psi varies widely, and for some diseases it's near zero --- which means these effects are
+  real, not hypothetical."
+  - Then cover interventions (D&I and gathering restrictions), which are the practical implications.
+  - Relegate time shifts and inference to supporting roles --- either later in the results or
+  partially in supplementary. These are interesting but don't carry the same weight as "there's a new
+   source of superspreading your models are missing."
+
+  2. The first two results subsections read as model development, not findings
+
+  Section 1 ("A time-shifted Gamma model flexibly captures...") and Section 2 ("Expressing the
+  individual reproduction number...") define the model and notation. These aren't results --- they're
+   framework. In Lloyd-Smith, the model (negative binomial offspring distribution) is introduced in a
+   single paragraph of the main text. Your model is more complex, but the exposition could be
+  tightened. Consider moving the model definition to a brief "Model" subsection before Results, or
+  folding it into Methods. The current structure means the reader doesn't encounter an actual finding
+   until the third subsection (page ~4-5 of results), which is too late.
+
+  3. The model.tex section creates redundancy
+
+  You have a "Modeling framework" section (model.tex) that overlaps substantially with Results
+  subsections 1-2 --- both define the Gamma time-shift model, the contact process, and the simulation
+   approach. This will confuse readers. Pick one location for the model definition and commit to it.
+
+  4. The D&I section tries to do too much
+
+  Section 5 covers three distinct phenomena --- TE sensitivity, generation interval truncation, and
+  overdispersion from isolation --- each of which is complex. Consider whether you need all three at
+  equal depth. The TE sensitivity is the most intuitive and actionable; the truncation and
+  overdispersion results could be condensed or split into a separate subsection.
+
+  5. The paper needs a sharper "so what" for non-modelers
+
+  Lloyd-Smith ends with concrete, actionable proposals: report p_0 (proportion non-transmitting),
+  define SSEs using the Z^(n) threshold, target the most infectious 20%. These are things
+  epidemiologists can immediately do. Your discussion mentions "incorporating psi even as a
+  sensitivity parameter," but this isn't crystallized into a clear call to action.
+
+  Some concrete recommendations you could make:
+  - Contact tracing studies should record index case identity for each serial interval (you mention
+  this, but it could be elevated)
+  - Report within-cluster variance of serial intervals alongside the mean serial interval
+  - Sensitivity analyses in projection models should sweep psi in [0, 1]
+  - When evaluating D&I interventions, assess sensitivity of TE to detection timing shifts
+
+  6. The title is descriptive rather than provocative
+
+  "The impact of punctuated infectiousness on infectious disease dynamics" tells the reader what the
+  paper is about but not what it finds. Compare Lloyd-Smith: "Superspreading and the effect of
+  individual variation on disease emergence." Consider something that conveys the finding, e.g.:
+  - "Individual infectiousness timing as a hidden driver of epidemic variability and superspreading"
+  - "A missing axis of variation in epidemic models: the shape of individual infectiousness"
+
+  7. The abstract is missing
+
+  This is critical for framing. For maximum impact, the abstract should lead with the gap (we model
+  A(tau) but ignore a_i(tau)), state the key finding (narrow a_i(tau) generates overdispersion
+  through a new mechanism, and makes interventions sensitive to timing), give the empirical anchor
+  (psi varies widely across pathogens), and end with the implication.
+
+  8. Figure strategy
+
+  You need a "hero figure" --- the equivalent of Lloyd-Smith's Figure 1. Currently your figures are
+  all simulation-output panels. Consider a composite figure that puts the conceptual schematic (your
+  Figure 1, which is good), the empirical psi estimates (currently Figure 7), and one key consequence
+   (e.g., the OD heatmap) side by side. This would let the reader see "here's the concept, here's the
+   data, here's why it matters" in a single visual.
+
+  Also: all your figure captions are "[Caption]". This matters more than you might think --- strong
+  captions that tell a story independently of the main text are a hallmark of high-impact papers.
+
+  9. For the Nature vs. JRSI decision
+
+  If you target Nature:
+  - You need to cut to ~3,000 words of main text, with everything else in Supplementary
+  - Lead with the superspreading mechanism + empirical data
+  - The interventions section becomes a brief third act
+  - Time shifts and inference move to supplementary
+  - You need the hero figure
+
+  If you target JRSI:
+  - You can keep the current breadth
+  - But you still benefit from reorganizing to lead with the strongest result
+  - The longer format lets you develop the D&I and gathering size results fully
+  - The comprehensive supplementary derivations are a natural fit
+
+  My honest assessment: the ideas are strong enough for Nature. The question is whether you can
+  distill them to the required length without losing the story. The superspreading mechanism +
+  empirical estimates + intervention sensitivity, compressed to 4 pages with a killer figure, could
+  work. But the current structure, with its seven results subsections and dual model definitions,
+  would need significant restructuring to fit that format. If the restructuring feels forced, JRSI is
+   a strong venue where the full breadth would be appreciated and influential among exactly the
+  modeler audience you're targeting. Champredon & Dushoff (2015) in Proc. R. Soc. B is another
+  comparable precedent --- well-cited, influential in the modeling community.
+
+  10. One more thing: the language around psi
+
+  You consistently use "punctuated" and "smooth" to describe the extremes. This is clear but slightly
+   technical. Lloyd-Smith's language --- "superspreaders," "the 20/80 rule" --- immediately connects
+  to intuition. Consider whether there's a more vivid way to describe what low psi means in practice:
+   "burst transmitters" vs. "sustained shedders," or "synchronized" vs. "diffuse" infectiousness. A
+  memorable label helps a parameter become part of the field's vocabulary.

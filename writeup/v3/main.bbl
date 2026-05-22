@@ -1,4 +1,4 @@
-\begin{thebibliography}{15}
+\begin{thebibliography}{17}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -38,6 +38,23 @@ David Champredon and Jonathan Dushoff.
 \newblock URL
   \url{https://royalsocietypublishing.org/doi/10.1098/rspb.2015.2026}.
 
+\bibitem[Chan et~al.(2025)Chan, Morris, Stockwell, Bowman, Asturias, Rao,
+  Lutrick, Ellingson, Nguyen, Maldonado, McLaren, Sano, Biddle, Smith-Jeffcoat,
+  Biggerstaff, Rolfes, Talbot, Grijalva, Borchering, and
+  Mellis]{chan_estimating_2025}
+Louis Yat~Hin Chan, Sinead~E. Morris, Melissa~S. Stockwell, Natalie~M. Bowman,
+  Edwin Asturias, Suchitra Rao, Karen Lutrick, Katherine~D. Ellingson, Huong~Q.
+  Nguyen, Yvonne Maldonado, Son~H. McLaren, Ellen Sano, Jessica~E. Biddle,
+  Sarah~E. Smith-Jeffcoat, Matthew Biggerstaff, Melissa~A. Rolfes, H.~Keipp
+  Talbot, Carlos~G. Grijalva, Rebecca~K. Borchering, and Alexandra~M. Mellis.
+\newblock Estimating the generation time for influenza transmission using
+  household data in the {United} {States}.
+\newblock \emph{Epidemics}, 50:\penalty0 100815, March 2025.
+\newblock ISSN 17554365.
+\newblock \doi{10.1016/j.epidem.2025.100815}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S1755436525000039}.
+
 \bibitem[Goyal et~al.(2021)Goyal, Reeves, Cardozo-Ojeda, Schiffer, and
   Mayer]{goyal_viral_2021}
 Ashish Goyal, Daniel~B Reeves, E~Fabian Cardozo-Ojeda, Joshua~T Schiffer, and
@@ -48,6 +65,17 @@ Ashish Goyal, Daniel~B Reeves, E~Fabian Cardozo-Ojeda, Joshua~T Schiffer, and
 \newblock ISSN 2050-084X.
 \newblock \doi{10.7554/eLife.63537}.
 \newblock URL \url{https://elifesciences.org/articles/63537}.
+
+\bibitem[Klinkenberg and Nishiura(2011)]{klinkenberg_correlation_2011}
+Don Klinkenberg and Hiroshi Nishiura.
+\newblock The correlation between infectivity and incubation period of measles,
+  estimated from households with two cases.
+\newblock \emph{Journal of Theoretical Biology}, 284\penalty0 (1):\penalty0
+  52--60, September 2011.
+\newblock ISSN 00225193.
+\newblock \doi{10.1016/j.jtbi.2011.06.015}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S0022519311003146}.
 
 \bibitem[Klinkenberg et~al.(2006)Klinkenberg, Fraser, and
   Heesterbeek]{klinkenberg_effectiveness_2006}
@@ -102,6 +130,25 @@ J.~O. Lloyd-Smith, S.~J. Schreiber, P.~E. Kopp, and W.~M. Getz.
 \newblock \doi{10.1038/nature04153}.
 \newblock URL \url{https://www.nature.com/articles/nature04153}.
 
+\bibitem[Manica et~al.(2022)Manica, De~Bellis, Guzzetta, Mancuso, Vicentini,
+  Venturelli, Zerbini, Bisaccia, Litvinova, Menegale, Molina~Grané, Poletti,
+  Marziano, Zardini, d'Andrea, Trentini, Bella, Riccardo, Pezzotti, Ajelli,
+  Giorgi~Rossi, and Merler]{manica_intrinsic_2022}
+Mattia Manica, Alfredo De~Bellis, Giorgio Guzzetta, Pamela Mancuso, Massimo
+  Vicentini, Francesco Venturelli, Alessandro Zerbini, Eufemia Bisaccia, Maria
+  Litvinova, Francesco Menegale, Carla Molina~Grané, Piero Poletti, Valentina
+  Marziano, Agnese Zardini, Valeria d'Andrea, Filippo Trentini, Antonino Bella,
+  Flavia Riccardo, Patrizio Pezzotti, Marco Ajelli, Paolo Giorgi~Rossi, and
+  Stefano Merler.
+\newblock Intrinsic generation time of the {SARS}-{CoV}-2 {Omicron} variant:
+  {An} observational study of household transmission.
+\newblock \emph{The Lancet Regional Health - Europe}, 19:\penalty0 100446,
+  August 2022.
+\newblock ISSN 26667762.
+\newblock \doi{10.1016/j.lanepe.2022.100446}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S2666776222001405}.
+
 \bibitem[Middleton and Larremore(2024)]{middleton_modeling_2024}
 Casey Middleton and Daniel~B. Larremore.
 \newblock Modeling the transmission mitigation impact of testing for infectious
@@ -122,13 +169,6 @@ Dylan Morris, John Maclean, and Andrew~J. Black.
 \newblock ISSN 0303-6812, 1432-1416.
 \newblock \doi{10.1007/s00285-024-02132-6}.
 \newblock URL \url{https://link.springer.com/10.1007/s00285-024-02132-6}.
-
-\bibitem[Papoulis(1965)]{papoulis_probability_1965}
-Athanasios Papoulis.
-\newblock \emph{Probability, random variables and stochastic processes}.
-\newblock {McGraw}-{Hill} series in systems science. McGraw-Hill, New York,
-  1965.
-\newblock ISBN 978-0-07-048448-1.
 
 \bibitem[Svensson(2007)]{svensson_note_2007}
 Åke Svensson.

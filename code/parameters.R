@@ -13,7 +13,7 @@ parslist <- list(
 	     Tgen=12.2,
 	     Tvar=3.62^2,
 	     R0=12,
-	     doi="10.1016/j.sciencedirect.com/S0022519311003146")
+	     doi="10.1016/j.jtbi.2011.06.015")
 )
 
 # Compute moment-matched Gamma shape and rate for each pathogen

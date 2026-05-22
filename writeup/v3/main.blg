@@ -7,45 +7,45 @@ Warning--I didn't find a database entry for ""
 Warning--I didn't find a database entry for "taube_outbreaktrees_2022"
 Warning--I didn't find a database entry for "ganyani_estimating_2020"
 Warning--I didn't find a database entry for "hart_generation_2022"
-You've used 15 entries,
+You've used 17 entries,
             2773 wiz_defined-function locations,
-            737 strings with 9028 characters,
-and the built_in function-call counts, 7929 in all, are:
-= -- 764
-> -- 453
+            757 strings with 10578 characters,
+and the built_in function-call counts, 10933 in all, are:
+= -- 993
+> -- 848
 < -- 7
-+ -- 153
-- -- 138
-* -- 747
-:= -- 1275
-add.period$ -- 89
-call.type$ -- 15
-change.case$ -- 90
-chr.to.int$ -- 15
-cite$ -- 30
-duplicate$ -- 308
-empty$ -- 586
-format.name$ -- 161
-if$ -- 1631
++ -- 284
+- -- 267
+* -- 1087
+:= -- 1787
+add.period$ -- 102
+call.type$ -- 17
+change.case$ -- 140
+chr.to.int$ -- 17
+cite$ -- 34
+duplicate$ -- 350
+empty$ -- 670
+format.name$ -- 294
+if$ -- 2203
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 16
-newline$ -- 126
-num.names$ -- 60
-pop$ -- 114
+missing$ -- 17
+newline$ -- 144
+num.names$ -- 68
+pop$ -- 197
 preamble$ -- 1
-purify$ -- 76
+purify$ -- 123
 quote$ -- 0
-skip$ -- 220
+skip$ -- 287
 stack$ -- 0
-substring$ -- 309
-swap$ -- 29
+substring$ -- 368
+swap$ -- 34
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 160
+type$ -- 187
 warning$ -- 0
-while$ -- 65
+while$ -- 75
 width$ -- 0
-write$ -- 289
+write$ -- 330
 (There were 4 warnings)
