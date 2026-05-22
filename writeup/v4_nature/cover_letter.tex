@@ -1,0 +1,55 @@
+\documentclass[11pt]{letter}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\signature{Stephen M.~Kissler, PhD\\
+Assistant Professor\\
+Department of Computer Science\\
+BioFrontiers Institute\\
+University of Colorado Boulder\\
+stephen.kissler@colorado.edu}
+
+\address{Stephen M.~Kissler\\
+Department of Computer Science\\
+University of Colorado Boulder\\
+Boulder, CO 80309\\
+stephen.kissler@colorado.edu}
+
+\begin{document}
+
+\begin{letter}{The Editors\\Nature}
+
+\opening{Dear Editors,}
+
+We submit for your consideration our manuscript, ``Individual infectiousness timing as a hidden driver of epidemic variability and superspreading.''
+
+A central insight of modern infectious disease epidemiology is that individual-level variation matters: Lloyd-Smith et al.\ (2005, \textit{Nature}) showed that variation in the \textit{amount} of individual transmission, captured by the dispersion parameter $k$, profoundly shapes epidemic dynamics, outbreak probability, and the effectiveness of control measures. Here, we identify a complementary axis of variation that has been overlooked: variation in the \textit{timing} of individual transmission. We introduce a smoothness parameter, $\psi$, that captures how much of the generation interval's variability arises within versus between individuals---that is, whether a person's infectiousness is concentrated in a brief burst or spread over a broad window. This quantity is invisible to standard epidemic models: the basic reproduction number $R_0$, the generation interval distribution $g(\tau)$, and the population-level infectiousness profile $A(\tau)$ are all invariant to $\psi$. Yet its effects on stochastic dynamics can be substantial.
+
+Our central finding is that narrow individual infectiousness profiles generate overdispersion in secondary infection counts through a mechanism that is fundamentally distinct from previously recognized sources of superspreading. When a person's infectiousness is concentrated in a short window, the overlap between that window and their time-varying contact pattern becomes a matter of chance---producing ``bad luck'' superspreading that cannot be predicted or targeted by identifying high-risk individuals. We derive a closed-form expression for the resulting overdispersion and show that it depends on the interaction between infectiousness timing and the timescale of contact variation.
+
+Using transmission-tree data from eight pathogens, we estimate $\psi$ empirically, finding values ranging from near zero (measles, pneumonic plague) to near one (COVID-19, smallpox)---evidence that this axis of variation is not merely theoretical but differs meaningfully across pathogens. We further show that $\psi$ governs the sensitivity of detect-and-isolate interventions to shifts in detection timing, modulates the effects of gathering size restrictions beyond their impact on $R_\text{eff}$, inflates early-epidemic stochasticity, and reduces the effective information content of serial interval data for generation interval estimation.
+
+We believe this work is appropriate for \textit{Nature} for several reasons. First, it identifies a genuinely new mechanism of superspreading---a topic of broad interest since the SARS and COVID-19 pandemics---that operates even in populations with no biological or behavioural heterogeneity. Second, it introduces a parameter ($\psi$) that fills a gap in the field's conceptual toolkit, complementing $R_0$ and $k$ as a fundamental descriptor of transmission dynamics. Third, the findings have immediate practical implications: they reveal that evaluating interventions purely in terms of $R_\text{eff}$ can be misleading, and they identify specific ways in which contact-tracing data collection and epidemic modelling practice should change. The paper combines analytic theory, simulation, and empirical estimation across multiple pathogens, in a structure parallel to Lloyd-Smith et al.\ (2005).
+
+This manuscript has not been published or submitted elsewhere. All authors have approved the manuscript for submission. We have no competing interests to declare.
+
+We suggest the following reviewers, who have expertise in individual-level transmission dynamics, generation intervals, and superspreading:
+
+\begin{itemize}
+\item Jamie Lloyd-Smith (UCLA) --- individual variation in infectiousness, superspreading
+\item Jonathan Dushoff (McMaster University) --- generation intervals, individual-level transmission kernels
+\item Sebastian Funk (London School of Hygiene and Tropical Medicine) --- real-time epidemic modelling, renewal equation methods
+\item Christophe Fraser (University of Oxford) --- contact tracing, individual-level transmission dynamics
+\end{itemize}
+
+Thank you for considering our manuscript.
+
+\closing{Sincerely,}
+
+\end{letter}
+\end{document}

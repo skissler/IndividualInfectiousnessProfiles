@@ -401,3 +401,298 @@
   to intuition. Consider whether there's a more vivid way to describe what low psi means in practice:
    "burst transmitters" vs. "sustained shedders," or "synchronized" vs. "diffuse" infectiousness. A
   memorable label helps a parameter become part of the field's vocabulary.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ❯ Cool. Do you think I should focus more on targeting a nature-style journal (maybe also
+  science), or a proceedings b/royal society interface journal? What should be my manuscript
+  submission strategy?
+
+⏺ This depends on what you're optimizing for, and I want to be honest about the trade-offs rather
+  than just cheerleading.
+
+  The case for Nature/Science:
+
+  The conceptual contribution is genuinely at the right level. You're introducing a new parameter
+  that captures a previously unrecognized axis of variation, you're showing it generates a novel
+  mechanism for a phenomenon (superspreading) that the field cares deeply about, and you have
+  empirical estimates across multiple pathogens. That's structurally parallel to Lloyd-Smith 2005.
+  The "new mechanism of superspreading" angle is the kind of finding that Nature editors respond to
+  --- it's surprising, general, and changes how you think about a well-studied phenomenon.
+
+  The case against Nature/Science:
+
+  A few things work against you relative to Lloyd-Smith's position in 2005. First, timing:
+  Lloyd-Smith published during the immediate aftermath of SARS-1, when superspreading was an urgent,
+  unresolved public health puzzle. Your paper doesn't have that kind of topical urgency --- it's a
+  fundamental contribution to epidemic theory, but there's no ongoing crisis creating demand for it.
+  Nature and Science weight timeliness heavily.
+
+  Second, the effects of psi, while real and theoretically important, are effects on stochastic
+  dynamics --- they're invisible to deterministic models by construction. This is intellectually
+  interesting but makes the "so what" harder to communicate to a broad audience. Lloyd-Smith's k had
+  a visceral, immediate interpretation: 20% of cases cause 80% of transmission, and you can see it in
+   the data. Your strongest analogue is the OD formula, which is elegant, but the practical
+  consequences (higher extinction probability, sensitivity of TE to detection timing) require more
+  work from the reader.
+
+  Third, the empirical estimates are preliminary by your own admission. Lloyd-Smith had clean
+  maximum-likelihood fits to outbreak data that decisively rejected the Poisson model. Your estimates
+   are Bayesian posteriors with fixed GI parameters and acknowledged ascertainment biases, and the
+  most striking results (measles and plague at psi near 0) are the ones most susceptible to those
+  biases. A Nature referee will press hard on this.
+
+  My honest assessment:
+
+  I think the ideas are strong enough that a Nature/Science submission is defensible, but I'd put the
+   probability of acceptance at maybe 10-15% --- which is roughly the acceptance rate for papers that
+   make it past the editors' desk. The risk is a 6-12 month cycle of submission, desk rejection or
+  review, revision, and possible rejection, after which you submit to Proc B / Interface anyway.
+
+  What I'd actually recommend:
+
+  Submit to Nature first, but with a short time horizon. Nature's initial editorial decision (desk
+  accept/reject) typically comes within 1-2 weeks. If it passes the editors, great --- you're in
+  play. If it's desk-rejected, you've lost almost no time. You could also try Science, but I'd do one
+   or the other, not both sequentially --- the marginal value of the second attempt isn't worth the
+  delay.
+
+  If Nature desk-rejects, go to PNAS or Proc B next, not Interface. Here's why:
+
+  - PNAS (via direct submission or contributed) has the prestige and readership to make psi part of
+  the field's vocabulary, accepts longer papers than Nature, and publishes a lot of mathematical
+  epidemiology. The format would let you keep the full argument without the compression pain of a
+  Nature Letter. It's also faster than Interface in my experience.
+  - Proc B is the natural home for this kind of work --- the Champredon & Dushoff paper is there, as
+  are many of the papers you cite. It's well-read by exactly the modelling community you're
+  targeting. The format fits your content well.
+  - Interface is more methods-oriented. Your paper has substantial methodological content, but the
+  story is really about epidemiological insight, not methodology. Proc B is a better fit.
+
+  So my suggested sequence would be:
+
+  1. Nature (1-2 weeks for desk decision; low cost if rejected)
+  2. If desk-rejected: PNAS or Proc B, depending on whether you want to optimize for breadth of
+  readership (PNAS) or depth within the modelling community (Proc B)
+
+  One practical consideration: Nature requires ~3,000 words; Proc B allows ~5,000-6,000. You already
+  have both drafts. If Nature desk-rejects, you can submit the Proc B version within days rather than
+   rewriting from scratch. Having both ready is a genuine strategic advantage --- it means a desk
+  rejection doesn't cost you more than two weeks.
+
+  One thing I'd do regardless of venue: write a strong cover letter that explicitly makes the
+  Lloyd-Smith parallel. "Just as Lloyd-Smith et al. (2005) showed that variation in the amount of
+  individual transmission (parameterized by k) has profound consequences for epidemic dynamics, we
+  show that variation in its timing (parameterized by psi) has consequences of comparable magnitude,
+  through mechanisms that are invisible to existing frameworks." That framing helps editors see where
+   the paper sits in the field's intellectual history.
+
+✻ Worked for 40s
+
+❯ Could you draft a nature-style cover letter and put it in the writeup/v4_nature directory?
+
+⏺ Write(cover_letter.tex)
+  ⎿  Wrote 55 lines to cover_letter.tex
+     \documentclass[11pt]{letter}
+
+     \usepackage[margin=1in]{geometry}
+     \usepackage[T1]{fontenc}
+     \usepackage{mathpazo}
+     \usepackage{hyperref}
+     \usepackage{xcolor}
+
+     \signature{Stephen M.~Kissler, PhD\\
+     Assistant Professor\\
+     … +45 lines (ctrl+o to expand)
+
+⏺ Bash(cd "/Users/stephen_ally/Dropbox
+      (Personal)/DropboxHarvard/Projects/IndividualInfectiousnessProfiles/writeup/v4_nature" &&
+      pdflatex -interaction=nonstopmode cove…)
+  ⎿  Error: Exit code 1
+
+⏺ Bash(cd "/Users/stephen_ally/Dropbox
+      (Personal)/DropboxHarvard/Projects/IndividualInfectiousnessProfiles/writeup/v4_nature" &&
+      pdflatex -interaction=nonstopmode cove…)
+  ⎿  ! Undefined control sequence.
+     l.36 ... interventions purely in terms of $R_\text
+                                                       {eff}$ can be misleading, ...
+     … +12 lines (ctrl+o to expand)
+
+⏺ The \text command needs amsmath. Let me fix that.
+
+⏺ Update(cover_letter.tex)
+  ⎿  Added 1 line
+       4  \usepackage[T1]{fontenc}
+       5  \usepackage{mathpazo}
+       6  \usepackage{hyperref}
+       7 +\usepackage{amsmath}
+       8  \usepackage{xcolor}
+       9
+      10  \signature{Stephen M.~Kissler, PhD\\
+
+⏺ Bash(cd "/Users/stephen_ally/Dropbox
+      (Personal)/DropboxHarvard/Projects/IndividualInfectiousnessProfiles/writeup/v4_nature" &&
+      pdflatex -interaction=nonstopmode cove…)
+  ⎿  Done: 2 pages
+
+⏺ Read 1 file (ctrl+o to expand)
+
+⏺ Looks clean. The letter runs about 1 page of substance, which is appropriate for Nature --- editors
+   don't read long cover letters.
+
+  A few things you may want to adjust before sending:
+
+  - Reviewer suggestions: You'll want to confirm these are people you're comfortable having review
+  the paper. Lloyd-Smith and Dushoff are the most natural choices given the intellectual lineage, but
+   if either has a close connection to you or your co-authors, swap them out. Fraser is a strong
+  choice for the D&I angle. You might also consider Adam Kucharski (LSHTM) for the
+  superspreading/overdispersion angle, or Joel Miller for the branching process theory.
+  - The date will auto-generate from compilation time, so it'll be correct whenever you submit.
+  - Co-author approval: The letter states all authors have approved --- make sure that's true before
+  submitting.
+  - Competing interests / funding: Both are declared as none / to be completed. Fill these in before
+  submission.
+
+✻ Worked for 1m 50s
+
+❯ Ok, now: with the nature submission, there are a few key weaknesses I'm concerned about in
+  addition to the ones you mentioned above. First: we say that weekly variation is the most
+  impactful for influenza/sars-cov-2/measles, but we don't show that there's meaningful weekly
+  variation in actual contact patterns. Is that a critical piece of the story? Second: can we
+  really call this a "new mechanism of superspreading?" Maybe it's because I"m so close to the
+  work now, but I worry a reviewer will read our description that "when the infectiousness
+  window coincides with a period of high contacts, we get superspreading" and say, effectively,
+  duh, that's trivial. Those are the main ones: anything i should do about them? does it tank
+  nature/science as a venue?
+
+⏺ These are both legitimate concerns. Let me take them seriously.
+
+  On weekly contact variation:
+
+  This is a real gap, but I don't think it's fatal. The claim you're making isn't "weekly contact
+  variation exists and causes superspreading via psi." The claim is "when contact rates vary on
+  timescales comparable to the mean generation time, psi determines how much overdispersion results."
+   The weekly example is illustrative, not the finding itself. The finding is the formula (Eq. 1) and
+   the mechanism it captures.
+
+  That said, a referee will reasonably ask: "Is there evidence that contacts vary on the relevant
+  timescales?" And the answer is yes --- there's a substantial literature on this. Weekend vs.
+  weekday contact differences are well-documented in contact survey data (POLYMOD, CoMix, BBC
+  Pandemic study). These studies consistently show 20-40% fewer contacts on weekends than weekdays,
+  which is roughly c_amp in the range 0.1-0.2. There's also variation at longer timescales (school
+  terms, holidays) and shorter ones (daily routines). You don't need to generate new data on this;
+  you need to cite it. A paragraph in the Discussion or Methods saying "empirical contact surveys
+  document substantial day-of-week variation (refs), with weekend contact rates 20-40% lower than
+  weekday rates, corresponding to c_amp ~ 0.1-0.2 at c_per = 7 days" would close this gap. You could
+  even plug those empirical values into the OD formula to give concrete estimates of psi-attributable
+   overdispersion, which would strengthen the paper.
+
+  What I wouldn't do is add a new analysis of contact data. That's scope creep, and it's not where
+  the contribution lies.
+
+  On "is this really a new mechanism?":
+
+  This is the more serious concern, and I want to be careful here because I think the answer is
+  nuanced.
+
+  A referee who says "duh, if your infectious window coincides with high contacts you transmit more"
+  is correct at the level of the individual. That observation is not new. What's new is the
+  population-level consequence and the specific conditions under which it matters. There are three
+  things the paper shows that are genuinely non-obvious:
+
+  First, this mechanism generates overdispersion even when there is zero heterogeneity in biological
+  infectiousness and zero heterogeneity in average contact rates. In the standard Lloyd-Smith
+  framework, you need variation in nu_i to get overdispersion. You're showing that identical
+  individuals with identical average contacts can still produce overdispersed offspring counts,
+  purely through timing. That's not "duh" --- it's a specific, falsifiable claim that contradicts the
+   implicit assumption of most superspreading analyses.
+
+  Second, the magnitude of the effect is governed by a precise relationship between psi, the
+  generation time, and the contact period (the OD formula). The fact that this has a clean analytic
+  form, and that it predicts when the effect is large vs. negligible, is not something you'd get from
+   the intuition alone.
+
+  Third, and this is the key point that I think you should emphasize more: this overdispersion cannot
+   be targeted. Classical superspreading from super-shedders or super-contactors is in principle
+  addressable by identifying and isolating high-risk individuals. The timing-contact overdispersion
+  cannot be, because it doesn't arise from any persistent individual trait. This has a concrete
+  policy implication: it sets a floor on the overdispersion that remains even after you've perfectly
+  identified and controlled all super-shedders and super-contactors.
+
+  The "duh" objection mistakes the individual-level intuition for the population-level result. You
+  should address this directly by framing the contribution carefully. I'd avoid calling it a "new
+  mechanism of superspreading" in the abstract or the first time you mention it --- that invites the
+  dismissive reaction. Instead, frame it as: "We show that the interaction between infectiousness
+  timing and time-varying contacts generates overdispersion in secondary infection counts that is not
+   captured by existing frameworks for individual variation in transmission." Then, when you unpack
+  it, emphasize the three non-obvious aspects above. The word "mechanism" is fine in the body of the
+  paper, but lead with the consequence (overdispersion in a population with no individual-level
+  heterogeneity), not the label (new mechanism).
+
+  Concretely, in the Nature draft, I'd rewrite the opening of the superspreading paragraph from:
+
+  "Here, we identify a third mechanism: when infectiousness is concentrated in a narrow temporal
+  window, the overlap between that window and the contact process becomes a matter of chance."
+
+  to something like:
+
+  "We show that overdispersion in secondary infection counts can arise even in populations with no
+  variation in biological infectiousness or average contact rates --- a result that cannot be
+  explained by existing frameworks for superspreading. The mechanism is the stochastic interaction
+  between a person's infectiousness window and their contact process: when infectiousness is
+  concentrated in a narrow window, the overlap with high- or low-contact periods becomes a matter of
+  chance, generating variation in nu_i that is not attributable to any persistent individual
+  characteristic and therefore cannot be targeted by identifying high-risk individuals."
+
+  This version leads with the surprising result (overdispersion without heterogeneity) rather than
+  the mechanism, and immediately explains why it matters (you can't target it). The "duh" objection
+  has less purchase when the framing is "here's a result your models can't produce" rather than
+  "here's a mechanism."
+
+  Does this tank Nature/Science?
+
+  No, I don't think either concern is disqualifying. The contact variation issue is addressable with
+  a paragraph and some citations. The framing issue is addressable with careful writing. Neither is a
+   fundamental flaw in the science.
+
+  What would concern me more at Nature is the empirical estimation section --- the fact that your
+  strongest results (measles and plague near psi = 0) are the ones most susceptible to the biases you
+   acknowledge. If a referee pushes hard on "your low-psi estimates could just be ascertainment bias
+  toward event-based transmission clusters," you need a response. One option is to frame the
+  empirical estimates as hypothesis-generating rather than definitive: "these estimates motivate
+  further investigation with purpose-collected data" rather than "we have shown that measles has psi
+  near 0." Another is to add a sensitivity analysis showing that your estimates are robust to
+  dropping the largest clusters, which would partially address the ascertainment concern. That's a
+  relatively small addition to the analysis that could meaningfully strengthen the paper.
