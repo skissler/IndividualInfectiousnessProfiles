@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: supplementary.aux
+The style file: plainnat.bst
+Database file #1: ../zotero.bib
+Warning--I didn't find a database entry for "taube_outbreaktrees_2022"
+Warning--I didn't find a database entry for "ganyani_estimating_2020"
+Warning--I didn't find a database entry for "hart_generation_2022"
+You've used 6 entries,
+            2773 wiz_defined-function locations,
+            656 strings with 7542 characters,
+and the built_in function-call counts, 4774 in all, are:
+= -- 398
+> -- 475
+< -- 2
++ -- 159
+- -- 153
+* -- 494
+:= -- 805
+add.period$ -- 36
+call.type$ -- 6
+change.case$ -- 69
+chr.to.int$ -- 6
+cite$ -- 12
+duplicate$ -- 124
+empty$ -- 229
+format.name$ -- 161
+if$ -- 935
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 6
+newline$ -- 56
+num.names$ -- 24
+pop$ -- 109
+preamble$ -- 1
+purify$ -- 63
+quote$ -- 0
+skip$ -- 120
+stack$ -- 0
+substring$ -- 104
+swap$ -- 12
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 66
+warning$ -- 0
+while$ -- 26
+width$ -- 0
+write$ -- 121
+(There were 3 warnings)

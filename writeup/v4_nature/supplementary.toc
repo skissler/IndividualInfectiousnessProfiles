@@ -1,0 +1,51 @@
+\contentsline {section}{\numberline {1}Supplementary Methods}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}The Gamma time-shifted model: detailed specification}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Contact process framework}{3}{subsection.1.2}%
+\contentsline {paragraph}{Periodic contact model.}{4}{equation.1.4}%
+\contentsline {paragraph}{Stochastic contact model.}{4}{equation.1.5}%
+\contentsline {subsection}{\numberline {1.3}Derivation of the overdispersion formula}{4}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}Expressing $k$ in terms of $\text {Var}[\tilde {c}_i]$}{4}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.2}Deriving $\text {Var}[\tilde {c}_i]$ via spectral analysis}{5}{subsubsection.1.3.2}%
+\contentsline {subsubsection}{\numberline {1.3.3}The power transfer function $|\hat {g}_i(\omega )|^2$}{5}{subsubsection.1.3.3}%
+\contentsline {subsubsection}{\numberline {1.3.4}Overdispersion for the periodic contact model}{6}{subsubsection.1.3.4}%
+\contentsline {subsubsection}{\numberline {1.3.5}Overdispersion for the stochastic contact model}{6}{subsubsection.1.3.5}%
+\contentsline {subsection}{\numberline {1.4}Overdispersion in daily infection counts}{6}{subsection.1.4}%
+\contentsline {paragraph}{Setup.}{6}{subsection.1.4}%
+\contentsline {paragraph}{Mean of $Q_i(\tau )$.}{7}{equation.1.26}%
+\contentsline {paragraph}{Index of dispersion.}{7}{equation.1.27}%
+\contentsline {subsection}{\numberline {1.5}Derivation of $E[\varsigma ]$ and $\text {Var}[\varsigma ]$: early-epidemic time shifts}{7}{subsection.1.5}%
+\contentsline {paragraph}{Setup.}{7}{subsection.1.5}%
+\contentsline {paragraph}{Approximating the distribution of $W$.}{7}{equation.1.29}%
+\contentsline {paragraph}{Deriving $E[W|\text {surv}]$.}{7}{equation.1.30}%
+\contentsline {paragraph}{Deriving $\text {Var}[W]$.}{7}{equation.1.31}%
+\contentsline {paragraph}{Parameters of the moment-matched Gamma.}{8}{equation.1.35}%
+\contentsline {paragraph}{Mode, mean, and variance of $\varsigma $.}{8}{equation.1.36}%
+\contentsline {subsection}{\numberline {1.6}Effective sample size for generation interval estimation}{8}{subsection.1.6}%
+\contentsline {subsection}{\numberline {1.7}Invariance of infection-anchored TE to the shape of the infectiousness profile}{9}{subsection.1.7}%
+\contentsline {subsection}{\numberline {1.8}Derivation of the truncated generation interval distribution under D\&I interventions}{9}{subsection.1.8}%
+\contentsline {subsection}{\numberline {1.9}Derivation of $R_\text {eff}$ and OD for gathering size restrictions}{9}{subsection.1.9}%
+\contentsline {subsection}{\numberline {1.10}Simulation framework}{10}{subsection.1.10}%
+\contentsline {paragraph}{Infection attempt generation.}{10}{subsection.1.10}%
+\contentsline {paragraph}{Finite-population simulation.}{10}{Item.5}%
+\contentsline {paragraph}{Infinite-population simulation.}{10}{Item.5}%
+\contentsline {paragraph}{Default parameters.}{10}{Item.5}%
+\contentsline {subsection}{\numberline {1.11}Benchmark pathogens}{10}{subsection.1.11}%
+\contentsline {subsection}{\numberline {1.12}Empirical $\psi $ estimation procedure}{11}{subsection.1.12}%
+\contentsline {subsection}{\numberline {1.13}Power analysis for $\psi $ inference}{11}{subsection.1.13}%
+\contentsline {section}{\numberline {2}Supplementary Discussion}{11}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Why has $\psi $ been overlooked?}{11}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Early-epidemic time shifts}{12}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Inference of $r$ and $g(\tau )$}{12}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Detect-and-isolate interventions}{12}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Evaluating interventions beyond $R_\text {eff}$}{12}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Biases in empirical $\psi $ estimates}{13}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}Limitations}{13}{subsection.2.7}%
+\contentsline {section}{\numberline {3}Supplementary Results}{13}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Detailed early-epidemic dynamics}{13}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Growth rate estimation uncertainty}{14}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Generation interval estimation and coverage}{14}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Detailed overdispersion results}{14}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Detailed D\&I intervention results}{14}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Gathering size restriction results}{14}{subsection.3.6}%
+\contentsline {section}{\numberline {4}Supplementary Figures}{15}{section.4}%
+\contentsline {section}{\numberline {5}Supplementary Tables}{15}{section.5}%

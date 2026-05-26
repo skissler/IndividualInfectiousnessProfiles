@@ -1,0 +1,86 @@
+\begin{thebibliography}{6}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Chan et~al.(2025)Chan, Morris, Stockwell, Bowman, Asturias, Rao,
+  Lutrick, Ellingson, Nguyen, Maldonado, McLaren, Sano, Biddle, Smith-Jeffcoat,
+  Biggerstaff, Rolfes, Talbot, Grijalva, Borchering, and
+  Mellis]{chan_estimating_2025}
+Louis Yat~Hin Chan, Sinead~E. Morris, Melissa~S. Stockwell, Natalie~M. Bowman,
+  Edwin Asturias, Suchitra Rao, Karen Lutrick, Katherine~D. Ellingson, Huong~Q.
+  Nguyen, Yvonne Maldonado, Son~H. McLaren, Ellen Sano, Jessica~E. Biddle,
+  Sarah~E. Smith-Jeffcoat, Matthew Biggerstaff, Melissa~A. Rolfes, H.~Keipp
+  Talbot, Carlos~G. Grijalva, Rebecca~K. Borchering, and Alexandra~M. Mellis.
+\newblock Estimating the generation time for influenza transmission using
+  household data in the {United} {States}.
+\newblock \emph{Epidemics}, 50:\penalty0 100815, March 2025.
+\newblock ISSN 17554365.
+\newblock \doi{10.1016/j.epidem.2025.100815}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S1755436525000039}.
+
+\bibitem[Klinkenberg and Nishiura(2011)]{klinkenberg_correlation_2011}
+Don Klinkenberg and Hiroshi Nishiura.
+\newblock The correlation between infectivity and incubation period of measles,
+  estimated from households with two cases.
+\newblock \emph{Journal of Theoretical Biology}, 284\penalty0 (1):\penalty0
+  52--60, September 2011.
+\newblock ISSN 00225193.
+\newblock \doi{10.1016/j.jtbi.2011.06.015}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S0022519311003146}.
+
+\bibitem[Lloyd(2001)]{lloyd_realistic_2001}
+Alun~L. Lloyd.
+\newblock Realistic {Distributions} of {Infectious} {Periods} in {Epidemic}
+  {Models}: {Changing} {Patterns} of {Persistence} and {Dynamics}.
+\newblock \emph{Theoretical Population Biology}, 60\penalty0 (1):\penalty0
+  59--71, August 2001.
+\newblock ISSN 00405809.
+\newblock \doi{10.1006/tpbi.2001.1525}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S0040580901915254}.
+
+\bibitem[Manica et~al.(2022)Manica, De~Bellis, Guzzetta, Mancuso, Vicentini,
+  Venturelli, Zerbini, Bisaccia, Litvinova, Menegale, Molina~Grané, Poletti,
+  Marziano, Zardini, d'Andrea, Trentini, Bella, Riccardo, Pezzotti, Ajelli,
+  Giorgi~Rossi, and Merler]{manica_intrinsic_2022}
+Mattia Manica, Alfredo De~Bellis, Giorgio Guzzetta, Pamela Mancuso, Massimo
+  Vicentini, Francesco Venturelli, Alessandro Zerbini, Eufemia Bisaccia, Maria
+  Litvinova, Francesco Menegale, Carla Molina~Grané, Piero Poletti, Valentina
+  Marziano, Agnese Zardini, Valeria d'Andrea, Filippo Trentini, Antonino Bella,
+  Flavia Riccardo, Patrizio Pezzotti, Marco Ajelli, Paolo Giorgi~Rossi, and
+  Stefano Merler.
+\newblock Intrinsic generation time of the {SARS}-{CoV}-2 {Omicron} variant:
+  {An} observational study of household transmission.
+\newblock \emph{The Lancet Regional Health - Europe}, 19:\penalty0 100446,
+  August 2022.
+\newblock ISSN 26667762.
+\newblock \doi{10.1016/j.lanepe.2022.100446}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S2666776222001405}.
+
+\bibitem[Morris et~al.(2024)Morris, Maclean, and
+  Black]{morris_computation_2024}
+Dylan Morris, John Maclean, and Andrew~J. Black.
+\newblock Computation of random time-shift distributions for stochastic
+  population models.
+\newblock \emph{Journal of Mathematical Biology}, 89\penalty0 (3):\penalty0 33,
+  September 2024.
+\newblock ISSN 0303-6812, 1432-1416.
+\newblock \doi{10.1007/s00285-024-02132-6}.
+\newblock URL \url{https://link.springer.com/10.1007/s00285-024-02132-6}.
+
+\bibitem[Wearing et~al.(2005)Wearing, Rohani, and
+  Keeling]{wearing_appropriate_2005}
+Helen~J Wearing, Pejman Rohani, and Matt~J Keeling.
+\newblock Appropriate {Models} for the {Management} of {Infectious} {Diseases}.
+\newblock \emph{PLoS Medicine}, 2\penalty0 (7):\penalty0 e174, July 2005.
+\newblock ISSN 1549-1676.
+\newblock \doi{10.1371/journal.pmed.0020174}.
+\newblock URL \url{https://dx.plos.org/10.1371/journal.pmed.0020174}.
+
+\end{thebibliography}

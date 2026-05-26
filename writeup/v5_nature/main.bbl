@@ -1,0 +1,162 @@
+\begin{thebibliography}{13}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Breda et~al.(2012)Breda, Diekmann, De~Graaf, Pugliese, and
+  Vermiglio]{breda_formulation_2012}
+D.~Breda, O.~Diekmann, W.~F. De~Graaf, A.~Pugliese, and R.~Vermiglio.
+\newblock On the formulation of epidemic models (an appraisal of {Kermack} and
+  {McKendrick}).
+\newblock \emph{Journal of Biological Dynamics}, 6\penalty0 (sup2):\penalty0
+  103--117, September 2012.
+\newblock ISSN 1751-3758, 1751-3766.
+\newblock \doi{10.1080/17513758.2012.716454}.
+\newblock URL
+  \url{http://www.tandfonline.com/doi/abs/10.1080/17513758.2012.716454}.
+
+\bibitem[Champredon and Dushoff(2015)]{champredon_intrinsic_2015}
+David Champredon and Jonathan Dushoff.
+\newblock Intrinsic and realized generation intervals in infectious-disease
+  transmission.
+\newblock \emph{Proceedings of the Royal Society B: Biological Sciences},
+  282\penalty0 (1821):\penalty0 20152026, December 2015.
+\newblock ISSN 0962-8452, 1471-2954.
+\newblock \doi{10.1098/rspb.2015.2026}.
+\newblock URL
+  \url{https://royalsocietypublishing.org/doi/10.1098/rspb.2015.2026}.
+
+\bibitem[Chan et~al.(2025)Chan, Morris, Stockwell, Bowman, Asturias, Rao,
+  Lutrick, Ellingson, Nguyen, Maldonado, McLaren, Sano, Biddle, Smith-Jeffcoat,
+  Biggerstaff, Rolfes, Talbot, Grijalva, Borchering, and
+  Mellis]{chan_estimating_2025}
+Louis Yat~Hin Chan, Sinead~E. Morris, Melissa~S. Stockwell, Natalie~M. Bowman,
+  Edwin Asturias, Suchitra Rao, Karen Lutrick, Katherine~D. Ellingson, Huong~Q.
+  Nguyen, Yvonne Maldonado, Son~H. McLaren, Ellen Sano, Jessica~E. Biddle,
+  Sarah~E. Smith-Jeffcoat, Matthew Biggerstaff, Melissa~A. Rolfes, H.~Keipp
+  Talbot, Carlos~G. Grijalva, Rebecca~K. Borchering, and Alexandra~M. Mellis.
+\newblock Estimating the generation time for influenza transmission using
+  household data in the {United} {States}.
+\newblock \emph{Epidemics}, 50:\penalty0 100815, March 2025.
+\newblock ISSN 17554365.
+\newblock \doi{10.1016/j.epidem.2025.100815}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S1755436525000039}.
+
+\bibitem[Goyal et~al.(2021)Goyal, Reeves, Cardozo-Ojeda, Schiffer, and
+  Mayer]{goyal_viral_2021}
+Ashish Goyal, Daniel~B Reeves, E~Fabian Cardozo-Ojeda, Joshua~T Schiffer, and
+  Bryan~T Mayer.
+\newblock Viral load and contact heterogeneity predict {SARS}-{CoV}-2
+  transmission and super-spreading events.
+\newblock \emph{eLife}, 10:\penalty0 e63537, February 2021.
+\newblock ISSN 2050-084X.
+\newblock \doi{10.7554/eLife.63537}.
+\newblock URL \url{https://elifesciences.org/articles/63537}.
+
+\bibitem[Klinkenberg and Nishiura(2011)]{klinkenberg_correlation_2011}
+Don Klinkenberg and Hiroshi Nishiura.
+\newblock The correlation between infectivity and incubation period of measles,
+  estimated from households with two cases.
+\newblock \emph{Journal of Theoretical Biology}, 284\penalty0 (1):\penalty0
+  52--60, September 2011.
+\newblock ISSN 00225193.
+\newblock \doi{10.1016/j.jtbi.2011.06.015}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S0022519311003146}.
+
+\bibitem[Lloyd-Smith et~al.(2005)Lloyd-Smith, Schreiber, Kopp, and
+  Getz]{lloyd-smith_superspreading_2005}
+J.~O. Lloyd-Smith, S.~J. Schreiber, P.~E. Kopp, and W.~M. Getz.
+\newblock Superspreading and the effect of individual variation on disease
+  emergence.
+\newblock \emph{Nature}, 438\penalty0 (7066):\penalty0 355--359, November 2005.
+\newblock ISSN 0028-0836, 1476-4687.
+\newblock \doi{10.1038/nature04153}.
+\newblock URL \url{https://www.nature.com/articles/nature04153}.
+
+\bibitem[Manica et~al.(2022)Manica, De~Bellis, Guzzetta, Mancuso, Vicentini,
+  Venturelli, Zerbini, Bisaccia, Litvinova, Menegale, Molina~Grané, Poletti,
+  Marziano, Zardini, d'Andrea, Trentini, Bella, Riccardo, Pezzotti, Ajelli,
+  Giorgi~Rossi, and Merler]{manica_intrinsic_2022}
+Mattia Manica, Alfredo De~Bellis, Giorgio Guzzetta, Pamela Mancuso, Massimo
+  Vicentini, Francesco Venturelli, Alessandro Zerbini, Eufemia Bisaccia, Maria
+  Litvinova, Francesco Menegale, Carla Molina~Grané, Piero Poletti, Valentina
+  Marziano, Agnese Zardini, Valeria d'Andrea, Filippo Trentini, Antonino Bella,
+  Flavia Riccardo, Patrizio Pezzotti, Marco Ajelli, Paolo Giorgi~Rossi, and
+  Stefano Merler.
+\newblock Intrinsic generation time of the {SARS}-{CoV}-2 {Omicron} variant:
+  {An} observational study of household transmission.
+\newblock \emph{The Lancet Regional Health - Europe}, 19:\penalty0 100446,
+  August 2022.
+\newblock ISSN 26667762.
+\newblock \doi{10.1016/j.lanepe.2022.100446}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S2666776222001405}.
+
+\bibitem[Middleton and Larremore(2024)]{middleton_modeling_2024}
+Casey Middleton and Daniel~B. Larremore.
+\newblock Modeling the transmission mitigation impact of testing for infectious
+  diseases.
+\newblock \emph{Science Advances}, 10\penalty0 (24):\penalty0 eadk5108, June
+  2024.
+\newblock ISSN 2375-2548.
+\newblock \doi{10.1126/sciadv.adk5108}.
+\newblock URL \url{https://www.science.org/doi/10.1126/sciadv.adk5108}.
+
+\bibitem[Morris et~al.(2024)Morris, Maclean, and
+  Black]{morris_computation_2024}
+Dylan Morris, John Maclean, and Andrew~J. Black.
+\newblock Computation of random time-shift distributions for stochastic
+  population models.
+\newblock \emph{Journal of Mathematical Biology}, 89\penalty0 (3):\penalty0 33,
+  September 2024.
+\newblock ISSN 0303-6812, 1432-1416.
+\newblock \doi{10.1007/s00285-024-02132-6}.
+\newblock URL \url{https://link.springer.com/10.1007/s00285-024-02132-6}.
+
+\bibitem[Morris et~al.(2025)Morris, Kennedy, and Black]{morris_random_2025}
+Dylan~J. Morris, Lauren Kennedy, and Andrew~J. Black.
+\newblock Random time-shift approximation enables hierarchical {Bayesian}
+  inference of mechanistic within-host viral dynamics models on large datasets.
+\newblock \emph{arXiv preprint arXiv:2507.02884}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2507.02884}.
+
+\bibitem[Mossong et~al.(2008)Mossong, Hens, Jit, Beutels, Auranen, Mikolajczyk,
+  Massari, Salmaso, Tomba, Wallinga, Heijne, Sadkowska-Todys, Rosinska, and
+  Edmunds]{mossong_social_2008}
+Joël Mossong, Niel Hens, Mark Jit, Philippe Beutels, Kari Auranen, Rafael
+  Mikolajczyk, Marco Massari, Stefania Salmaso, Gianpaolo~Scalia Tomba, Jacco
+  Wallinga, Janneke Heijne, Malgorzata Sadkowska-Todys, Magdalena Rosinska, and
+  W.~John Edmunds.
+\newblock Social {Contacts} and {Mixing} {Patterns} {Relevant} to the {Spread}
+  of {Infectious} {Diseases}.
+\newblock \emph{PLoS Medicine}, 5\penalty0 (3):\penalty0 e74, March 2008.
+\newblock ISSN 1549-1676.
+\newblock \doi{10.1371/journal.pmed.0050074}.
+\newblock URL \url{https://dx.plos.org/10.1371/journal.pmed.0050074}.
+
+\bibitem[Svensson(2007)]{svensson_note_2007}
+Åke Svensson.
+\newblock A note on generation times in epidemic models.
+\newblock \emph{Mathematical Biosciences}, 208\penalty0 (1):\penalty0 300--311,
+  July 2007.
+\newblock ISSN 00255564.
+\newblock \doi{10.1016/j.mbs.2006.10.010}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S0025556406002094}.
+
+\bibitem[Wallinga and Lipsitch(2007)]{wallinga_how_2007}
+J~Wallinga and M~Lipsitch.
+\newblock How generation intervals shape the relationship between growth rates
+  and reproductive numbers.
+\newblock \emph{Proceedings of the Royal Society B: Biological Sciences},
+  274\penalty0 (1609):\penalty0 599--604, February 2007.
+\newblock ISSN 0962-8452, 1471-2954.
+\newblock \doi{10.1098/rspb.2006.3754}.
+\newblock URL
+  \url{https://royalsocietypublishing.org/doi/10.1098/rspb.2006.3754}.
+
+\end{thebibliography}
