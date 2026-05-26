@@ -226,7 +226,7 @@ gen_inf_attempts_gamma <- function(Tgen, R0, alpha, psi) {
 #' @param z_max Upper bound on z(t), used as the proposal rate.
 #' @param alpha Shape parameter for the population generation interval
 #'   (Gamma(alpha, alpha/Tgen)).
-#' @param psi Punctuation parameter (psi in (0, 1)).
+#' @param psi Punctuation parameter (psi in [0, 1]).
 #' @return Function(tinf) returning a numeric vector of absolute attempt times.
 gen_inf_attempts_gamma_contacts <- function(Tgen, z, z_max, alpha, psi) {
 	stopifnot(psi >= 0, psi <= 1, z_max > 0)
@@ -240,28 +240,27 @@ gen_inf_attempts_gamma_contacts <- function(Tgen, z, z_max, alpha, psi) {
 	}
 }
 
-#' Generate a single random piecewise-constant contact trajectory
+#' Truncated Gamma sampler (rejection method)
 #'
-#' Generates a Gamma/Poisson contact trajectory for one person: contact levels
-#' are drawn iid from Gamma(k_c, k_c) and switch at arrivals of a Poisson
-#' process with rate lambda.
+#' Draws n samples from Gamma(shape, rate) truncated above at upper.
+#' Uses simple rejection sampling. If upper = Inf, falls back to rgamma().
 #'
-#' @param R0 Basic reproduction number (scales levels).
-#' @param k_c Shape (and rate) of Gamma distribution for contact levels.
-#' @param lambda Rate of the Poisson switching process (switches per day).
-#' @param tinf Person's infection time (trajectory start).
-#' @param duration How long the trajectory needs to cover.
-#' @return List with z (function of t returning R0*level) and z_max (R0*max(levels)).
-make_contact_fn_gammapoisson <- function(R0, k_c, lambda, tinf, duration) {
-	n_switches <- rpois(1, lambda * duration)
-	switch_times <- if (n_switches > 0) tinf + sort(runif(n_switches, 0, duration)) else numeric(0)
-	levels <- rgamma(n_switches + 1, k_c, k_c)
-	breaks <- c(tinf, switch_times)
-	z_max <- R0 * max(levels)
-	list(
-		z = function(t) R0 * levels[findInterval(t, breaks)],
-		z_max = z_max
-	)
+#' @param n Number of draws.
+#' @param shape Shape parameter of the Gamma distribution.
+#' @param rate Rate parameter of the Gamma distribution.
+#' @param upper Upper truncation point (default Inf = no truncation).
+#' @return Numeric vector of length n.
+rtgamma <- function(n, shape, rate, upper = Inf) {
+	stopifnot(upper>=0)
+	if (is.infinite(upper)) return(rgamma(n, shape, rate))
+	x <- numeric(n)
+	for (i in seq_len(n)) {
+		repeat {
+			draw <- rgamma(1, shape, rate)
+			if (draw <= upper) { x[i] <- draw; break }
+		}
+	}
+	x
 }
 
 #' Infection attempt generator: gamma profile with Gamma/Poisson stochastic
@@ -308,27 +307,6 @@ gen_inf_attempts_gammapoisson_contacts <- function(Tgen, R0, alpha, psi, k_c, la
 	}
 }
 
-#' Truncated Gamma sampler (rejection method)
-#'
-#' Draws n samples from Gamma(shape, rate) truncated above at upper.
-#' Uses simple rejection sampling. If upper = Inf, falls back to rgamma().
-#'
-#' @param n Number of draws.
-#' @param shape Shape parameter of the Gamma distribution.
-#' @param rate Rate parameter of the Gamma distribution.
-#' @param upper Upper truncation point (default Inf = no truncation).
-#' @return Numeric vector of length n.
-rtgamma <- function(n, shape, rate, upper = Inf) {
-	if (is.infinite(upper)) return(rgamma(n, shape, rate))
-	x <- numeric(n)
-	for (i in seq_len(n)) {
-		repeat {
-			draw <- rgamma(1, shape, rate)
-			if (draw <= upper) { x[i] <- draw; break }
-		}
-	}
-	x
-}
 
 #' Mean-reduction factor for truncated Gamma contact levels
 #'
@@ -498,6 +476,7 @@ gen_inf_attempts_gamma_symptoms <- function(Tgen, R0, alpha, psi,
 #' @param gen_inf_attempts Infection attempt time generator function,
 #'   capturing the individual infectiousness profile, with signature
 #'   function(t_inf) -> numeric vector.
+#' @param maxinf Max number of infections to simulate (for early stopping)
 #' @return Numeric vector of length n containing infection times (Inf if the
 #'   person remains uninfected at the end of the simulation)
 sim_stochastic_fast_r <- function(n=1000, gen_inf_attempts, maxinf=Inf){
@@ -546,6 +525,7 @@ sim_stochastic_fast_r <- function(n=1000, gen_inf_attempts, maxinf=Inf){
 #' @param gen_inf_attempts Infection attempt time generator function,
 #'   capturing the individual infectiousness profile, with signature
 #'   function(t_inf) -> numeric vector.
+#' @param maxinf Max number of infections to simulate (for early stopping)
 #' @return Numeric vector of length n containing infection times (Inf if the
 #'   person remains uninfected at the end of the simulation)
 sim_stochastic_fast <- function(n=1000, gen_inf_attempts, maxinf=Inf){
@@ -701,14 +681,14 @@ load_cache <- function(pathogen, nsim, popsize, psivals) {
 	summary_df <- read_csv(summary_file, show_col_types = FALSE)
 	cached_psi <- sort(unique(summary_df$psi))
 	if (!all(psivals %in% cached_psi)) {
-		cat(sprintf("  %s: v2 cache missing psi values %s, re-running\n",
+		cat(sprintf("  %s: cache missing psi values %s, re-running\n",
 		    pathogen, paste(setdiff(psivals, cached_psi), collapse = ", ")))
 		return(NULL)
 	}
 
 	plot_df <- read_csv(plot_file, show_col_types = FALSE)
 
-	cat(sprintf("  %s: loading v2 cached simulations from %s\n", pathogen, summary_file))
+	cat(sprintf("  %s: loading cached simulations from %s\n", pathogen, summary_file))
 	list(
 		summary = summary_df %>% mutate(psi = factor(psi)),
 		plot    = plot_df    %>% mutate(psi = factor(psi))
@@ -771,6 +751,7 @@ load_cache_infpop <- function(pathogen, nsim, max_cases, psivals) {
 #' @param window_days    Number of full calendar days in the estimation window (default 7)
 #' @return Scalar growth rate (coefficient on day), or NA if too few data points
 compute_growth_rate <- function(infection_times, min_threshold = 100, window_days = 7) {
+	stopifnot(all(is.finite(infection_times)), !is.unsorted(infection_times))
 	n <- length(infection_times)
 	if (n < min_threshold) return(NA_real_)
 

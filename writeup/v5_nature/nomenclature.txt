@@ -1,0 +1,97 @@
+  1. The parameter ψ itself
+
+  Current names in the manuscript: "smoothness parameter," "punctuation parameter." Both are
+  descriptive but forgettable.
+
+  Options:
+  - Burstiness (ψ → 0 = bursty, ψ → 1 = sustained). This term has precedent in physics and network
+  science (Barabási's work on bursty human dynamics). It's immediately evocative, scales naturally
+  ("how bursty is transmission?"), and works as an adjective. The downside is that ψ = 1 is the "not
+  bursty" end, so you'd either need to define ψ as burstiness (and flip the scale so 1 = maximally
+  bursty) or call it something like "sustainedness" for the other end, which is awkward.
+  - Concentration (ψ → 0 = concentrated, ψ → 1 = diffuse). Clean, precise, no jargon. "How
+  concentrated is an individual's infectiousness in time?" But "concentration" already means other
+  things in biology.
+  - Sharpness (ψ → 0 = sharp, ψ → 1 = broad). Works visually — you can picture a sharp vs broad
+  infectiousness profile. Slightly less evocative than burstiness.
+  - Temporal coherence (ψ → 0 = high coherence, ψ → 1 = low coherence). Borrows from optics/signal
+  processing. Precise, but probably too technical for a Nature audience.
+
+  My recommendation: burstiness, but with ψ redefined or relabeled so that high values = bursty.
+  Alternatively, keep ψ as-is and refer to "1 − ψ" conceptually as the burstiness. Or just introduce
+  a new symbol (say, β... no, taken. Maybe φ or ξ) where ξ = 1 − ψ is the burstiness parameter. But
+  honestly, I think you can keep ψ as-is and just call it the "burstiness parameter" with the
+  convention that low ψ = bursty — readers can handle that, especially with a good figure.
+
+  2. The individual infectiousness profile a_i(τ)
+
+  Current name: "individual infectiousness profile." Accurate but long and not catchy.
+
+  Options:
+  - Transmission window — simple, visual, widely understood. "How wide is a person's transmission
+  window?"
+  - Infectiousness kernel — more technical, common in the modeling literature.
+  - Shedding profile — concrete but ties it to a specific mechanism (pathogen shedding), which is
+  narrower than the concept.
+
+  My recommendation: transmission window for the broad-audience framing. It works naturally with
+  burstiness: "How bursty is a person's transmission window?"
+
+  3. The mechanism (narrow profiles + variable contacts → overdispersion)
+
+  Current framing: "timing-contact interaction," "overdispersion without individual-level
+  heterogeneity." Accurate but neither is a name.
+
+  Options:
+  - Coincidence superspreading — captures the core idea: superspreading by coincidence of a burst
+  with high contacts. Immediately distinguishes it from "trait-based" superspreading.
+  - Bad-luck superspreading — vivid, accessible, slightly informal for Nature but would work in the
+  text if not the title. Contrasts nicely with "bad-actor" superspreading (identifying risky
+  individuals).
+  - Timing-driven superspreading — safe, descriptive, but forgettable.
+  - Stochastic superspreading — too vague; all superspreading is stochastic in some sense.
+  - Non-targetable overdispersion — leads with the policy implication rather than the mechanism.
+  Could work as a secondary framing.
+
+  My recommendation: coincidence superspreading as the primary term, with "bad-luck superspreading"
+  as an informal gloss used once or twice in the text to make it concrete. The contrast pair would be
+   coincidence superspreading vs trait-based superspreading (or individual superspreading).
+
+  4. The overarching framing / title concept
+
+  The current title — "Individual infectiousness timing as a hidden driver of epidemic variability
+  and superspreading" — is descriptive. For Nature, you want something that makes a claim.
+
+  Some directions:
+  - Lead with the surprising result: "Superspreading without superspreaders" — punchy, paradoxical,
+  immediately hooks. Downside: slightly overstates (you're not saying all superspreading is this
+  way).
+  - Lead with the new axis: "When you transmit matters as much as how much you transmit" — too long
+  for a title but captures the Lloyd-Smith parallel perfectly.
+  - Lead with the parameter: "The burstiness of infection shapes epidemic dynamics beyond R₀ and k"
+  - Shorter options: "Bursty transmission and the origins of superspreading" / "Coincidence
+  superspreading from bursty infectiousness"
+
+  I'd lean toward something like "Superspreading without superspreaders: how bursty infectiousness
+  drives epidemic variability" — it's provocative, immediately signals what's new, and the subtitle
+  grounds it.
+
+  Summary of recommended terminology:
+  ┌──────────────────────┬───────────────────────────────┬───────────────────────────────────┐
+  │       Concept        │       Recommended term        │           Current term            │
+  ├──────────────────────┼───────────────────────────────┼───────────────────────────────────┤
+  │ ψ (the parameter)    │ burstiness parameter          │ smoothness/punctuation parameter  │
+  ├──────────────────────┼───────────────────────────────┼───────────────────────────────────┤
+  │ a_i(τ) (the profile) │ transmission window           │ individual infectiousness profile │
+  ├──────────────────────┼───────────────────────────────┼───────────────────────────────────┤
+  │ Low ψ profiles       │ bursty / concentrated         │ punctuated / narrow               │
+  ├──────────────────────┼───────────────────────────────┼───────────────────────────────────┤
+  │ High ψ profiles      │ sustained / diffuse           │ smooth / broad                    │
+  ├──────────────────────┼───────────────────────────────┼───────────────────────────────────┤
+  │ The mechanism        │ coincidence superspreading    │ timing-contact interaction        │
+  ├──────────────────────┼───────────────────────────────┼───────────────────────────────────┤
+  │ The implication      │ non-targetable overdispersion │ floor on overdispersion           │
+  └──────────────────────┴───────────────────────────────┴───────────────────────────────────┘
+  One caution: don't over-rename. Pick 2–3 terms that you want to stick and use them consistently.
+  The rest can stay descriptive. If I had to pick just two terms to brand, they'd be burstiness (for
+  ψ) and coincidence superspreading (for the mechanism).

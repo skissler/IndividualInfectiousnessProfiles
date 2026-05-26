@@ -39,21 +39,22 @@
 
 \begin{document}
 
-\noindent\textbf{\large Individual infectiousness timing as a hidden driver of epidemic variability and superspreading}
+\noindent\textbf{\large Bursty infectiousness as a hidden driver of epidemic variability}
 \vskip 1.5em
 
-\noindent Carolyn Fulton\textsuperscript{1},
-Liza Hadley\textsuperscript{1,2},
-Casey Middleton\textsuperscript{1},
-Stephen M.~Kissler\textsuperscript{1,3,4}*
+% \noindent Carolyn Fulton\textsuperscript{1},
+% Liza Hadley\textsuperscript{1,2},
+% Casey Middleton\textsuperscript{1},
+\noindent Stephen M.~Kissler\textsuperscript{1,3,4}* [Full authorship and ordering TBD]
 
-\vskip 0.5em
-\noindent {\small
-\textsuperscript{1}Department of Computer Science, University of Colorado Boulder, Boulder CO USA \\
-\textsuperscript{2}Department of Veterinary Medicine, University of Cambridge, Cambridge UK \\
-\textsuperscript{3}BioFrontiers Institute, University of Colorado Boulder, Boulder CO USA \\
-\textsuperscript{4}Department of Epidemiology, Colorado School of Public Health, Aurora CO USA \\
-}
+
+% \vskip 0.5em
+% \noindent {\small
+% \textsuperscript{1}Department of Computer Science, University of Colorado Boulder, Boulder CO USA \\
+% \textsuperscript{2}Department of Veterinary Medicine, University of Cambridge, Cambridge UK \\
+% \textsuperscript{3}BioFrontiers Institute, University of Colorado Boulder, Boulder CO USA \\
+% \textsuperscript{4}Department of Epidemiology, Colorado School of Public Health, Aurora CO USA \\
+% }
 
 \vskip 0.5em
 \noindent {\small *Correspondence: stephen.kissler@colorado.edu}
@@ -73,9 +74,46 @@ The population-level infectiousness profile, $A(\tau) = R_0 \, g(\tau)$, determi
 % MAIN TEXT (~3000 words)
 % ---------------------------------------------------------------------------
 
+% \paragraph{The individual infectiousness kernel.}
+
+% \paragraph{The SEIR analog.}
+
+% \paragraph{The Gamma burst model.}
+
+To isolate this effect, we introduce the Gamma burst model for individual infectiousness. At the population level, we assume $g(\tau)$ is (approximately) Gamma-distributed with shape $\alpha$ and rate $\beta$. At the individual level, secondary infections are distributed according to a $\text{Gamma}(\psi \alpha, \beta)$ distribution --- the ``burst'' --- which follows a latent period of length $l_i \sim \text{Gamma}((1-\psi) \alpha, \beta)$, with $\psi \in [0,1]$ ({\bf Figure XX}). The burstiness parameter, $\psi$, defines the width of the individual infectiousness kernel relative to $g(\tau)$: $\psi = 0$ is maximally bursty, with all infectiousness happening at a single moment, while $\psi = 1$ is maximally smooth, with  infectiousness spread across the full generation interval distribution. Since the latent period and post-latent infection time are both Gamma-distributed, their sum follows a $\text{Gamma}(\alpha, \beta) = g(\tau)$ distribution, ensuring that any value of $\psi$ yields the same generation interval distribution. This model of infectiousness has biological grounding in within-host viral dynamics: stochastic viral replication early in an infection causes variability in when the virus can first be detected (the variable latent period), while the kinetics thereafter are largely consistent across individuals (the infectiousness burst) \citep{morris_random_2025}. 
+
+% produces between-individual shifts in the timing of peak infectiousness (a variable latent period), while the kinetics themselves are largely consistent across individuals (the infectiousness burst) 
+
+% At the individual level, secondary infections $j$ from an index case $i$ happen at time $\tau_{ij} = l_{i} + \epsilon_j$, where $l_i \sim \text{Gamma}((1-\psi)\alpha, \beta)$ is a non-infectious latent period, and $\epsilon_i \sim \text{Gamma}(\psi \alpha, \beta)$ --- the ``burst''.  
+
+% At the individual level, each person's infectiousness kernel is $\text{Gamma}(\psi \alpha, \beta)$-shaped --- the ``burst'' --- which falls after a latent period of length $l \sim \text{Gamma}((1-\psi )\alpha, \beta)$ ({\bf Figure XX}). Since the latent period and post-latent infection time are both Gamma-distributed, their sum follows a $\text{Gamma}(\alpha, \beta) = g(\tau)$ distribution, ensuring that any value of $\psi \in [0,1]$ yields the same generation interval distribution. The burstiness of individual-level transmission is governed by $\psi$, which defines the width of the individual infectiousness window relative to the generation interval distribution: thus, $\psi = 0$ is maximally bursty, with all infectiousness happening at a single moment; while $\psi = 1$ is maximally smooth, with  infectiousness spread across the full generation interval distribution. 
+
+% Thus, in terms of random variables, the generation interval $\tau_{ij}$ for person $j$ infected by person $i$ is $l_i + \epsilon_i$, where $\epsilon_i$
+
+% Implications of psi -- why might the general public care? like superspreading, we might want to know not just how infectious we are, but when we're infectious. it touches everything from recommendations on how long we should isolate to how infectious we presume ourselves to be at any given time. It's very different to say I might be a little infectious at all times, vs I might be extremely infectious at some unpredictable moment in the future. 
+
+\paragraph{\sc{Empirical estimates of $\psi$.}} The relative lack of attention to $\psi$ may stem partly from the difficulty in empirically estimating it. Ideally, contact tracing data would capture precise infection times and perfectly link each index case to all their secondary infections; from this, estimating $\psi$ would be straightforward. The reality is far messier: case ascertainment is imperfect, infection times are blurry, and detection lags and multiple exposures can make it hard to disentangle who infected whom. Incorporating viral kinetics can help: \citet{goyal_viral_2021} showed that the dose-response relationship between viral load and transmission probability restricts the window of high transmission risk to less than 1 day for both SARS-CoV-2 and influenza, consistent with low $\psi$. 
+
+Bearing these limitations in mind, we estimated $\psi$ from published transmission tree data for eight diseases: COVID-19, MERS, measles, Ebola, smallpox, pneumonic plague, norovirus, and hepatitis A. We extracted serial intervals from the OutbreakTrees database [x], grouping them by index case to form clusters. For each pathogen, we fixed the generation interval distribution to published estimates and placed a flat prior on $\psi$, and the likelihood was computed by integrating over all possible latent periods for each cluster ({\bf Methods}). 
+
+The resulting estimates spanned a wide range ({\bf Figure XX}). Measles and pneumonic plague showed the strongest evidence of burstiness (95\% credible interval for $\psi$: [0.00, 0.11] and [0.00, 0.20], respectively), while smallpox and MERS showed evidence of more diffuse infectiousness (95\% credible interval for $\psi$: [xx,xx] and [xx,xx], respectively).  These estimates should be regarded as illustrative rather than conclusive: multiple biases could be in play. Uncertainty in infection time can inflate estimates of $\psi$ by causing infection times to appear artificially diffuse; while case ascertainment may be biased towards superspreading events and miss less explosive, more distributed-in-time transmission, driving estimates of $\psi$ downward. Nevertheless, the breadth of the estimated range --- from near 0 to near 1 --- suggests that $\psi$ may vary meaningfully across pathogens. 
+
+A simulation-based power analysis indicates that $\psi$ is identifiable from contact-tracing data under reasonably favorable conditions: if the distribution of uncertainty in infection times is known, 50 index cases sufficied for well-powered inference of $\psi$ when $R_0 \geq 6$ (\eg, SARS-CoV-2 or measles). Inference was more challenging for lower $R_0$, where fewer secondary cases per index case limit the amount of information available on the correlation of infection times within clusters. 
+
+\paragraph{\sc{Bursty infectiousness drives coincidence superspreading.}}
 
 
 
+\paragraph{\sc{Burstiness and the epidemic latent period.}}
+
+\paragraph{\sc{Common interventions are sensitive to bursty infectiousness.}}
+
+\paragraph{\sc{Burstiness complicates estimation of key epidemiological parameters.}}
+
+
+\clearpage
+
+ 
 
 
 
