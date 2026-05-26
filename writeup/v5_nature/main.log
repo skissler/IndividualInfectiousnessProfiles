@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.3.29)  26 MAY 2026 15:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.3.29)  26 MAY 2026 15:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -528,94 +528,94 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 5.21004pt on input line 69.
  [1
 
-{/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+{/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
 
-LaTeX Warning: Reference `fig:concept' on page 2 undefined on input line 136.
+LaTeX Warning: Reference `fig:concept' on page 3 undefined on input line 146.
 
 
-LaTeX Warning: Reference `fig:concept' on page 2 undefined on input line 138.
+LaTeX Warning: Reference `fig:concept' on page 3 undefined on input line 148.
 
-[2
+[3
 
 ]
 
-Package natbib Warning: Citation `jarvis_quantifying_2020' on page 3 undefined 
-on input line 150.
+Package natbib Warning: Citation `jarvis_quantifying_2020' on page 4 undefined 
+on input line 160.
 
 
-LaTeX Warning: Reference `fig:superspreading' on page 3 undefined on input line
- 152.
+LaTeX Warning: Reference `fig:superspreading' on page 4 undefined on input line
+ 162.
 
 
-Package natbib Warning: Citation `taube_outbreaktrees_2022' on page 3 undefined
- on input line 155.
+Package natbib Warning: Citation `taube_outbreaktrees_2022' on page 4 undefined
+ on input line 165.
 
 
-Package natbib Warning: Citation `ganyani_estimating_2020' on page 3 undefined 
-on input line 155.
+Package natbib Warning: Citation `ganyani_estimating_2020' on page 4 undefined 
+on input line 165.
 
 
-Package natbib Warning: Citation `hart_generation_2022' on page 3 undefined on 
-input line 155.
+Package natbib Warning: Citation `hart_generation_2022' on page 4 undefined on 
+input line 165.
 
 
-Overfull \hbox (7.77817pt too wide) in paragraph at lines 155--156
+Overfull \hbox (7.77817pt too wide) in paragraph at lines 165--166
 [] []\T1/ppl/b/n/10 Em-pir-i-cal es-ti-mates of $\OML/zplm/m/it/10  $\T1/ppl/b/
 n/10 .[] \T1/ppl/m/n/10 We es-ti-mated $\OML/zplm/m/it/10  $ \T1/ppl/m/n/10 fro
 m pub-lished transmission-tree data for eight dis-eases: COVID-
  []
 
 
-LaTeX Warning: Reference `fig:empirical' on page 3 undefined on input line 157.
+LaTeX Warning: Reference `fig:empirical' on page 4 undefined on input line 167.
 
 
-[3]
+[4]
 
-LaTeX Warning: Reference `fig:interventions' on page 4 undefined on input line 
-166.
+LaTeX Warning: Reference `fig:interventions' on page 5 undefined on input line 
+176.
 
 
-Overfull \hbox (3.47966pt too wide) in paragraph at lines 168--169
+Overfull \hbox (3.47966pt too wide) in paragraph at lines 178--179
 []\T1/ppl/m/n/10 Beyond TE, mode-anchored D&I in-ter-ven-tions pro-duce two ad-
 di-tional $\OML/zplm/m/it/10  $\T1/ppl/m/n/10 -dependent ef-fects. First, among
 
  []
 
-[4]
+[5]
 
-LaTeX Warning: Reference `fig:interventions' on page 5 undefined on input line 
-170.
+LaTeX Warning: Reference `fig:interventions' on page 6 undefined on input line 
+180.
 
 
-Overfull \hbox (1.12802pt too wide) in paragraph at lines 173--174
+Overfull \hbox (1.12802pt too wide) in paragraph at lines 183--184
 [] []\T1/ppl/b/n/10 Fur-ther ef-fects on epi-demic dy-nam-ics.[] \T1/ppl/m/n/10
  Nar-row in-fec-tious-ness pro-files also in-flate early-epidemic stochas-
  []
 
 
-Overfull \hbox (9.60994pt too wide) in paragraph at lines 176--177
+Overfull \hbox (9.60994pt too wide) in paragraph at lines 186--187
 \T1/ppl/m/n/10 superspreaders---which Lloyd-Smith et al. showed can dra-mat-i-c
 ally out-per-form population-wide measures---
  []
 
-[5]
+[6]
 
-Package natbib Warning: Citation `taube_outbreaktrees_2022' on page 6 undefined
- on input line 199.
-
-
-Package natbib Warning: Citation `ganyani_estimating_2020' on page 6 undefined 
-on input line 199.
+Package natbib Warning: Citation `taube_outbreaktrees_2022' on page 7 undefined
+ on input line 209.
 
 
-Package natbib Warning: Citation `hart_generation_2022' on page 6 undefined on 
-input line 199.
+Package natbib Warning: Citation `ganyani_estimating_2020' on page 7 undefined 
+on input line 209.
 
-(./main.bbl [6] [7]) [8]
+
+Package natbib Warning: Citation `hart_generation_2022' on page 7 undefined on 
+input line 209.
+
+(./main.bbl [7] [8]) [9]
 
 Package natbib Warning: There were undefined citations.
 
-[9
+[10
 
 ] (./main.aux)
 
@@ -625,9 +625,9 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 5C38B27EFB85E41B7920B89979DF94A2;200.
  ) 
 Here is how much of TeX's memory you used:
- 12334 strings out of 478994
- 181493 string characters out of 5858184
- 502019 words of memory out of 5000000
+ 12335 strings out of 478994
+ 181500 string characters out of 5858184
+ 502021 words of memory out of 5000000
  29599 multiletter control sequences out of 15000+600000
  441291 words of font info for 112 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -645,10 +645,10 @@ dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2021/texmf-di
 st/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2021/texmf-dist/font
 s/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1
 /urw/palatino/uplri8a.pfb>
-Output written on main.pdf (9 pages, 202828 bytes).
+Output written on main.pdf (10 pages, 205837 bytes).
 PDF statistics:
- 185 PDF objects out of 1000 (max. 8388607)
- 161 compressed objects within 2 object streams
- 24 named destinations out of 1000 (max. 500000)
+ 192 PDF objects out of 1000 (max. 8388607)
+ 167 compressed objects within 2 object streams
+ 25 named destinations out of 1000 (max. 500000)
  17 words of extra memory for PDF output out of 10000 (max. 10000000)
 
