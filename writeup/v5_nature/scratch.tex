@@ -340,3 +340,22 @@ To gague the potential range of $\psi$ across pathogens, we estimated $\psi$ usi
 
 These estimates should be regarded with caution. Multiple biases can impact estimates of $\psi$: uncertainty in infection timing can artificially disperse observed infection times, making infectiousness appear less bursty; and biases toward recording superspreading events but ignoring less explosive, more dispersed transmission events could inflate the appearance of burstiness. Nevertheless, the range of estimates, spanning from near 0 to near 1 --- along with independent evidence on the burstiness of infections like influenza and SARS-CoV-2 \citep{goyal_viral_2021} --- indicates that $\psi$ may vary meaningfully across pathogens. 
 
+
+
+% genuine pathogen biology rather than a measurement artifact. 
+
+% burstiness may be a real feature of transmission for multiple pathogens.
+
+
+% These estimates should be regarded with caution. Multiple biases can distort estimates of $\psi$ in either direction: uncertainty in infection timing can artificially disperse observed infection times, making infectiousness appear less bursty; and biases toward recording superspreading events but ignoring less explosive, more dispersed transmission events could inflate the appearance of burstiness. Nevertheless, the range of estimates, spanning from near 0 to near 1 --- along with independent viral kinetics evidence suggesting narrow infectiousness windows for influenza and SARS-CoV-2 \citep{goyal_viral_2021} --- indicates that $\psi$ may vary meaningfully across pathogens. 
+
+% Bearing the aforementioned limitations in mind, we estimated $\psi$ from published transmission tree data for eight diseases: COVID-19, MERS, measles, Ebola, smallpox, pneumonic plague, norovirus, and hepatitis A. We extracted serial intervals from the OutbreakTrees database, grouping them by index case to form clusters.\citep{taube_open-access_2022} For each pathogen, we fixed the generation interval distribution to published estimates and placed a flat prior on $\psi$, and the likelihood was computed by integrating over all possible latent periods for each cluster ({\bf Methods}). 
+
+% The resulting estimates spanned a wide range ({\bf Figure XX}). Measles and pneumonic plague showed the strongest evidence of burstiness (95\% credible interval for $\psi$: [0.00, 0.11] and [0.00, 0.20], respectively), while smallpox and MERS showed evidence of more diffuse infectiousness (95\% credible interval for $\psi$: [xx,xx] and [xx,xx], respectively).  Due to the many biases that may be in play, these estimates should be regarded with extreme caution; yet the breadth of the estimated range, from near 0 to near 1, indicate that $\psi$ may vary meaningfully across pathogens. 
+
+% For the remainder of our analyses, we illustrate our main findings using three benchmark pathogens ({\bf Figure XX}): influenza ($R_0 = 2$, $\alpha = 2.32$, $\beta = 0.73$), SARS-CoV-2 omicron ($R_0 = 6$, $\alpha = 2.39$, $\beta = 0.34$), and measles ($R_0 = 12$, $\alpha = 11.36$, $\beta = 0.93$), examining the impact of the full range of burstiness ($\psi \in [0,1]$); but we emphasize that the methods and findings are general. 
+
+
+% shift the timing of epidemics, it should be accounted for when generating outbreak forecasts and when estimating epidemiological parameters like $r$ and $g(\tau)$. 
+
+% Burstiness should be accounted for in epidemic forecasting, since it can inflate variability in daily case counts and shift the timing of epidemics. When designing interventions, burstiness can potentially be leveraged to gain significant reductions in transmission with relatively little effort: for example, a small increase in testing frequency could in some cases yield a major improvement in TE. Furthermore, burstiness can interact with D\&I interventions and gathering size restrictions to produce population-level effects --- like slower growth rate and elevated outbreak extinction probability --- that are masked by considering reductions in $R_\text{eff}$ alone, underscoring the importance of accounting for burstiness when predicting the transmission impacts of interventions. When estimating epidemiological values like $r$ and $g(\tau)$, burstiness can infuse uncertainty and artificial confidence: thus, burstiness must be accounted for when designing studies to estimate these quantities, and caution should be taken when interpreting past results that did not account for burstiness. 
