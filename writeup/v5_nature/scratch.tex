@@ -1,0 +1,342 @@
+  Broken LaTeX / Typos (fix first)
+
+  - Line 98: Stray apostrophe: 'we introduce → we introduce; and a
+  \text{Gamma}((1-\psi) \alpha, \beta)$ is missing an opening $ — the math will not
+  compile
+  - Line 92: "somwhat" → "somewhat"; double space before "It  could"
+  - Line 94: "artifically" → "artificially"; "baises" → "biases"
+  - Line 96: The period inside the parenthetical before \citep: Supplementary
+  Methods}).\citep — the period should come after the citation
+  - Line 112: "pesistent" → "persistent"
+  - Line 122: "provide show" → "show"
+  - Line 150: "epidiemics" → "epidemics"
+  - Line 154: [x] — placeholder citation needs to be filled in
+
+  ---
+  Paragraph 5 (line 98): Gamma burst model is incomplete
+
+  The live text says "secondary infections are distributed according to a Gamma((1-ψ)α,
+   β)" — but it doesn't say what this represents (the latent period? the burst?), and
+  the derivation is cut off. Comparing with the commented-out versions, the paragraph
+  is clearly mid-edit. The description of the burst (Gamma(ψα, β)) + latent period
+  (Gamma((1-ψ)α, β)) convolution structure is missing from the live text.
+
+  ---
+  Paragraph 2 (line 92): framing issue for Science
+
+  The public health messaging angle ("a person may want to know...") reads like
+  Discussion material and slows the introduction of the mechanistic gap. For Science,
+  consider leading with the mechanistic mismatch: viral kinetics data suggest the
+  infectious window is far narrower than the generation interval distribution implies,
+  and the epidemiological consequences of this discrepancy are unknown. The messaging
+  point can go in the Discussion.
+
+  Also, two of the citations here are CDC public webpages — for Science, you'd want
+  peer-reviewed sources.
+
+  ---
+  Paragraph 4 (line 96): ψ definition
+
+  The current live text has been substantially revised from the commented-out version
+  and is much cleaner. One remaining issue: the definition "governs the width of the
+  individual infectiousness kernel" doesn't give the reader the precise mathematical
+  content — the fraction-of-variance interpretation that makes ψ a dimensionless,
+  model-general quantity. The commented-out note at line 158 says "we should emphasize
+  that ψ is actually just the fraction of variation of g(τ) that's between-individual
+  vs. within-individual" — this is still missing from the live text. Even a brief
+  clause ("specifically, the fraction of g(τ)'s variance attributable to
+  within-individual timing") would tighten this substantially.
+
+  ---
+  Notation collision (line 116 vs. line 146)
+
+  The contact model uses ρ for amplitude (line 116); the D&I section later uses δ for
+  symptom offset (line 146). The commented-out notes flag a collision between δ in the
+  contact model and δ in the D&I section — check whether this is still an issue in the
+  current live text. Also, the function z(R_0, α) at line 138 collides with c(t)
+  notation for contact rates — using κ or similar would be cleaner, and "a quantity
+  that depends on" understates it since it's actually a function.
+
+  ---
+  Discussion (line 166+)
+
+  The live Discussion text (lines 168–183) is thin — most of the content is still
+  commented out. The three paragraphs that exist are good: the
+  ψ-as-new-axis-alongside-k framing, the practical implications, and the coincidence
+  superspreading formalization. But the prior literature paragraph (line 176) is the
+  weakest: it reads as a list rather than making an argument. The key insight — that
+  standard frameworks marginalize over individual-level timing by construction, which
+  is why ψ has been invisible — is there but buried. Lead with it.
+
+  The measurement challenge / future directions paragraph (line 182) ends too
+  tentatively. The commented-out note at line 184 has the right idea: "prospective
+  household studies with dense viral sampling could resolve ψ directly, and our power
+  analysis suggests ~50 index cases suffice for well-powered inference when R₀ ≥ 6."
+  That concrete number is far more compelling than the current language and should be
+  in the live text.
+
+  ---
+  Science-specific structural concerns
+
+  1. Equation count: You have three displayed equations in the main text. Science
+  typically expects 0–3 total, and reviewers may ask to move the branching process
+  equations (lines 131–133, 137–139) to Supplementary. The OD formula (line 118) is the
+   strongest candidate to keep.
+  2. The D&I paragraph (lines 144–150) is the longest and densest in the paper. It
+  covers TE sensitivity, GI truncation, and D&I-induced overdispersion in one
+  paragraph. Consider splitting: one paragraph on TE sensitivity, one on downstream
+  epidemic dynamics.
+  3. Commented-out old drafts: Lines 100–105 (old ψ paragraph drafts), lines 172–175,
+  184–354 (commented-out discussion notes) should be cleaned up before submission —
+  they add hundreds of lines and make the file hard to navigate.
+
+  ---
+  What's working well
+
+  - The coincidence superspreading concept and the OD formula with the η interpretation
+   are the paper's strongest contributions and are presented clearly
+  - The empirical estimates section strikes exactly the right tone of appropriate
+  caution ("these estimates should be regarded with extreme caution")
+  - The D&I analysis connecting ψ to TE sensitivity and downstream dynamics is
+  compelling
+  - The opening paragraph's framing and the ψ-parallel-to-k argument in the Discussion
+  are well-pitched for Science
+
+
+
+
+
+
+
+
+
+
+
+% where 
+% \begin{equation}
+% 	\varsigma = \frac{\log W - \log E[W]}{r}
+% \end{equation}
+% and the branching process can be expressed as 
+% \begin{equation}
+% 	Z(t) \approx e^{r(t + \varsigma)}
+% \end{equation}
+
+
+
+
+Population-level analyses often use average quantities to describe heterogeneous systems, particularly when variation does not arise from identifiable groups\citep{lloyd-smith_superspreading_2005}. A central example is the infectiousness profile, $A(\tau) = R_0 \, g(\tau)$, which captures the expected amount and timing of transmission from an infected individual and is the key parameter in the renewal equation framework for epidemic modeling\citep{wallinga_how_2007, breda_formulation_2012}. But $A(\tau)$ is an expectation over individuals: person $i$'s infectiousness trajectory is $a_i(\tau) = \nu_i g_i(\tau)$, where $\nu_i$ is the individual reproduction number and $g_i(\tau)$ is the individual generation interval distribution\citep{champredon_intrinsic_2015, svensson_note_2007}. Substantial work has characterized how variation in $\nu_i$---the area under $a_i(\tau)$---drives superspreading and shapes outbreak dynamics\citep{lloyd-smith_superspreading_2005}. But the impact of variation in $g_i(\tau)$---how $a_i(\tau)$ is distributed over time---has not been studied systematically.
+
+Since $A(\tau) = E_i[a_i(\tau)]$, the population-level profile need not resemble any single person's trajectory. The standard SEIR model illustrates this starkly: each person has a discontinuous, stepwise infectiousness profile (zero during latency, constant during infection), yet the population average is a smooth, bell-shaped curve (Fig.~\ref{fig:concept}a). Other choices of $a_i(\tau)$ can also produce the same $A(\tau)$: setting $a_i(\tau) \equiv A(\tau)$ for all individuals gives a ``smooth'' profile in which each person follows the population mean; at the opposite extreme, concentrating each person's infectiousness at a single random moment gives a ``spike'' profile. All produce identical deterministic epidemic dynamics, since $R_0$, $g(\tau)$, and $A(\tau)$ are unchanged. The stochastic dynamics, however, can differ profoundly.
+
+To isolate this effect, we introduce the Gamma time-shifted model, parameterized by a single smoothness parameter $\psi \in [0,1]$. Each person's secondary infections occur at times $\tau_{ij} = l_i + \epsilon_j$, where $l_i \sim \text{Gamma}((1-\psi)\alpha, \beta)$ is a shared latent period and $\epsilon_j \overset{iid}{\sim} \text{Gamma}(\psi\alpha, \beta)$ is an independent jitter (Fig.~\ref{fig:concept}b). Since both are Gamma-distributed with common rate $\beta$, their sum follows $\text{Gamma}(\alpha, \beta) = g(\tau)$ regardless of $\psi$, ensuring that all population-level quantities remain invariant. When $\psi = 1$, there is no between-individual variation: every person's infections are independently drawn from $g(\tau)$. When $\psi = 0$, there is no within-individual variation: each person's infections are concentrated at a single moment drawn from $g(\tau)$. This decomposition has biological grounding in within-host viral dynamics: stochastic early-infection processes produce between-individual variation in the timing of peak infectiousness, while subsequent kinetics are more stereotyped across individuals\citep{morris_random_2025}, yielding exactly the time-shifted structure captured by the $l_i + \epsilon_j$ decomposition. We combine this model with a general contact-process framework (Supplementary Methods) in which the individual reproduction number is $\nu_i = b_i \int_0^\infty g_i(\tau) c_i(t_i + \tau)\, d\tau$, where $b_i$ is biological infectiousness and $c_i(t)$ is a time-varying contact modulator.
+
+\paragraph{Overdispersion without individual-level heterogeneity.}
+Superspreading arises when secondary infection counts are overdispersed, conventionally parameterized by the negative binomial dispersion parameter $k$, where smaller $k$ indicates greater overdispersion\citep{lloyd-smith_superspreading_2005}. In the standard framework, overdispersion requires variation in the individual reproduction number $\nu_i$, arising from variation in biological infectiousness $b_i$ (``super-shedders'') or average contact rates $E_t[c_i(t)]$ (``super-contactors'')---both persistent individual traits that are in principle identifiable and targetable. We show that overdispersion can also arise in populations with \textit{no} such individual-level heterogeneity: when all individuals have identical biological infectiousness ($b_i \equiv R_0$) and identical average contact rates ($E_t[c_i(t)] = 1$), narrow infectiousness profiles still generate variation in $\nu_i$ through the stochastic interaction between each person's infectiousness window and their time-varying contact pattern. A person whose brief burst of infectiousness happens to coincide with a period of elevated contacts produces many secondary infections; one whose burst falls during a contact lull produces few. Crucially, this variation is not attributable to any persistent individual characteristic and therefore cannot be reduced by identifying or targeting high-risk individuals---it represents a floor on overdispersion that persists even after all ``super-shedder'' and ``super-contactor'' heterogeneity has been accounted for.
+
+We derived a closed-form expression for the overdispersion parameter under periodic contacts, $c_i(t) = 1 - c_\text{amp}\cos(2\pi t / c_\text{per})$ (Supplementary Methods):
+%
+\begin{equation}
+	\text{OD} \equiv 1/k = \frac{c_\text{amp}^2}{2} \left(1 + \left(\frac{2\pi \bar{g}}{\alpha c_\text{per}}\right)^2\right)^{-\psi\alpha}
+	\label{eq:OD}
+\end{equation}
+%
+When contacts are constant ($c_\text{amp} = 0$), OD $= 0$ regardless of $\psi$: no contact variation, no overdispersion. When contacts vary, narrow infectiousness profiles ($\psi \to 0$) drive OD toward $c_\text{amp}^2/2$, while broad profiles ($\psi \to 1$) average over the contact variation and suppress overdispersion. The sensitivity of OD to $\psi$ is governed by the ratio of the mean generation time $\bar{g}$ to the contact period $c_\text{per}$: weekly contact variation ($c_\text{per} = 7$ days) produces $\psi$-sensitive overdispersion for most respiratory pathogens, whereas daily variation gets averaged out and monthly variation yields near-maximal overdispersion regardless of $\psi$. Empirical contact surveys provide direct evidence that contacts vary substantially on these relevant timescales: the POLYMOD study\citep{mossong_social_2008} and subsequent surveys\citep{jarvis_quantifying_2020} document 20--40\% fewer contacts on weekends than weekdays across European populations, corresponding to $c_\text{amp} \approx 0.1$--$0.2$ at $c_\text{per} = 7$ days. Larger-amplitude variation occurs at the timescale of school terms and holidays. Even at a moderate $c_\text{amp} = 0.15$, Eq.~\ref{eq:OD} predicts OD $\approx 0.01$ for punctuated profiles ($\psi = 0$) with weekly contacts, which---while modest in isolation---combines multiplicatively with other sources of overdispersion and grows substantially at higher amplitudes or with stochastic contact variation (Supplementary Fig.~XX). Previous transmission models have implicitly included the ingredients for this interaction---for example, Goyal et al.\citep{goyal_viral_2021} coupled narrow peak-infectivity windows ($\sim$0.5--1 day) with overdispersed daily contact draws and showed that differing contact distributions explain SARS-CoV-2 superspreading---but attributed overdispersion to the contact process alone rather than isolating the role of infectiousness profile shape.
+
+For three benchmark pathogens---influenza ($R_0 = 2$), SARS-CoV-2 omicron ($R_0 = 6$), and measles ($R_0 = 12$)---simulations confirmed these analytic predictions across a range of contact amplitudes and periods, and showed that the resulting overdispersion translates into systematically higher epidemic extinction probabilities (Fig.~\ref{fig:superspreading}). Similar patterns emerged for stochastic contact processes with individual-level variation (Supplementary Fig.~XX).
+
+\paragraph{Empirical estimates of $\psi$.}
+We estimated $\psi$ from published transmission-tree data for eight diseases: COVID-19, MERS, measles, Ebola, smallpox, pneumonic plague, norovirus, and hepatitis A. We extracted serial intervals from the OutbreakTrees database\citep{taube_outbreaktrees_2022}, supplemented with COVID-19 data from refs.~\citenum{ganyani_estimating_2020} and~\citenum{hart_generation_2022}. Serial intervals were grouped by index case to form clusters (restricted to $\geq 2$ secondary cases per cluster). For each pathogen, we fixed the generation interval distribution to published estimates and placed a flat prior on $\psi$; the likelihood was computed by integrating over the shared latent period within each cluster (Methods).
+
+The resulting estimates spanned a wide range (Fig.~\ref{fig:empirical}). Measles and pneumonic plague yielded strongly punctuated estimates ($\hat{\psi} \approx 0$, 95\% CI [0.00, 0.11] and [0.00, 0.20]), consistent with secondary infections tightly clustered in time. COVID-19, smallpox, and MERS yielded diffuse estimates ($\hat{\psi} > 0.7$), consistent with infections spread broadly across each index case's infectious period.
+
+These estimates should be regarded as hypothesis-generating rather than definitive. The available data are subject to ascertainment bias toward large clusters and superspreading events (which can arise from event-based transmission rather than genuinely narrow infectiousness windows), incomplete observation of infectious periods, date discretization to symptom onset day, and sensitivity to the assumed generation interval parameters (Supplementary Discussion). The most strongly punctuated estimates---measles and pneumonic plague---are also the most susceptible to these biases, since transmission of both pathogens is often event-mediated and well-traced. Conversely, local susceptible depletion in high-$R_0$ settings could mimic low $\psi$: an index case may rapidly exhaust nearby susceptibles upon reaching peak infectiousness, yielding tightly clustered secondary infections even if the biological window of infectiousness is broad. Disentangling such epidemiological effects from the intrinsic shape of $a_i(\tau)$ will require data from settings where these confounds are minimal, such as household studies with complete ascertainment or controlled exposure experiments. Nevertheless, the breadth of the estimated range---from near 0 to near 1---suggests that $\psi$ varies meaningfully across pathogens. Independent evidence from viral kinetics modelling supports narrow infectivity windows: Goyal et al.\citep{goyal_viral_2021} showed that the dose-response relationship between viral load and transmission probability restricts the window of high transmission risk to $\sim$0.5--1 day for both SARS-CoV-2 and influenza, consistent with low $\psi$. The biological plausibility of variation in $\psi$ across pathogens---brief shedding bursts \vs sustained infectiousness---motivates investment in the data needed to resolve these estimates.
+
+A simulation-based power analysis indicates that $\psi$ is identifiable from contact-tracing data under reasonably favourable conditions: 50 index cases sufficed for well-powered inference for SARS-CoV-2 and measles across a range of observation delays (Supplementary Fig.~XX). Inference was more challenging for influenza ($R_0 = 2$), where fewer secondary cases per index case limit within-cluster information.
+
+\paragraph{Intervention sensitivity.}
+Detect-and-isolate (D\&I) interventions aim to identify infected individuals and prevent onward transmission. Their efficacy depends on the timing of detection relative to infectiousness. When detection timing is anchored to the individual infectiousness profile---as is realistic for symptom-based or viral-load-based detection---the shape of $a_i(\tau)$ determines how sensitively the intervention responds to shifts in detection timing.
+
+We defined testing effectiveness (TE) as $\text{TE} = \rho \eta P(\tau > D)$, where $\rho$ is the participation rate, $\eta$ is isolation effectiveness, and $D$ is the detection time\citep{middleton_modeling_2024}. For symptom-based detection (symptoms arising at a $\text{Normal}(\delta_\text{symp}, \sigma_\text{symp}^2)$ offset from peak infectiousness) and test-based screening (tests at fixed intervals with a detectability window around peak infectiousness), we computed TE by numerical integration (Methods). For both detection mechanisms, TE dropped as detection shifted from before to after peak infectiousness, with the sharpest drops for narrow infectiousness profiles (Fig.~\ref{fig:interventions}a,b). These sharp transitions reflect the all-or-nothing character of punctuated profiles: detection either catches the entire burst of infectiousness or misses it entirely.
+
+Beyond TE, mode-anchored D\&I interventions produce two additional $\psi$-dependent effects. First, among individuals who escape detection, the effective generation interval $g^*(\tau)$ is truncated. For smooth profiles, detection reliably removes late transmission, shortening the mean generation interval; for punctuated profiles, detection is all-or-nothing, so survivors transmit with an untruncated $g^*(\tau) = g(\tau)$. This truncation can accelerate epidemic growth among those who escape detection (Supplementary Methods). Second, variation in detection timing across individuals creates variation in the individual reproduction number $\nu_i^* = \nu_i F_\epsilon(m_\epsilon + \iota_i)$, where $F_\epsilon$ is the CDF of the infectiousness kernel and $\iota_i$ is the individual's isolation time relative to peak infectiousness. This introduces overdispersion in offspring counts, the magnitude of which depends on $\psi$ and the detection timing distribution (Supplementary Fig.~XX).
+
+Gathering size restrictions also interact with $\psi$. Truncating the contact distribution at a maximum gathering size $c_\text{max}$ reduces $R_\text{eff}$ by a factor $\mu_T$ that is independent of $\psi$ (Supplementary Methods). However, the truncation also reduces overdispersion, and the absolute reduction is greatest when the baseline overdispersion is highest---\ie, when $\psi$ is small. Simulations confirmed that gathering-size-restricted epidemics had systematically higher extinction probabilities than $R_\text{eff}$-matched epidemics without contact-process adjustment, with the largest discrepancies for narrow infectiousness profiles (Fig.~\ref{fig:interventions}c). Evaluating interventions purely in terms of their effect on $R_\text{eff}$ can therefore be misleading; the full distribution of secondary infections---not just its mean---determines the epidemic consequences.
+
+\paragraph{Further effects on epidemic dynamics.}
+Narrow infectiousness profiles also inflate early-epidemic stochasticity. In the branching-process approximation to early-epidemic growth, the cumulative infection count can be written as $Z(t) \approx e^{r(t + \varsigma)}$, where $\varsigma$ is a random time shift\citep{morris_computation_2024}. We showed analytically that $\text{Var}[\varsigma]$ increases as $\psi \to 0$, with $\text{Var}[W] \propto c(R_0, \alpha)^{(1-\psi)\alpha}$ for a constant $c > 1$ (Supplementary Methods). Simulations confirmed that punctuated profiles produced wider distributions of epidemic establishment times: by day 20, only 55\% of SARS-CoV-2 epidemics with $\psi = 0$ had reached 5\% cumulative prevalence, compared to 82\% with $\psi = 1$ (Supplementary Fig.~XX). Additionally, serial intervals from the same index case are correlated when $\psi < 1$, yielding an effective sample size $n_\text{eff} = n / (1 + (R_0 - 1) \cdot \text{ICC})$ for generation interval estimation, where the intraclass correlation ICC increases as $\psi \to 0$. Treating serial intervals as independent, as is common practice, can produce overconfident estimates of $g(\tau)$'s parameters (Supplementary Fig.~XX).
+
+\paragraph{Implications.}
+Our results demonstrate that the shape of the individual infectiousness profile---an epidemiological quantity that is invisible to deterministic, mean-field models---can meaningfully impact epidemic dynamics and intervention effectiveness. The parameter $\psi$ captures an axis of variation complementary to the dispersion parameter $k$ introduced by Lloyd-Smith et al.\citep{lloyd-smith_superspreading_2005}: whereas $k$ describes how much individuals vary in the \textit{amount} of transmission, $\psi$ describes how much they vary in its \textit{timing}. The two interact: the timing-contact mechanism we identify generates overdispersion ($k < \infty$) even in a population of identical shedders with identical average contact rates, setting a \textit{floor} on the overdispersion that remains after all individual-level risk factors have been accounted for. This has a direct implication for outbreak control: individual-specific interventions that target biological or behavioural superspreaders---which Lloyd-Smith et al.\ showed can dramatically outperform population-wide measures---cannot address the timing-driven component of overdispersion, because it does not arise from any identifiable individual trait. The long-noted qualitative distinction between superspreading \textit{events} and superspreader \textit{individuals}\citep{lloyd-smith_superspreading_2005} maps onto our framework: individual-driven overdispersion (variation in $b_i$ or $\bar{c}_i$) produces superspreader individuals, while timing-driven overdispersion (low $\psi$ with variable contacts) produces superspreading events. Anecdotal observations support the latter mechanism---individuals who generate large clusters in one setting yet fail to infect household contacts are difficult to reconcile with persistent individual-level superspreading, but are expected when infectiousness is concentrated in a brief window that may or may not coincide with high-contact periods. Quantifying the relative contributions of biological variation, contact variation, and timing-contact interaction to observed overdispersion is an important avenue for future work; our framework provides the tools to do so.
+
+Several concrete recommendations follow. First, contact-tracing studies should record the identity of the index case for each observed serial interval, enabling cluster-level analyses that correctly account for within-cluster correlation. Second, projection and forecasting models should incorporate $\psi$---even as a sensitivity parameter---to account for a source of uncertainty that is currently ignored. Third, evaluations of D\&I interventions should assess the sensitivity of testing effectiveness to small shifts in detection timing, which can produce disproportionate changes in epidemic outcomes when infectiousness profiles are narrow. Better data are needed: longitudinal viral kinetics studies linked to transmission outcomes, household studies capturing full sets of secondary infections, and controlled exposure experiments could all inform estimates of $a_i(\tau)$'s shape. We hope this framework will motivate such data collection and support more nuanced assessments of epidemic risk.
+
+% ---------------------------------------------------------------------------
+% METHODS (brief; full details in Supplementary)
+% ---------------------------------------------------------------------------
+
+\section{Methods}
+
+\paragraph{Simulation framework.}
+We used stochastic, individual-based epidemic simulations implemented in R (version 4.5.0) with performance-critical loops in C++ via Rcpp. For each infected individual, the number of secondary infection attempts was drawn from $\text{Poisson}(R_0)$, with infection times $\tau_{ij} = l_i + \epsilon_j$ under the Gamma time-shifted model. Time-varying contacts were incorporated via Poisson thinning. We simulated both finite-population ($N = 10{,}000$) and infinite-population (branching process) variants. Full simulation details are in Supplementary Methods.
+
+\paragraph{Benchmark pathogens.}
+We used generation interval parameters from the literature: influenza ($\bar{g} = 3.2$ days, $\alpha = 2.32$, $R_0 = 2$; ref.~\citenum{chan_estimating_2025}), SARS-CoV-2 omicron ($\bar{g} = 7.05$ days, $\alpha = 2.39$, $R_0 = 6$; ref.~\citenum{manica_intrinsic_2022}), and measles ($\bar{g} = 12.2$ days, $\alpha = 11.36$, $R_0 = 12$; ref.~\citenum{klinkenberg_correlation_2011}).
+
+\paragraph{Overdispersion.}
+Overdispersion was quantified by fitting a negative binomial distribution to simulated offspring counts via moment matching ($k = R_0^2 / (\text{Var}[\chi] - R_0)$). The closed-form expression (Eq.~\ref{eq:OD}) was derived using the power spectral density of the contact process filtered through the individual infectiousness kernel (Supplementary Methods).
+
+\paragraph{Testing effectiveness.}
+TE was computed by numerical integration over the detection time distribution and the infectiousness kernel, for both symptom-based ($D \sim \text{Normal}(\delta_\text{symp}, \sigma_\text{symp}^2)$ relative to peak infectiousness) and test-based (fixed-interval screening with detectability window) detection mechanisms (Supplementary Methods).
+
+\paragraph{Empirical $\psi$ estimation.}
+Transmission trees were obtained from the OutbreakTrees database\citep{taube_outbreaktrees_2022}, supplemented with COVID-19 data from refs.~\citenum{ganyani_estimating_2020} and~\citenum{hart_generation_2022}. Serial intervals were grouped by index case into clusters ($\geq 2$ secondary cases). For each pathogen, the likelihood was computed as a product over clusters of the Gamma time-shifted density, integrating over the shared latent period $l_i$, with generation interval parameters $(\alpha, \beta)$ fixed from published estimates. A flat prior on $\psi \in [0,1]$ was evaluated on a grid of 101 points. Posterior mode, mean, and 95\% credible intervals were reported.
+
+\paragraph{Power analysis.}
+We simulated serial interval data for 10, 25, 50, and 100 index cases at $\psi \in \{0, 0.5, 1\}$ for each benchmark pathogen, with Gamma-distributed observation delays (mean 1, 2, or 4 days). Posterior estimates for $\psi$ were generated using a flat prior. Power was defined as $>80\%$ of 200 replicates assigning $\geq 95\%$ posterior mass within 0.2 of the true $\psi$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  % Structure and emphasis — what's working:
+  % - The opening paragraph (153) nails the framing: ψ as parallel to k. This is the right lead.
+  % - The practical implications paragraph (155) covers the right ground.
+  % - The superspreading events vs. individuals paragraph (157) is well-placed as a standalone point.
+  % - The "prior literature" paragraph (159) is a valuable addition — it preempts the "hasn't this been
+  %  done?" objection.
+
+  % Typos (there are several):
+  % - Line 153: $\pis$ → $\psi$
+  % - Line 157: mechansm → mechanism; conincidence → coincidence
+  % - Line 159: tie-verying → time-varying; individaul → individual; modes → models
+  % - Line 163: exsit → exist; diferent → different
+
+  % Substantive suggestions:
+
+  % xx 1. Practical implications (155) — too list-like. This paragraph reads as a catalogue: burstiness
+  % affects X, burstiness affects Y, burstiness affects Z. Each point is valid but they're all at the
+  % same altitude. Consider picking one or two to develop with a concrete example, and subordinating
+  % the rest. The D&I timing point is the most actionable — "a small increase in testing frequency
+  % could yield a major improvement in TE" is compelling but vague. If you can put a number on it (even
+  %  a rough one from your simulations), it becomes much more memorable.
+  % xx2. Superspreading paragraph (157) — could be tighter. "This maps onto the long-observed but
+  % previously unformalized qualitative distinction between superspreading events and superspreaders"
+  % is a bit wordy. Consider: "This formalizes the long-observed but previously ad hoc distinction
+  % between superspreading events and superspreader individuals."
+  % 3. Prior literature paragraph (159) — strongest candidate for revision. This is the most important
+  % paragraph for Science reviewers and also the roughest. Issues:
+  % xx  - It currently reads as a list of "people have sort of looked at this." For Science, you want a
+  % sharper thesis: something like "The ingredients for our findings have been present in the
+  % literature for over a decade, but were never assembled because standard modeling frameworks
+  % integrate over individual-level timing by construction."
+  %  xx - The sentence "the shape of the infectiousness kernel is either a modeling assumption adopted
+  % for a different purpose or a feature integrated over" is the key insight but it's buried at the
+  % end. Lead with it.
+  %   - Be more specific about what "shifts in the punctuation of the generation interval distribution"
+  %  refers to — this is your own prior work, presumably, and a Science reader won't know what
+  % "punctuation" means here without context.
+  % 4. Limitations (161) — appropriately brief but missing one. You should mention that the analysis
+  % assumes homogeneous mixing beyond the contact process — this is a real limitation given that
+  % network structure can interact with burstiness in nontrivial ways.
+  % 5. Future directions (163) — slight oversell at the end. "Since ψ interacts with growth rate and
+  % overdispersion, it may presumably be under evolutionary selective pressure in some contexts; this
+  % remains an important area of study." The qualifier "presumably" undercuts the confidence, and "an
+  % important area of study" is generic. Either commit to the claim with a sentence of reasoning (e.g.,
+  %  "pathogens that evolve narrower shedding windows would gain a transmission advantage in
+  % environments with periodic high-contact opportunities") or cut it. For a 500-word Discussion in
+  % Science, I'd lean toward cutting — the evolution point is speculative and you have more concrete
+  % future directions to spend words on.
+  % 6. Missing: the measurement opportunity. The current future directions paragraph frames measurement
+  %  as a challenge but doesn't point toward a solution. A sentence like "Prospective household studies
+  %  with dense viral sampling could resolve ψ directly, and our power analysis suggests that ~50 index
+  %  cases suffice for well-powered inference when R₀ ≥ 6" would end on a more constructive note.
+  % 7. Ordering suggestion. Consider swapping paragraphs 3 (superspreading events vs. individuals) and
+  % 4 (prior literature). The current flow is: framing → practical implications → superspreading
+  % distinction → prior literature → limitations → future. It might flow better as: framing → practical
+  %  implications → prior literature → superspreading distinction → limitations → future. The reason:
+  % the prior literature paragraph explains why ψ was overlooked, which sets up the superspreading
+  % distinction as the payoff — "and here's what was missed." The current order puts the payoff before
+  % the setup.
+
+  % Overall assessment: The content is right. The main work is tightening the prose (especially
+  % paragraph 159), cutting a few words from the practical implications catalogue, and fixing the
+  % typos. At roughly 500 words this is well-sized for Science.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \text{Gamma}((1-\psi) \alpha, \beta)$. Since the latent period and post-latent infection times are Gamma-distributed, their sum follows a $\text{Gamma}(\alpha, \beta) = g(\tau)$ distribution (by the convolution property of Gamma random variables), ensuring that any value of $\psi$ yields the same $g(\tau)$. This model of infectiousness has biological grounding in within-host viral dynamics: stochastic viral replication early in an infection causes variability in when the virus can first be detected (the variable latent period), while the kinetics thereafter are largely consistent across individuals (the infectiousness burst) \citep{morris_random_2025}. 
+
+% characterize the individual infection kernel (the individual-level analog of the generation interval distribution) 
+
+% Here, we address that gap by systematically examining the impact of bursty infectiousness on epidemic dynamics. To achieve this, we introduce the burstiness parameter, $\psi \in [0,1]$, that captures the fraction of $g(\tau)$'s variation that originates from within-infector (as opposed to between-infector) variation in secondary infection times. At the $\psi = 0$ extreme, the individual infectiousness kernel is a delta function: all secondary infections occur at a single moment, with the time distributed according to $g(\tau)$. At the $\psi = 1$ extreme, the individual infectiousness kernel matches $g(\tau)$ perfectly. To capture this effect in an analytically tractable form, we introduce the Gamma burst model, a model of individual infectiousness that allows us to isolate the impact of burstiness while leaving all population level quantities ($g(\tau)$ and the basic reproduction number, $R_0$) unchanged. At the population level, the model assumes that $g(\tau)$ is (approximately) Gamma-distributed with shape $\alpha$ and rate $\beta$. At the individual level, secondary infections are distributed according to a $\text{Gamma}(\psi \alpha, \beta)$ distribution --- the ``burst'' --- following a latent period of length $l_i \sim \text{Gamma}((1-\psi) \alpha, \beta)$, with $\psi \in [0,1]$ ({\bf Figure XX}). The burstiness parameter, $\psi$, defines the width of the burst relative to $g(\tau)$: $\psi = 0$ is maximally bursty, with all infectiousness happening at a single moment, while $\psi = 1$ is maximally smooth, with  infectiousness spread across the full generation interval distribution. Since the latent period and post-latent infection times are Gamma-distributed, their sum follows a $\text{Gamma}(\alpha, \beta) = g(\tau)$ distribution (by the convolution property of Gamma random variables), ensuring that any value of $\psi$ yields the same $g(\tau)$. This model of infectiousness has biological grounding in within-host viral dynamics: stochastic viral replication early in an infection causes variability in when the virus can first be detected (the variable latent period), while the kinetics thereafter are largely consistent across individuals (the infectiousness burst) \citep{morris_random_2025}. 
+
+% Here, we address that gap by systematically examining the impact of bursty infectiousness on epidemic dynamics. To achieve this, we introduce the Gamma burst model, a model of individual infectiousness that allows us to isolate the impact of burstiness while leaving all population level quantities ($g(\tau)$ and the basic reproduction number, $R_0$) unchanged. At the population level, the model assumes that $g(\tau)$ is (approximately) Gamma-distributed with shape $\alpha$ and rate $\beta$. At the individual level, secondary infections are distributed according to a $\text{Gamma}(\psi \alpha, \beta)$ distribution --- the ``burst'' --- following a latent period of length $l_i \sim \text{Gamma}((1-\psi) \alpha, \beta)$, with $\psi \in [0,1]$ ({\bf Figure XX}). The burstiness parameter, $\psi$, defines the width of the burst relative to $g(\tau)$: $\psi = 0$ is maximally bursty, with all infectiousness happening at a single moment, while $\psi = 1$ is maximally smooth, with  infectiousness spread across the full generation interval distribution. Since the latent period and post-latent infection times are Gamma-distributed, their sum follows a $\text{Gamma}(\alpha, \beta) = g(\tau)$ distribution (by the convolution property of Gamma random variables), ensuring that any value of $\psi$ yields the same $g(\tau)$. This model of infectiousness has biological grounding in within-host viral dynamics: stochastic viral replication early in an infection causes variability in when the virus can first be detected (the variable latent period), while the kinetics thereafter are largely consistent across individuals (the infectiousness burst) \citep{morris_random_2025}. 
+
+% One such factor that has so far received little attention is the ``burstiness'' of infectiousness. Evidence from SARS-CoV-2 and influenza suggests that the window of meaningful infectiousness for those viruses may be short --- even less than a day --- despite the fact that the infectiousness window is typically quoted as lasting 6-8 days for influenza and 9-12 days for SARS-CoV-2.\citep{goyal_viral_2021, centers_for_disease_control_and_prevention_yellow_2025, centers_for_disease_control_and_prevention_about_2026} These longer spans reflect the generation interval distribution, $g(\tau)$, a population-level function that describes the spread of times $\tau$ that elapse between an index case and a secondary infection. If infectiousness is in reality more concentrated (bursty), this could impact everything from how individuals gauge their own risk of transmitting to how epidemics unfold overall. 
+
+% Intuitively, the typical individual-level infectiousness must be briefer than the full width of the generation interval distribution: $g(\tau)$'s breadth is composed of both within-individual and between-individual variation in infectiousness timing. 
+
+% If infectiousness is in reality more concentrated (bursty), this could impact 
+
+% If infectiousness is in reality more concentrated (bursty), then an individual's transmission risk over their infection, the timing of interventions, and how an outbreak unfolds could all depend on when that brief infectious window happens to fall --- yet the  quantitative 
+
+% These longer spans reflect the generation interval distribution, $g(\tau)$, a population-level function that describes the spread of times $\tau$ that elapse between an index case and a secondary infection. If infectiousness is in reality much shorter (burstier), this could have important implications for public health messaging: a person may want to know if they are likely to be somwhat infectious for a long time, or extremely infectious for a brief but unpredictable window. It  could also have an impact on epidemic dynamics; for example, if infectiousness happens to coincide with a period of high contacts, this could lead to superspreading, though this mechanism is largely unexplored. 
+% One such factor that has so far received little attention is the ``burstiness'' of infectiousness. Evidence from SARS-CoV-2 and influenza suggests that the window of meaningful infectiousness for those viruses may be short --- even less than a day --- despite the fact that  the infectiousness window is typically quoted as lasting 6-8 days for influenza and 9-12 days for SARS-CoV-2.\citep{goyal_viral_2021, centers_for_disease_control_and_prevention_yellow_2025, centers_for_disease_control_and_prevention_about_2026} These longer spans reflect the generation interval distribution, $g(\tau)$, a population-level function that describes the spread of times $\tau$ that elapse between an index case and a secondary infection. If infectiousness is in reality much shorter (burstier), this could have important implications for public health messaging: a person may want to know if they are likely to be somwhat infectious for a long time, or extremely infectious for a brief but unpredictable window. It  could also have an impact on epidemic dynamics; for example, if infectiousness happens to coincide with a period of high contacts, this could lead to superspreading, though this mechanism is largely unexplored. 
+
+
+
+% To examine $\psi$'s epidemiological consequences analytically, we introduce the Gamma burst model. The model assumes $g(\tau)$ is (approximately) Gamma-distributed with shape $\alpha$ and rate $\beta$. At the individual level, secondary infections are distributed according to a $\text{Gamma}(\psi \alpha, \beta)$  distribution --- the ``burst'' --- following a latent period of length $l_i \sim \text{Gamma}((1-\psi) \alpha, \beta)$, with $\psi \in [0,1]$ ({\bf Figure XX}). Since the latent period and post-latent infection times are Gamma-distributed, their sum follows a $\text{Gamma}(\alpha, \beta) = g(\tau)$ distribution (by the convolution property of Gamma random variables), ensuring that any value of $\psi$ yields the same $g(\tau)$. This model of infectiousness has biological grounding in within-host viral dynamics: stochastic viral replication early in an infection causes variability in when the virus can first be detected (the variable latent period), while the kinetics thereafter are largely consistent across individuals (the infectiousness burst) \citep{morris_random_2025}. 
+
+% Bursty infectiousness has received little theoretical attention because standard epidemic models operate directly on the population-level $g(\tau)$, averaging over individual infectiousness kernels by construction and making burstiness effects invisible. Empirical evidence is likewise limited: resolving the infectiousness kernel requires densely-sampled, individual-level transmission data that is rarely available, and what data exist are subject to biases that can both inflate and obscure the apparent degree of burstiness. Whether burstiness has epidemiologically meaningful consequences has therefore never been systematically examined. 
+
+% One reason why bursty infectiousness has been under-examined may be the difficulty in measuring it. Ideally, contact tracing data would capture precise infection times and perfectly link each index case to all their secondary infections; from this, inferring the width of the infectiousness window would be straightforward. The reality is far messier: case ascertainment is imperfect, reducing statistical power; uncertainty in infection timing can artifically disperse observed infection times, making infectiousness appear less bursty; and baises towards recording superspreading events but ignoring less explosive, more dispersed transmission events could inflate the appearance of burstiness. It remains an open question, however, whether this burstiness matters enough to put in the effort to measure it. 
+
+
+To gague the potential range of $\psi$ across pathogens, we estimated $\psi$ using published transmission trees with serial intervals for COVID-19, MERS, measles, Ebola, smallpox, pneumonic plague, norovirus, and hepatitis A \citep{taube_open-access_2022} ({\bf Methods}). The resulting estimates spanned a wide range ({\bf Figure XX}). Measles and pneumonic plague showed the strongest evidence of burstiness (95\% credible interval for $\psi$: [0.00, 0.11] and [0.00, 0.20], respectively), while smallpox and MERS showed evidence of more diffuse infectiousness (95\% credible interval for $\psi$: [xx,xx] and [xx,xx], respectively). 
+
+These estimates should be regarded with caution. Multiple biases can impact estimates of $\psi$: uncertainty in infection timing can artificially disperse observed infection times, making infectiousness appear less bursty; and biases toward recording superspreading events but ignoring less explosive, more dispersed transmission events could inflate the appearance of burstiness. Nevertheless, the range of estimates, spanning from near 0 to near 1 --- along with independent evidence on the burstiness of infections like influenza and SARS-CoV-2 \citep{goyal_viral_2021} --- indicates that $\psi$ may vary meaningfully across pathogens. 
+

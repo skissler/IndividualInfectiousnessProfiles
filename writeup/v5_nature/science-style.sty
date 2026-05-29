@@ -1,0 +1,118 @@
+% science-style.sty
+% Approximates the visual style of a Science magazine article.
+% Loaded conditionally when \sciencemode is defined.
+
+\ProvidesPackage{science-style}
+
+% --- Page layout ---
+\RequirePackage[
+  paperwidth=8.5in,
+  paperheight=11in,
+  top=0.75in,
+  bottom=0.75in,
+  left=0.6in,
+  right=0.6in,
+  columnsep=0.25in
+]{geometry}
+
+% --- Two-column layout ---
+\RequirePackage{multicol}
+
+% --- Fonts ---
+% Body text: XCharter (close match to Science's serif body font)
+% Headers/labels: Helvetica (sans-serif)
+% Math: Charter-compatible math via XCharter
+\RequirePackage[T1]{fontenc}
+\RequirePackage[scaled=0.92]{helvet}           % sans-serif for headers
+\RequirePackage[charter,greekuppercase=italicized]{newtxmath}  % math fonts matching Charter
+\RequirePackage[sups,scaled=.97]{XCharter}     % serif body text (close to Science's body font)
+
+% --- Font sizes ---
+\renewcommand{\normalsize}{\fontsize{9}{11}\selectfont}
+\renewcommand{\small}{\fontsize{8}{10}\selectfont}
+\renewcommand{\footnotesize}{\fontsize{7}{9}\selectfont}
+\renewcommand{\large}{\fontsize{12}{14}\selectfont}
+\renewcommand{\Large}{\fontsize{14}{17}\selectfont}
+\renewcommand{\LARGE}{\fontsize{18}{21}\selectfont}
+
+% --- Paragraph formatting ---
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{0em}
+
+% --- Section formatting ---
+\RequirePackage{titlesec}
+\titleformat{\section}{\large\bfseries\sffamily}{}{0em}{}[\vspace{-0.3em}]
+\titleformat{\subsection}{\normalsize\bfseries\sffamily}{}{0em}{}[\vspace{-0.3em}]
+\titleformat{\paragraph}[runin]{\normalsize\bfseries\sffamily}{}{0em}{}[.]
+\titlespacing{\section}{0pt}{1em}{0.3em}
+\titlespacing{\subsection}{0pt}{0.8em}{0.2em}
+\titlespacing{\paragraph}{0pt}{0.5em}{0.5em}
+
+% --- Caption formatting ---
+\RequirePackage{caption}
+\captionsetup{
+  font={small,sf},
+  labelfont={bf},
+  labelsep=period,
+  justification=justified,
+  singlelinecheck=false
+}
+
+% --- Abstract formatting ---
+\renewenvironment{abstract}{%
+  \vspace{0.5em}
+  \noindent\textbf{\sffamily Abstract}\par
+  \small\sffamily
+}{%
+  \par\vspace{0.5em}
+}
+
+% --- Line spacing ---
+\RequirePackage{setspace}
+\setstretch{1.05}
+
+% --- References: numbered, Science-style ---
+% Override natbib to use numbered citations
+\RequirePackage{natbib}
+\setcitestyle{numbers,square,comma}
+
+% --- Disable line numbers in Science mode ---
+\RequirePackage{lineno}
+\nolinenumbers
+
+% --- Title block formatting ---
+\newcommand{\sciencetitle}[1]{%
+  \begingroup
+  \LARGE\bfseries\sffamily #1\par
+  \endgroup
+  \vskip 0.8em
+}
+\newcommand{\scienceauthors}[1]{%
+  \begingroup
+  \normalsize\sffamily #1\par
+  \endgroup
+  \vskip 0.3em
+}
+\newcommand{\scienceaffiliations}[1]{%
+  \begingroup
+  \footnotesize\sffamily #1\par
+  \endgroup
+  \vskip 0.3em
+}
+\newcommand{\sciencecorrespondence}[1]{%
+  \begingroup
+  \footnotesize\sffamily\itshape *Corresponding author: #1\par
+  \endgroup
+  \vskip 1em
+}
+
+% --- Column rule ---
+\setlength{\columnseprule}{0.4pt}
+\renewcommand{\columnseprulecolor}{\color{black!20}}
+
+% --- Equation formatting ---
+\RequirePackage{amsmath}
+\abovedisplayskip=6pt
+\belowdisplayskip=6pt
+
+\endinput
