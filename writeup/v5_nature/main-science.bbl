@@ -1,4 +1,4 @@
-\begin{thebibliography}{12}
+\begin{thebibliography}{14}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -126,5 +126,25 @@ Casey Middleton and Daniel~B. Larremore.
 \newblock ISSN 2375-2548.
 \newblock \doi{10.1126/sciadv.adk5108}.
 \newblock URL \url{https://www.science.org/doi/10.1126/sciadv.adk5108}.
+
+\bibitem[Wearing et~al.(2005)Wearing, Rohani, and
+  Keeling]{wearing_appropriate_2005}
+Helen~J Wearing, Pejman Rohani, and Matt~J Keeling.
+\newblock Appropriate {Models} for the {Management} of {Infectious} {Diseases}.
+\newblock \emph{PLoS Medicine}, 2\penalty0 (7):\penalty0 e174, July 2005.
+\newblock ISSN 1549-1676.
+\newblock \doi{10.1371/journal.pmed.0020174}.
+\newblock URL \url{https://dx.plos.org/10.1371/journal.pmed.0020174}.
+
+\bibitem[Lloyd(2001)]{lloyd_realistic_2001}
+Alun~L. Lloyd.
+\newblock Realistic {Distributions} of {Infectious} {Periods} in {Epidemic}
+  {Models}: {Changing} {Patterns} of {Persistence} and {Dynamics}.
+\newblock \emph{Theoretical Population Biology}, 60\penalty0 (1):\penalty0
+  59--71, August 2001.
+\newblock ISSN 00405809.
+\newblock \doi{10.1006/tpbi.2001.1525}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S0040580901915254}.
 
 \end{thebibliography}

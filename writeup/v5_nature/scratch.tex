@@ -415,3 +415,28 @@ These estimates should be regarded with caution. Multiple biases can impact esti
  illustrating how bursty infectiousness can produce substantial differences in epidemic timing, especially for pathogens with high $R_0$. 
 
 % Simulations illustrate the impact of bursty infectiousness on epidemic timing and its relationship with $R_0$. Survival curves depicting the time to reach 5\% total prevalence show marked differences across $\psi$-values for SARS-CoV-2 omicron and measles ({{\bf Figure XX}}). For example, the fraction of simulated measles outbreaks that reached 5\% prevalence by week 5 was xx\% at the bursty extreme ($\psi = 0$) \vs xx\% at the smooth extreme ($\psi = 1$), consistent with burstiness driving more variable and late-shifted epidemic timing. For influenza, which has a lower $R_0$, differences in epidemic timing across $\psi$-values were hardly discernible ({{\bf Figure XX}}). 
+
+
+
+
+
+
+
+
+
+The burstiness of infectiousness, as captured by the parameter $\psi$, plays a key role in how epidemics unfold. Just as the overdispersion parameter $k$ illustrates how not all pathogens with the same $R_0$ behave alike, $\psi$ reveals that not all pathogens with the same $g(\tau)$ behave alike. Burstiness impacts overdispersion, outbreak timing, intervention effectiveness, and epidemiological parameter estimation --- a wide enough range of consequences to justify treating it as a fundamental epidemiological quantity. 
+
+Our findings have various practical implications. When designing D\&I interventions, burstiness can potentially be leveraged to gain significant reductions in transmission with relatively little effort: for example, a 1-day increase in testing frequency was in some cases associated with as much as a xx\% predicted increase in the intervention's effectiveness. Furthermore, burstiness can impact how interventions shape population-level transmission: accounting for an intervention's reduction in $R_\text{eff}$ alone can mask important, burstiness-related shifts in epidemic growth rate and extinction probability. Since burstiness can inflate variability in daily case counts and create timing correlations among secondary infections, care must be taken when estimating and interpreting epidemiological parameter values like $r$ and $g(\tau)$. 
+
+The ingredients for our findings have been present in the literature for over a decade, but were never assembled because standard modeling frameworks integrate over individual-level timing by construction. The individual infectiousness kernel was defined by Svensson and extended by Champredon and Dushoff. Shifts in the punctuation of the generation interval distribution have demonstrated the key impact of that population-level quantity; and replacing the stepwise infectiousness profile commonly assumed by SIR and SEIR-type compartmental models with time-varying viral kinetics-informed infectiousness kernels can generate meaningful impacts on epidemic dynamics. The course of individual infectivity has been used as key input in models of contact tracing effectiveness and testing-based interventions. 
+
+A key feature of bursty infectiousness is that it introduces an often-overlooked and unintervenable mechanism of superspreading. Coincidence superspreading produces superspreading events without superspreader individuals. This formalizes the long-observed but previously {\it ad hoc} distinction between superspreading events and superspreaders. As a result of coincidence superspreading, some fraction of overdispersion may be structurally untargetable, setting a floor on the overdispersion $k$ regardless of how well we identify and manage high-risk individuals. 
+
+Our findings are subject to several limitations: the Gamma burst model, while analytically tractable, may not capture the full biological variability in burstiness. The contact models we considered are stylized, not empirically driven, and they do not account for spatial or network heterogeneity. When inferring $\psi$, we used serial intervals as proxies for generation intervals, inflating uncertainty in our estimates. 
+
+Looking forward, a key challenge facing future work on burstiness is measurement: estimating $\psi$ is challenging without detailed, dense contact tracing data. Some opportunities exist for incorporating other data streams, like cross-referencing with viral kinetics; but we need a better understanding of how viral load relates to infectiousness.\cite{goyal_viral_2021} Joint inference of $k$ and $\psi$ remains an open question, given that they can interact with one another. More complex models --- like mixture models with multiple different values of $\psi$ belonging to the same person --- could enhance the biological fidelity of the Gamma burst model, though at the cost of model complexity. 
+
+
+\vspace{2cm} 
+% ================================================================================
+% REVISED DISCUSSION DRAFT (for comparison with existing text above)
