@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.5)  29 MAY 2026 13:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.5)  29 MAY 2026 15:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -856,7 +856,7 @@ nch-mark
 
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
 (Font)              scaled to size 8.73001pt on input line 137.
-[2] [3] (./main-science.bbl
+[2] [3] [4] (./main-science.bbl
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
 (Font)              scaled to size 11.64001pt on input line 1.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
@@ -868,8 +868,8 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
-)) [4{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.e
-nc}] [5
+)) [5{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.e
+nc}] [6
 
 ]
 (./main-science.aux)
@@ -881,8 +881,8 @@ Package rerunfilecheck Info: File `main-science.out' has not changed.
 (rerunfilecheck)             Checksum: F90EC86B029096B9126BDD68CF9CD717;119.
  ) 
 Here is how much of TeX's memory you used:
- 16481 strings out of 476025
- 253689 string characters out of 5790018
+ 16482 strings out of 476025
+ 253695 string characters out of 5790018
  1890388 words of memory out of 5000000
  36628 multiletter control sequences out of 15000+600000
  623778 words of font info for 104 fonts, out of 8000000 for 9000
@@ -901,10 +901,10 @@ b></usr/local/texlive/2023/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb></usr
 exlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/
 2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2023/te
 xmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on main-science.pdf (5 pages, 303060 bytes).
+Output written on main-science.pdf (6 pages, 303934 bytes).
 PDF statistics:
- 162 PDF objects out of 1000 (max. 8388607)
- 127 compressed objects within 2 object streams
- 22 named destinations out of 1000 (max. 500000)
+ 164 PDF objects out of 1000 (max. 8388607)
+ 128 compressed objects within 2 object streams
+ 23 named destinations out of 1000 (max. 500000)
  9 words of extra memory for PDF output out of 10000 (max. 10000000)
 

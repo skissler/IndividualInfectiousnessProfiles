@@ -440,3 +440,323 @@ Looking forward, a key challenge facing future work on burstiness is measurement
 \vspace{2cm} 
 % ================================================================================
 % REVISED DISCUSSION DRAFT (for comparison with existing text above)
+
+
+
+
+
+% Even without precise estimates, incorporating $\psi$ as a sensitivity parameter in epidemic models would allow for more principled assessments of forecast and projection uncertainty. 
+
+
+
+% Looking ahead, the most pressing open question is measurement: without better estimates of $\psi$, we cannot fully account for it in epidemic modeling, intervention planning, and parameter estimation. Clarifying the link between viral kinetics and infectiousness would provide a useful way to constrain $\psi$, orthogonal to contact tracing data. Pathogen phylogenies may offer another complementary approach, since near-simultaneous transmission from a single infector may leave characteristic phylogenetic signatures. Whether $\psi$ is under evolutionary selective pressure --- and under which circumstances pathogens may benefit from bursty \vs broad infectiousness --- is a longer-horizon question with implications for both evolutionary biology and surveillance. The framework introduced here opens a path toward these goals, illustrating how not all pathogens with the same $g(\tau)$ behave alike. Understanding the impact of bursty infectiousness stands to improve how we monitor, model, and respond to epidemics. 
+
+
+% Even without precise estimates, incorporating $\psi$ as a sensitivity parameter in epideimic models would allow for more principled assessments of forecast and projection uncertainty. 
+
+% Looking ahead, measuring $\psi$ in practice remains the central challenge. Prospective household studies with dense viral sampling, and joint inference of $\psi$ and $k$ from contact tracing data, are natural next steps. Cross-referencing transmission data with viral kinetics could offer additional insights, though the precise relationship between viral load and infectiousness remains uncertain \citep{goyal_viral_2021}. Even without precise estimates, incorporating $\psi$ as a sensitivity parameter in epidemic projection models would make those models more honest about a currently overlooked axis of uncertainty. The framework introduced here opens a path toward that goal: not all pathogens with the same $g(\tau)$ behave alike, and understanding why stands to improve how we monitor, model, and respond to epidemics.
+
+
+
+
+
+
+% In outbreak surveillance, bursty infectiousness makes it harder to distinguish a slow epidemic from a late one early in an outbreak, complicating severity assessment and the decision of when to intervene \citep{morris_computation_2024}. For detect-and-isolate interventions, routine shifts in detection timing --- such as changes in symptom profiles across SARS-CoV-2 variants --- can produce sharp changes in effectiveness when infectiousness is bursty, underscoring the importance of characterizing the individual infectiousness kernel for operational planning. For epidemiological inference, treating serial intervals from the same infector as independent draws from $g(\tau)$, as is common practice, can produce overconfident parameter estimates; where possible, contact tracing records should identify the index case to enable cluster-level analyses that account for the correlation structure that burstiness induces.
+
+
+% What can we say about the gamma burst model not reflecting actual dynamics? This feels akin to the lloyd smith parameter k --- it assumes a negative binomial distribution, which may not always hold, but it's a useful way of summarizing an important concept. 
+
+% ================================================================================
+% Things to consider: should we include our power analysis somewhere? Where? It doesn't seem to fit quite right anywhere, but it's useful to refer to it in the Discussion. Are we being too bold when we're saying that our work "justifies treating psi as a fundamental epidemiological quantity?" Will people think we're assholes? Can we maybe update the bit on prior literature from the end of the intro in v3? Can we tighten the Discussion overall? What points should the abstract hit? What should our figures be? How can we land the plane at the end of the Discussion? What references am I missing? How to make the "individual-level factors" at the end of the first paragraph less vague? We should emphasize that $\psi$ is actually just the fraction of variation of $g(\tau)$ that's between-individual \vs within-individual. It has a nice parametric form in the Gamma burst model; but the idea, and the parameter itself, is more general. Do we need more motivation for why it makes sense that the individual infectiousness kernel *must* be narrower than the generation interval distribution --- it's just not clear how much? 
+
+% Fig. 1: The Gamma time-shift model, the generation interval distributions for the canonical pathogens, and some trajectories (maybe) 
+% Fig. 2: Empirical estimates of psi: likelihood approach, results. 
+% Fig. 3: Coincidence superspreading
+% Fig. 4: The epidemic latent period (illustration of intuition and survival curves) 
+% Fig. 5: Interventions (illustrations of how they work and the results) 
+% ================================================================================
+
+
+
+% Prospective household studies with dense viral sampling could resolve $\psi$ directly, and our power analysis suggests that ~50 index cases suffice for well-powered inference when $R_0 \geq 6$.  
+
+% Yet, in each of these cases, the shape of the infectiousness kernel is either a modeling assumption adopted for a different purpose or a feature integrated over, producing variation at the population level, without attending to the individual-level effects. 
+
+
+% Since $\psi$ interacts with growth rate and overdispersion, it may presumably be under evolutionary selective pressure in some contexts; this remains an important area of study. 
+
+% can meaningfully impact epidemic dynamics and intervention effectiveness. 
+
+%   - ψ as a new axis of pathogen characterization. Parallel to Lloyd-Smith's k: just as k revealed
+%   that not all pathogens with the same R₀ behave alike, ψ reveals that not all pathogens with the
+%   same g(τ) behave alike. The paper shows that ψ matters for overdispersion, outbreak timing,
+%   intervention effectiveness, and parameter estimation — a wide enough range of consequences to
+%   justify treating it as a fundamental epidemiological quantity.
+
+% \vspace{4cm}
+
+% \begin{itemize}
+%   \item $\psi$ is a new axis of variation. Practical implications: forecasting, testing, inference of key parameters. Shifts in symptom timing are commonplace, and shifts in screening intervals are easy to implement.  counter-intuitive relationships between Reff, g, and k under interventions. 
+%   \item Superspreading \vs superspreader distinction. 
+%   \item Relationship with other studies; why $\psi$ has been overlooked. 
+%   \item Measurement challenges and opportunities, including viral kinetics; genomics? 
+%   \item Limitations: Gamma time-shift model is convenient but may not fully capture variation in transmission dynamics (maybe a mixture distribution?); contact models are stylized; serial intervals were used as proxies for generation intervals in the empirical estimates; we assume homogeneous mixing beyond the contact process
+%   \item Future stuff: mixture models? More complex contact structures? Joint inference of $\psi$ and $k$. Evolution of $\psi$? 
+% \end{itemize}
+
+
+% ⏺ Here's what I'd suggest for the Discussion, roughly in order:
+
+%   - ψ as a new axis of pathogen characterization. Parallel to Lloyd-Smith's k: just as k revealed
+%   that not all pathogens with the same R₀ behave alike, ψ reveals that not all pathogens with the
+%   same g(τ) behave alike. The paper shows that ψ matters for overdispersion, outbreak timing,
+%   intervention effectiveness, and parameter estimation — a wide enough range of consequences to
+%   justify treating it as a fundamental epidemiological quantity.
+%   - The superspreading events vs. superspreader individuals distinction. Coincidence superspreading
+%   produces events without individuals. This maps onto the long-observed but never formalized
+%   qualitative distinction. Implication: some fraction of overdispersion may be structurally
+%   untargetable, setting a floor on k regardless of how well we identify and manage high-risk
+%   individuals.
+%   - Practical implications for outbreak response. Briefly: (i) D&I timing margins are tighter than
+%   expected if ψ is small — a day's delay in testing/isolation matters more; (ii) gathering size
+%   restrictions may be more effective than R_eff calculations suggest (because they also reduce OD);
+%   (iii) epidemic forecasting should account for ψ-driven variance in outbreak timing, especially for
+%   high-R₀ pathogens.
+%   - The measurement challenge as both limitation and opportunity. Acknowledge the biases head-on
+%   (ascertainment, timing uncertainty, cluster-size bias). But frame the difficulty as motivating, not
+%    fatal: viral kinetics data (Goyal et al.) provide orthogonal evidence for small ψ; prospective
+%   household studies with dense sampling could resolve ψ directly; and the power analysis shows it's
+%   feasible with ~50 index cases at moderate R₀.
+%   - Why ψ has been overlooked. The standard renewal equation framework marginalizes over
+%   individual-level timing by construction — g(τ) is a population average. Branching process models
+%   typically assume independent generation intervals. The Gamma burst model shows that relaxing this
+%   assumption (at no cost to g(τ)) unlocks a family of effects that are invisible to conventional
+%   models. This isn't a criticism of existing work — it's a blind spot created by a modeling
+%   convention.
+%   - Connection to within-host dynamics. The time-shift structure has biological grounding (Morris
+%   2025): stochastic viral replication → variable latent period, stereotyped post-peak kinetics → the
+%   burst. This means ψ is not just a mathematical convenience but potentially a measurable biological
+%   quantity tied to viral replication dynamics. Different pathogens should have different ψ values for
+%    mechanistic reasons.
+%   - Limitations. (i) The Gamma burst model is a specific parametric choice — real infectiousness
+%   profiles may not decompose neatly into latent period + burst; (ii) the periodic contact model is
+%   stylized; (iii) serial intervals are used as proxies for generation intervals in the empirical
+%   estimates; (iv) the analysis assumes homogeneous mixing beyond the contact process.
+%   - Forward-looking close. What would it take to measure ψ well? Dense prospective contact tracing
+%   with known exposure times, or integration of viral load trajectories with contact data. The payoff:
+%    more accurate epidemic forecasts, better-calibrated intervention timing, and a more complete
+%   picture of why epidemics of the same pathogen can look so different.
+
+%   ---
+%   At ~500 words, you probably can't hit all of these at full depth. I'd prioritize the first three
+%   bullets and the limitations, and weave the measurement/biology points in more briefly. The "why ψ
+%   has been overlooked" point is interesting but could be cut if space is tight — it's more suited to
+%   a longer-format journal.
+
+  % Future directions: 
+  % - Mixture models (as discussed) — combining a narrow burst with a broad baseline, potentially
+  % informed by viral kinetics data.
+  % - More complex contact structures — moving beyond periodic and stochastic contact processes to
+  % empirical contact networks, age-structured mixing, household vs. community contacts. The
+  % coincidence superspreading mechanism should interact differently with structured vs. homogeneous
+  % mixing.
+  % - Joint inference of ψ and k — currently ψ and Lloyd-Smith's k are estimated separately, but
+  % they're entangled: some of the observed overdispersion attributed to k may actually be coincidence
+  % superspreading from low ψ. A framework that estimates both simultaneously from transmission tree
+  % data would allow decomposition of overdispersion into its sources (contact-driven,
+  % infectiousness-driven, coincidence).
+  % - Pathogen-specific viral kinetics as priors on ψ — rather than estimating ψ purely from
+  % transmission trees, viral load trajectory data (à la Goyal) combined with dose-response models
+  % could provide informative priors or independent estimates. This links ψ to measurable within-host
+  % quantities.
+  % - Spatial and mobility dimensions — the current framework treats contact variation as temporal
+  % only. But people also move between locations (home, work, transit), and a burst coinciding with a
+  % crowded setting is different from one at home. A spatiotemporal contact process would connect ψ to
+  % venue-based superspreading.
+  % - Evolutionary implications — if ψ affects epidemic establishment probability, epidemic speed, and
+  % intervention effectiveness, it's plausibly under selection. Pathogens that evolve shorter, more
+  % intense shedding windows (lower ψ) might gain transmission advantages in certain contact
+  % environments. This connects to virulence-transmission tradeoffs.
+  % - Impact on phylodynamic inference — bursty infectiousness produces correlated coalescent events
+  % within transmission clusters. Standard phylodynamic models assume independent transmission events;
+  % low ψ would violate this and could bias estimates of effective population size and growth rate from
+  %  sequence data.
+  % - Real-time forecasting — the Var[W] result shows that ψ inflates uncertainty in early outbreak
+  % trajectories. Incorporating ψ into ensemble forecasting models could produce better-calibrated
+  % prediction intervals, especially for high-R₀ pathogens where the effect is largest.
+  % - Multi-pathogen or multi-variant settings — different variants of the same pathogen might have
+  % different ψ values (e.g., if mutations alter viral kinetics). This could partly explain why variant
+  %  waves behave differently even after accounting for differences in R₀ and immune escape.
+
+
+  % Structure and emphasis — what's working:
+  % - The opening paragraph (153) nails the framing: ψ as parallel to k. This is the right lead.
+  % - The practical implications paragraph (155) covers the right ground.
+  % - The superspreading events vs. individuals paragraph (157) is well-placed as a standalone point.
+  % - The "prior literature" paragraph (159) is a valuable addition — it preempts the "hasn't this been
+  %  done?" objection.
+
+  % Typos (there are several):
+  % - Line 153: $\pis$ → $\psi$
+  % - Line 157: mechansm → mechanism; conincidence → coincidence
+  % - Line 159: tie-verying → time-varying; individaul → individual; modes → models
+  % - Line 163: exsit → exist; diferent → different
+
+  % Substantive suggestions:
+
+  % 1. Practical implications (155) — too list-like. This paragraph reads as a catalogue: burstiness
+  % affects X, burstiness affects Y, burstiness affects Z. Each point is valid but they're all at the
+  % same altitude. Consider picking one or two to develop with a concrete example, and subordinating
+  % the rest. The D&I timing point is the most actionable — "a small increase in testing frequency
+  % could yield a major improvement in TE" is compelling but vague. If you can put a number on it (even
+  %  a rough one from your simulations), it becomes much more memorable.
+  % 2. Superspreading paragraph (157) — could be tighter. "This maps onto the long-observed but
+  % previously unformalized qualitative distinction between superspreading events and superspreaders"
+  % is a bit wordy. Consider: "This formalizes the long-observed but previously ad hoc distinction
+  % between superspreading events and superspreader individuals."
+  % 3. Prior literature paragraph (159) — strongest candidate for revision. This is the most important
+  % paragraph for Science reviewers and also the roughest. Issues:
+  %   - It currently reads as a list of "people have sort of looked at this." For Science, you want a
+  % sharper thesis: something like "The ingredients for our findings have been present in the
+  % literature for over a decade, but were never assembled because standard modeling frameworks
+  % integrate over individual-level timing by construction."
+  %   - The sentence "the shape of the infectiousness kernel is either a modeling assumption adopted
+  % for a different purpose or a feature integrated over" is the key insight but it's buried at the
+  % end. Lead with it.
+  %   - Be more specific about what "shifts in the punctuation of the generation interval distribution"
+  %  refers to — this is your own prior work, presumably, and a Science reader won't know what
+  % "punctuation" means here without context.
+  % 4. Limitations (161) — appropriately brief but missing one. You should mention that the analysis
+  % assumes homogeneous mixing beyond the contact process — this is a real limitation given that
+  % network structure can interact with burstiness in nontrivial ways.
+  % 5. Future directions (163) — slight oversell at the end. "Since ψ interacts with growth rate and
+  % overdispersion, it may presumably be under evolutionary selective pressure in some contexts; this
+  % remains an important area of study." The qualifier "presumably" undercuts the confidence, and "an
+  % important area of study" is generic. Either commit to the claim with a sentence of reasoning (e.g.,
+  %  "pathogens that evolve narrower shedding windows would gain a transmission advantage in
+  % environments with periodic high-contact opportunities") or cut it. For a 500-word Discussion in
+  % Science, I'd lean toward cutting — the evolution point is speculative and you have more concrete
+  % future directions to spend words on.
+  % 6. Missing: the measurement opportunity. The current future directions paragraph frames measurement
+  %  as a challenge but doesn't point toward a solution. A sentence like "Prospective household studies
+  %  with dense viral sampling could resolve ψ directly, and our power analysis suggests that ~50 index
+  %  cases suffice for well-powered inference when R₀ ≥ 6" would end on a more constructive note.
+  % 7. Ordering suggestion. Consider swapping paragraphs 3 (superspreading events vs. individuals) and
+  % 4 (prior literature). The current flow is: framing → practical implications → superspreading
+  % distinction → prior literature → limitations → future. It might flow better as: framing → practical
+  %  implications → prior literature → superspreading distinction → limitations → future. The reason:
+  % the prior literature paragraph explains why ψ was overlooked, which sets up the superspreading
+  % distinction as the payoff — "and here's what was missed." The current order puts the payoff before
+  % the setup.
+
+  % Overall assessment: The content is right. The main work is tightening the prose (especially
+  % paragraph 159), cutting a few words from the practical implications catalogue, and fixing the
+  % typos. At roughly 500 words this is well-sized for Science.
+
+
+
+% These findings carry several practical implications. By amplifying variability in epidemic timing, burstiness can increase uncertainty in outbreak forecasts; thus, incorporating uncertainty in $\psi$ in forecasts is critical for appropriately quantifying forecast uncertainty. For detect-and-isolate interventions, routine shifts in detection timing --- such as changes in the timing of symptom onset across SARS-CoV-2 variants [x] or adjustments to test-based screening frequencies --- can produce sharp changes in effectiveness when infectiousness is bursty. This underscores the importance of characterizing the indivdual infectiousness kernel, or assessing robustiness to it, for operational planning. When inferring $g(\tau)$, treating serial intervals from the same infector as independent draws from $g(\tau)$, as is common practice, can produce overconfident parameter estimates; where possible, contact tracing records should identify the index case to enable cluster-level analysis that accounts for the correlation structure that burstiness induces, and estimates of $g(\tau)$ that do not account for  this clustering should be interpreted with caution. 
+
+% Our findings are subject to several limitations. The Gamma burst model, while analytically tractable, is one of many possible parameterizations of the within- \vs between-individual decomposition of $g(\tau)$'s variance and may not capture the full range of individual infectiousness kernels. The Gamma burst model assumes a unimodal generation interval distribution and individual infectiousness kernel, which may hold better for acute respiratory infections than for other infections like HIV, tuberculosis, and malaria; models accounting for variable infectiousness timing in these more complex settings are needed. To isolate the impact of $\psi$, we held intrinsic infectiousness fixed across individuals; but $\psi$ and the individual reproduction number could be correlated, something we did not consider here. Our contact models are stylized and do not capture empirical contact structures, including household, community, and workplace stratification. Our estimates of $\psi$ rely on serial intervals from reported clusters, which are noisy indicators of infection time; this potentially biases our estimates of $\psi$ toward lower values. Meanwhile, the cluster data may over-represent large clusters, creating biases that likely push $\hat{\psi}$ in both directions.
+
+% A key feature of bursty infectiousness is that it creates a mechanistically distinct and structurally untargetable form of superspreading. The previously {\it ad hoc} dinstinction between superspreaders (as individuals with systematically higher contact rates or infectiousness) and superspreading events is formalized in the concept of coincidence superspreading, which produces superspreading events without superspreaders. Due to coincidence superspreading, some fraction of overdispersion is unattributable to any persistent individual characteristic, setting a floor on overdispersion regardless of how well we identify and manage high-risk individuals.
+
+% Coincidence superspreading produces superspreading events without intrinsic superspreaders, formalizing a long-observed but previously {\it ad hoc} distinction. As a result, some fraction of overdispersion is unattributable to any persistent individual characteristic, setting a floor on $k$ regardless of how well we identify and manage high-risk individuals.
+
+
+% A natural question is why bursty infectiousness has so far received little attention as a standalone concept. Part of the answer is structural: since $\psi$ does not affect mean-field dynamics, standard models depending only on $R_0$ and $g(\tau)$ are $\psi$-invariant by construction. Individual-based models can in principle accommodate variable infectiousness timing, but typically treat the shape of the individual infectiousness kernel as a modeling choice rather than an object of study; and approaches like the linear chain trick narrow the individual infectiousness profile while simultaneously changing $g(\tau)$, conflating two distinct effects \citep{wearing_appropriate_2005, lloyd_realistic_2001}. The central contribution of defining $\psi$ and introducing the Gamma burst model is to decouple these effects, allowing the the infectiousness kernel's width to vary while holding $g(\tau)$ fixed.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % ---
+  % Overall impression: This is strong. The logical arc — motivation → model → data → consequences — is
+  %  clear and well-paced. The writing is already close to Science-quality. Below are specific
+  % suggestions.
+
+  % Typos and minor errors (fix these first):
+  % - Line 92: "somwhat" → "somewhat"
+  % - Line 94: "artifically" → "artificially"; "baises" → "biases"
+  % - Line 96: "isoalte" → "isolate"
+  % - Line 132: "pesistent" → "persistent"
+  % - Line 142: "provide show" → "show" (doubled verb); also "XX% - XX%fewer" needs a space before
+  % "fewer"
+  % - Line 189: "epidiemics" → "epidemics"
+
+  % Structural / clarity suggestions:
+
+  % 1. Opening paragraph (90): Good framing, but the phrase "the variation around that mean ---
+  % including best- and worst-case scenarios --- hinges upon individual-level factors" is slightly
+  % vague. Consider specifying what individual-level factors you mean (superspreading from Lloyd-Smith,
+  %  stochastic extinction, etc.) so the reader sees exactly what's established before you introduce
+  % the new one.
+  % 2. Paragraph 2 (92): The public health messaging angle ("a person may want to know...") is
+  % effective but feels slightly out of place this early — it reads more like Discussion material. For
+  % Science, consider leading instead with the mechanistic gap: infectiousness is typically modeled as
+  % a smooth profile matching the generation interval, but viral kinetics data suggest it may be much
+  % narrower. The messaging point could go in Discussion.
+  % 3. Model paragraph (96): This is dense but mostly clear. Two suggestions:
+  %   - The sentence "Since the latent period and post-latent infection time are both
+  % Gamma-distributed, their sum follows a Gamma(α,β) = g(τ) distribution" relies on the reader knowing
+  %  the Gamma convolution property. For Science's broad audience, consider a brief gloss: "...their
+  % sum follows a Gamma(α,β) distribution (by the convolution property of Gamma random variables),
+  % recovering g(τ)."
+  %   - The Morris citation at the end could be made more specific: "...stochastic viral replication
+  % early in infection produces between-individual variation in the timing of peak viral load (the
+  % variable latent period), while post-peak clearance kinetics are more stereotyped (the burst)."
+  % 4. Empirical estimates (118): "placed a flat prior on ψ, and the likelihood was computed by
+  % integrating over all possible latent periods" — consider briefly saying what the likelihood
+  % function is or pointing to the equation in Methods/Supplement. The phrase "integrating over all
+  % possible latent periods" is somewhat opaque without knowing the model structure.
+  % 5. Coincidence superspreading (132–144): This is the strongest section. The OD formula is
+  % well-motivated and the η interpretation is excellent. One issue: you introduce δ and ω in the
+  % contact model, but δ is also used for the symptom offset in paragraph 183. This notation collision
+  % will confuse readers — consider using a different symbol for the contact amplitude (e.g., A, or
+  % c_amp).
+  % 6. Epidemic latent period (158–181): The branching process derivation is clear, but the
+  % proportionality constant "c(R₀, α)" in equation (5) is awkward — "c" collides with the contact rate
+  %  notation, and calling it "a constant" when it depends on two parameters is a stretch. Consider
+  % using a different letter (e.g., κ or γ, though γ is overloaded in epi) and calling it "a function
+  % of R₀ and α."
+  % 7. D&I paragraph (183–187): Very good, but long. For Science, consider splitting this into two
+  % paragraphs: one on TE sensitivity, one on the two additional effects (GI truncation, D&I-induced
+  % overdispersion). The sentence starting "In the bursty extreme, a fraction 1-TE of individuals
+  % retain their full infectiousness..." is a key insight and deserves more prominence.
+  % 8. Gathering size (189): The claim that "the absolute reduction [in OD] is greatest when the
+  % baseline overdispersion is highest" is important but stated without intuition. A one-sentence
+  % explanation would help: something like "because truncating the contact distribution removes the
+  % high-contact tail that bursty infectiousness exploits."
+  % 9. Parameter estimation (191–195): Clear and well-argued. The effective sample size argument (R₀
+  % draws collapse to 1 draw) is very compelling. Consider explicitly connecting this to practical
+  % consequences: "This means that a transmission tree with 100 secondary cases may contain no more
+  % timing information than 100 independent index cases, rather than the 100×R₀ independent draws
+  % commonly assumed."
+
+  % Science-specific considerations:
+
+  % - Equation count: You have 5 displayed equations. Science papers typically have 0–3 in the main
+  % text. Consider moving equations (2)–(4) (the branching process derivation) to Methods or
+  % Supplement, and keeping only the OD formula (eq 1) and perhaps the Var[W] result (eq 5) in the main
+  %  text. The ς derivation can be summarized in words.
+  % - Length: This text is roughly 2,500 words. Science Research Articles allow ~4,500 words total
+  % including abstract, references, and figure legends, with ~2,500 for body text. You're close to the
+  % limit for body text alone, and you still need a Discussion section. Tightening will be necessary —
+  % the branching process derivation and some of the D&I detail are candidates for compression.
+  % - Missing Discussion: The text ends after the parameter estimation section with no explicit
+  % Discussion. Science expects a brief closing section synthesizing the implications. Key points to
+  % hit: (i) ψ as a new axis of pathogen characterization alongside R₀ and k; (ii) practical
+  % consequences for outbreak response; (iii) the measurement challenge as both a limitation and an
+  % opportunity.
+  % - Figure references: All currently say "Figure XX" — make sure these are resolved before
+  % submission, obviously, but also consider whether 4 main-text figures (which seems to be the count
+  % based on the legends in the aux file) is the right number for Science (they allow up to 4).
+
+  % What's working well:
+  % - The "coincidence superspreading" framing is memorable and precise
+  % - The OD formula with the η interpretation is the paper's strongest analytical contribution and
+  % it's presented clearly
+  % - The empirical estimates section strikes the right tone of caution
+  % - The D&I analysis connecting ψ to both TE sensitivity and downstream epidemic dynamics is
+  % compelling
