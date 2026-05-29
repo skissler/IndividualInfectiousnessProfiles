@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.5)  29 MAY 2026 09:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.5)  29 MAY 2026 13:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -849,17 +849,14 @@ LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
 {/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/2023
 /texmf-dist/fonts/enc/dvips/xcharter/xch_rydp4l.enc}]
-! Missing $ inserted.
-<inserted text> 
-                $
-l.148 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
+Underfull \hbox (badness 5091) in paragraph at lines 135--136
+[]\T1/XCharter-TLF/m/n/9 Simulations con-firm these pre-dic-tions across the be
+nch-mark
+ []
 
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
-(Font)              scaled to size 8.73001pt on input line 155.
-[2] [3] [4] (./main-science.bbl
+(Font)              scaled to size 8.73001pt on input line 139.
+[2] [3] (./main-science.bbl
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
 (Font)              scaled to size 11.64001pt on input line 1.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
@@ -871,8 +868,8 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
-)) [5{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.e
-nc}] [6
+)) [4{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.e
+nc}] [5
 
 ]
 (./main-science.aux)
@@ -881,34 +878,33 @@ LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
 
 Package rerunfilecheck Info: File `main-science.out' has not changed.
-(rerunfilecheck)             Checksum: 4434EF4F975556F2B42F51A725BC0E26;119.
+(rerunfilecheck)             Checksum: F90EC86B029096B9126BDD68CF9CD717;119.
  ) 
 Here is how much of TeX's memory you used:
- 16475 strings out of 476025
- 253473 string characters out of 5790018
+ 16473 strings out of 476025
+ 253455 string characters out of 5790018
  1890388 words of memory out of 5000000
  36622 multiletter control sequences out of 15000+600000
  623778 words of font info for 104 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 88i,5n,134p,1768b,615s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 88i,6n,134p,1405b,614s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold
 .pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/xcharter/XCharter-I
 talic.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/xcharter/XChar
 ter-Roman.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/xcharter/X
-CharterMathMI.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/xchart
-er/XCharterMathRM.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super
-/sftt0900.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/newtx/txex
-s.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb><
-/usr/local/texlive/2023/texmf-dist/fonts/type1/public/newtx/txsys.pfb></usr/loc
-al/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texl
-ive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/202
-3/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on main-science.pdf (6 pages, 307550 bytes).
+CharterMathMI.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sft
+t0900.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/newtx/txexs.pf
+b></usr/local/texlive/2023/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb></usr
+/local/texlive/2023/texmf-dist/fonts/type1/public/newtx/txsys.pfb></usr/local/t
+exlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/
+2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2023/te
+xmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on main-science.pdf (5 pages, 301769 bytes).
 PDF statistics:
- 163 PDF objects out of 1000 (max. 8388607)
- 125 compressed objects within 2 object streams
- 22 named destinations out of 1000 (max. 500000)
+ 153 PDF objects out of 1000 (max. 8388607)
+ 118 compressed objects within 2 object streams
+ 20 named destinations out of 1000 (max. 500000)
  9 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -359,3 +359,59 @@ These estimates should be regarded with caution. Multiple biases can impact esti
 % shift the timing of epidemics, it should be accounted for when generating outbreak forecasts and when estimating epidemiological parameters like $r$ and $g(\tau)$. 
 
 % Burstiness should be accounted for in epidemic forecasting, since it can inflate variability in daily case counts and shift the timing of epidemics. When designing interventions, burstiness can potentially be leveraged to gain significant reductions in transmission with relatively little effort: for example, a small increase in testing frequency could in some cases yield a major improvement in TE. Furthermore, burstiness can interact with D\&I interventions and gathering size restrictions to produce population-level effects --- like slower growth rate and elevated outbreak extinction probability --- that are masked by considering reductions in $R_\text{eff}$ alone, underscoring the importance of accounting for burstiness when predicting the transmission impacts of interventions. When estimating epidemiological values like $r$ and $g(\tau)$, burstiness can infuse uncertainty and artificial confidence: thus, burstiness must be accounted for when designing studies to estimate these quantities, and caution should be taken when interpreting past results that did not account for burstiness. 
+
+
+% $\text{OD}$ is maximized by bursty infectiousness ($\psi \rightarrow 0$). The sensitivity of $\text{OD}$ to $\psi$ depends on $\eta = 2 \pi \bar{g} / (\alpha \omega)$: when $\eta \gg 1$, which happens for example when the contacts vary quickly relative to the mean generation time ($\omega \ll \bar{g}$), virtually all infection kernels average over the entire contact process, yielding little overdispersion ($\text{OD} \rightarrow 0$) regardless of $\psi$. Alternatively, when $\eta \ll 1$, which can happen when contacts vary slowly relative to the mean generation time ($\omega \gg \bar{g}$), all infection kernels --- whether narrow or broad --- only ``see'' a small part of the contact variation, causing maximum overdispersion ($\text{OD} \rightarrow \rho^2 / 2$) that is insensitive to $\psi$. The impact of $\psi$ is thus most visible when $\eta \approx 1$, in which case broad infectiousness ($\psi \rightarrow 1$) causes the infection kernel to effectively average over the contact variation, while bursty infectiousness ($\psi \rightarrow 0$) translates the contact process' variation directly into elevated overdispersion. For acute respiratory pathogens, where $\bar{g}$ may range from roughly 3 to 12 days, weekly-varying contact patterns are most relevant for $\psi$-related coincidence superspreading; daily variation gets averaged out, while monthly variation contributes to overdispersion regardless of $\psi$. Empirical contact surveys show that contacts vary meaningfully on these timescales: the POLYMOD and BBC Pandemic studies document 20\%-40\% more contacts on weekdays than weekends across European populations, corresponding to $\rho \approx 0.1-0.2$ at $\omega = 7$ days. 
+
+
+
+
+
+ % Ordering: The sequence — introduce superspreading → coin the "coincidence" mechanism
+ %  → derive analytically → interpret → confirm with simulations — is logical and
+ %  well-paced. The section-level ordering (coincidence superspreading first among the
+ %  results) is also right: it's the most novel conceptual contribution, and it's vivid
+ %  enough to anchor everything that follows.
+
+ %  What's working well:
+ %  - "Coincidence superspreading" is a precise and memorable coinage — it will stick
+ %  with readers
+ %  - The floor-on-overdispersion point in paragraph 2 is the conceptual highlight of the
+ %   section and is stated clearly
+ %  - The OD formula is well-motivated and the leap from paragraph 2 to the formula feels
+ %   earned
+ %  - The extinction probability payoff in the final paragraph is a strong closing result
+
+ %  Main concerns:
+
+ %  1. Paragraph 4 (line 119) is the biggest problem. It does three things in one
+ %  paragraph: derives the η regime analysis, applies it to respiratory pathogens, and
+ %  introduces empirical POLYMOD/BBC data. That's too much. The η analysis is genuinely
+ %  interesting but is probably better placed in Supplementary; in the main text what the
+ %   reader needs is the qualitative insight ("ψ matters most when contact variation
+ %  operates on the same timescale as the generation interval"), not the full
+ %  three-regime derivation. The POLYMOD data is a nice grounding detail but currently
+ %  interrupted by XX% placeholders, which makes the paragraph feel unfinished.
+ %  2. Missing transitional setup before the model. Paragraph 3 jumps from the
+ %  qualitative concept (coincidence superspreading) straight into the contact model
+ %  equation without first stating the key relationship: bursty infectiousness (low ψ)
+ %  amplifies coincidence superspreading. A single orienting sentence before the model
+ %  setup would help the reader follow the logic.
+ %  3. The extinction probability result comes out of the blue. The section heading is
+ %  "coincidence superspreading" and the closing result is about epidemic extinction
+ %  probability. The connection is real — higher overdispersion → higher extinction
+ %  probability — but it's not stated anywhere before line 121. A brief setup sentence
+ %  ("this overdispersion has direct consequences for outbreak establishment...") would
+ %  prevent the result from feeling like a surprise.
+ %  4. Three minor errors: "Empirical contact surveys provide show" (double verb,
+ %  line 119); "showed" should be "show" (line 121); and "with contacts vary slowly"
+ %  should be "when contacts vary slowly" (line 119).
+ %  5. Equation count: This section has one displayed equation, which is fine. If the
+ %  branching process equations from the epidemic timing section (two more equations) are
+ %   kept in the main text, the overall count may exceed what Science expects. Worth
+ %  keeping in mind as you proceed.
+
+
+ illustrating how bursty infectiousness can produce substantial differences in epidemic timing, especially for pathogens with high $R_0$. 
+
+% Simulations illustrate the impact of bursty infectiousness on epidemic timing and its relationship with $R_0$. Survival curves depicting the time to reach 5\% total prevalence show marked differences across $\psi$-values for SARS-CoV-2 omicron and measles ({{\bf Figure XX}}). For example, the fraction of simulated measles outbreaks that reached 5\% prevalence by week 5 was xx\% at the bursty extreme ($\psi = 0$) \vs xx\% at the smooth extreme ($\psi = 1$), consistent with burstiness driving more variable and late-shifted epidemic timing. For influenza, which has a lower $R_0$, differences in epidemic timing across $\psi$-values were hardly discernible ({{\bf Figure XX}}). 
