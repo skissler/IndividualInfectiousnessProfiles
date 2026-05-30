@@ -89,7 +89,7 @@
 
 Epidemic trajectories are profoundly shaped by random, individual-level effects. Superspreading can make epidemics less likely to establish, but more explosive when they do; and chance events during the cryptic early stages of an outbreak can durably shift its overall timing.\citep{lloyd-smith_superspreading_2005, morris_computation_2024} Accounting for such effects is vital for public health preparedness: while a good understanding of an epidemic's expected trajectory can be achieved using deterministic, population-level models, the variation around that mean --- including best- and worst-case scenarios --- hinges upon individual variation in transmission capacity and timing. 
 
-One such factor that has so far received little attention is the concentration of individual infectiousness, or its ``burstiness''. Evidence from SARS-CoV-2 and influenza suggests that the window of meaningful infectiousness for those viruses may be short --- even less than a day --- despite the fact that the infectiousness window is typically quoted as lasting 6-8 days for influenza and 9-12 days for SARS-CoV-2.\citep{goyal_viral_2021, centers_for_disease_control_and_prevention_yellow_2025, centers_for_disease_control_and_prevention_about_2026} These longer spans reflect the generation interval distribution, $g(\tau)$, a population-level average of the times $\tau$ between primary and secondary infections. Its individual-level counterpart, the infectiousness kernel\citep{svensson_note_2007, champredon_intrinsic_2015}, describes the distribution of transmission times for a single infector, and need not resemble $g(\tau)$: $g(\tau)$ can be broad simply because different individuals' infectiousness windows fall at different times, even if each individual is only briefly infectious. If the infectiousness kernel is in reality much more concentrated than $g(\tau)$, this could impact everything from how individuals gauge their own risk of transmitting to how epidemics unfold overall. 
+One axis of variation that has so far received little attention is the concentration of individual infectiousness, or its ``burstiness''. Evidence from SARS-CoV-2 and influenza suggests that the window of meaningful infectiousness for those viruses may be short --- even less than a day --- despite the fact that the infectiousness window is typically quoted as lasting 6-8 days for influenza and 9-12 days for SARS-CoV-2.\citep{goyal_viral_2021, centers_for_disease_control_and_prevention_yellow_2025, centers_for_disease_control_and_prevention_about_2026} These longer spans reflect the generation interval distribution, $g(\tau)$, a population-level average of the times $\tau$ between primary and secondary infections. Its individual-level counterpart, the infectiousness kernel\citep{svensson_note_2007, champredon_intrinsic_2015}, describes the distribution of transmission times for a single infector, and need not resemble $g(\tau)$: $g(\tau)$ can be broad simply because different individuals' infectiousness windows fall at different times, even if each individual is only briefly infectious. If the infectiousness kernel is in reality much more concentrated than $g(\tau)$, this could impact everything from how individuals gauge their own risk of transmitting to how epidemics unfold overall. 
 
 Although individual-based simulations can in principle accommodate heterogeneous infectiousness timing, standard analytical frameworks operate on the population-level $g(\tau)$ directly and thus are blind to burstiness by construction. More fundamentally, no existing framework has been designed to isolate burstiness as a free parameter while holding $g(\tau)$ and $R_0$ fixed, making it impossible to attribute observed epidemic dynamics specifically to burstiness. Empirical evidence is likewise limited: resolving the infectiousness kernel requires densely sampled, individual-level transmission data that is rarely available, and what data exist are subject to biases that can both inflate and obscure the apparent degree of burstiness. Whether burstiness has epidemiologically meaningful consequences therefore remains an open question. 
 
@@ -192,6 +192,121 @@ Looking ahead, the most pressing open question is measurement: without better es
 \paragraph{Figure 5 $|$ Interventions}
 
 
+  % ---
+  % Figure 1 — The kernel and ψ
+
+  % The job of this figure is to make the conceptual leap from g(τ) to the individual
+  % kernel feel intuitive and to introduce the Gamma burst model.
+
+  % Include:
+  % - Panel a: The core schematic — g(τ) as a fixed population-level curve on top, with
+  % three individual-level kernels underneath at ψ=0, ψ≈0.5, ψ=1. Make visually clear
+  % that all three produce the same g(τ). This is the single most important panel in the
+  % paper.
+  % - Panel b: The Gamma burst model mechanics — show a few example infectors, each with
+  % a shared latent period drawn from Gamma((1-ψ)α,β) and individual jitter Gamma(ψα,β),
+  % producing a narrow cluster of secondary infection times. Illustrates why ψ=0
+  % concentrates infections and ψ=1 spreads them.
+  % - Panel c: Generation interval distributions for the three benchmark pathogens,
+  % labeled with their α and β values. Grounds all subsequent quantitative results.
+
+  % Leave out: The SEIR stepwise profile comparison — appropriate for v3 but unnecessary
+  % here; the Gamma burst model illustration does the same conceptual work more
+  % efficiently.
+
+  % ---
+  % Figure 2 — Empirical estimates of ψ
+
+  % Include:
+  % - Panel a: A schematic of the inference approach — a stylized transmission tree with
+  % within-cluster vs between-cluster variance highlighted, contrasting what narrow vs
+  % broad kernels look like in the data. This gives readers the intuition before the
+  % results.
+  % - Panel b: Dot/forest plot of ψ̂ with confidence intervals across pathogens. Order by
+  % estimate so the spectrum reads naturally.
+
+  % Leave out: The power analysis (Supplementary). Detailed likelihood curves. Don't try
+  % to show all three benchmark pathogens prominently here — they get their own showcase
+  % in Figs 3–5.
+
+  % ---
+  % Figure 3 — Coincidence overdispersion
+
+  % Include:
+  % - Panel a: The mechanism — a sinusoidal contact function with a narrow infectiousness
+  %  kernel superimposed at different phases, illustrating how the burst-contact
+  % coincidence generates variation in secondary case counts. This is the conceptual
+  % heart of the result.
+  % - Panel b: Heatmaps of k as a function of ψ and ω (or ρ) for the three benchmark
+  % pathogens. The weekly contact variation zone deserves visual emphasis.
+  % - Panel c: Extinction probability as a function of ψ — directly links the
+  % overdispersion result to biological consequences and bridges to Figure 4.
+
+  % Leave out: Stochastic contact process results (Supplementary). Separate panels for
+  % each pathogen's extinction curve — overlay on one panel.
+
+  % ---
+  % Figure 4 — The epidemic latent period
+
+  % Include:
+  % - Panel a: Conceptual schematic — several simulated epidemic trajectories with the
+  % same r, showing how they look like time-shifted versions of each other. Visually
+  % illustrate the W→ζ mapping. This is the intuition panel that earns the branching
+  % process formalism.
+  % - Panel b: Var[W] vs ψ for the three benchmark pathogens — shows both the analytic
+  % prediction and how R₀ modulates the effect.
+  % - Panel c: Survival curves (time to 5% prevalence) for measles and SARS-CoV-2 omicron
+  %  across ψ values, with influenza as the negative result. Three pathogens, one panel,
+  % ψ as the color/line axis.
+
+  % Leave out: Don't separate influenza into its own panel — the negligible-difference
+  % result is best shown as a contrast within a single panel.
+
+  % ---
+  % Figure 5 — Interventions
+
+  % On gathering restrictions: I'd include it, but as a single clean panel rather than a
+  % detailed heatmap. The key result — that gathering-restricted epidemics have higher
+  % extinction probabilities than Reff-matched unrestricted epidemics, with the gap
+  % largest at low ψ — can be shown in one comparison plot.
+
+  % Include:
+  % - Panel a: D&I schematic — narrow vs broad kernel with a detection time indicated,
+  % illustrating why the narrow kernel makes TE sensitive to small timing shifts.
+  % Essential intuition.
+  % - Panel b: TE vs detection time for symptom-based detection across ψ values, for one
+  % benchmark pathogen (SARS-CoV-2 omicron most relatable). Shows the sharp drop and the
+  % ψ-dependence.
+  % - Panel c: Gathering restrictions — extinction probability comparison
+  % (gathering-restricted vs Reff-matched) as a function of ψ for the benchmark
+  % pathogens. One panel, clean.
+
+  % Leave out: Testing-based detection in a separate panel (mention in text, details to
+  % Supplementary). Don't try to show both detection mechanisms and gathering
+  % restrictions at equal weight.
+
+  % ---
+  % On r/g(τ) inference going to Supplementary:
+  % Correct call. The results are important but less visually compelling than the other
+  % four story threads, and the paper already runs long conceptually. The key numbers (SE
+  %  of r̂ inflated x-fold, effective draws collapsing from R₀ to 1) land clearly in the
+  % text without needing a main figure.
+
+  % ---
+  % One overall observation: Figures 1 and 2 together serve as setup; Figures 3, 4, and 5
+  %  each show one major consequence of ψ. That's a clean three-act results structure.
+  % The main risk is Figure 5 feeling cramped if you're trying to show D&I and gathering
+  % restrictions at adequate resolution in three panels. If space is tight, gathering
+  % restrictions could move to a single Supplementary figure with a summary result
+  % referenced in the main text.
+
+
+
+
+
+
+
+% ===============================================================================
 % \paragraph{Figure 1 $|$ The individual infectiousness profile and the smoothness parameter $\psi$.}
 % \textbf{a}, The population-level infectiousness profile $A(\tau)$ (black curve) can arise from different individual-level profiles $a_i(\tau)$. Left: stepwise profiles (SEIR model). Centre: smooth profiles matching the population average. Right: spike profiles concentrated at single moments. All produce the same $A(\tau)$ and thus the same deterministic epidemic dynamics.
 % \textbf{b}, The Gamma time-shifted model parameterizes this decomposition with $\psi \in [0,1]$. Secondary infections from index case $i$ occur at times $\tau_{ij} = l_i + \epsilon_j$, where $l_i \sim \text{Gamma}((1-\psi)\alpha, \beta)$ is a shared latent period and $\epsilon_j \sim \text{Gamma}(\psi\alpha, \beta)$ is independent jitter. Examples shown for three values of $\psi$.
