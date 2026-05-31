@@ -7,6 +7,8 @@ source("code/utils.R")
 source("code/global_parameters.R")
 source("code/parameters.R")
 
+set.seed(42)
+
 # c_per             <- 1
 c_per             <- 7
 c_amp_vals_sim    <- seq(0, 1, length.out=25)
@@ -60,7 +62,7 @@ for(idx in 1:nrow(sim_grid_periodic)){
 	c_amp_val <- sim_grid_periodic$c_amp[idx]
 	z     <- make_contact_fn_periodic(R0, c_amp_val, c_per)
 	z_max <- R0*(1 + c_amp_val)
-	gfun  <- gen_inf_attempts_gamma_contacts(T=Tgen, z=z, z_max=z_max,
+	gfun  <- gen_inf_attempts_gamma_contacts(Tgen=Tgen, z=z, z_max=z_max,
 	                                         alpha=alpha, psi=psi_val)
 	tinfs      <- c_per * runif(n_index)
 	noffspring <- sapply(lapply(tinfs, gfun), length)
@@ -140,7 +142,7 @@ epi_idx     <- 0L
 for (psi_val in psi_epi) {
 	z     <- make_contact_fn_periodic(R0, c_amp_epi, c_per)
 	z_max <- R0 * (1 + c_amp_epi)
-	gfun  <- gen_inf_attempts_gamma_contacts(T=Tgen, z=z, z_max=z_max,
+	gfun  <- gen_inf_attempts_gamma_contacts(Tgen=Tgen, z=z, z_max=z_max,
 	                                         alpha=alpha, psi=psi_val)
 	for (sim in 1:nsim_small) {
 		tinf <- sim_stochastic_fast(n=popsize, gen_inf_attempts=gfun,

@@ -16,6 +16,8 @@ source("code/utils.R")
 source("code/global_parameters.R")
 source("code/parameters.R")
 
+set.seed(42)
+
 # --- Parameters ---
 k_c_gs     <- 1                          # moderate contact heterogeneity
 lambda_gs  <- 1                          # Poisson switching rate
@@ -207,107 +209,3 @@ save_fig(fig_gathering_cmax, sprintf("fig_gathering_cmax_%s", pathogen), width =
 cat(sprintf("  Saved fig_gathering_cmax_%s\n", pathogen))
 
 } # end pathogen loop
-
-
-
-
-
-# # Plan: Gathering Size Restrictions Analysis                                                        │
-# │                                                                                                   │
-# │ Context                                                                                           │
-# │                                                                                                   │
-# │ We've established analytically that gathering size restrictions (truncating the Gamma-Poisson     │
-# │ contact process at c_max) reduce R₀ by a ψ-independent factor μ_T, and increase k by a            │
-# │ ψ-independent proportional factor k_c^T/k_c. But the establishment probability depends            │
-# │ nonlinearly on both R₀ and k, creating a "self-defeating" dynamic: the reduced overdispersion     │
-# │ partially offsets the R₀ reduction by making transmission more reliable. This offset is larger    │
-# │ for punctuated profiles (small ψ), where k is small and the absolute change in 1/k matters more.  │
-# │                                                                                                   │
-# │ We want to demonstrate this with simulations. The key comparison is between:                      │
-# │ - Full restriction model: truncated contact process (true R₀_new, true k_new)                     │
-# │ - R₀-only model: original contact process but with biological infectiousness scaled down to match │
-# │  R₀_new (true R₀_new, original k_old)                                                             │
-# │ - Poisson model: no contact process, Poisson(R₀_new) offspring (R₀_new, k = ∞)                    │
-# │                                                                                                   │
-# │ Expected outcome: P_est_R0only < P_est_restricted < P_est_Poisson, with the gaps larger for small │
-# │  ψ.                                                                                               │
-# │                                                                                                   │
-# │ Files to modify                                                                                   │
-# │                                                                                                   │
-# │ - code/utils.R — add c_max parameter to gen_inf_attempts_gammapoisson_contacts() and helper       │
-# │ rtgamma()                                                                                         │
-# │ - code/gatheringsize.R — new file with the analysis script                                        │
-# │                                                                                                   │
-# │ Implementation                                                                                    │
-# │                                                                                                   │
-# │ 1. Add rtgamma() helper to code/utils.R                                                           │
-# │                                                                                                   │
-# │ Simple truncated Gamma sampler using rejection:                                                   │
-# │ rtgamma <- function(n, shape, rate, upper = Inf) {                                                │
-# │     if (is.infinite(upper)) return(rgamma(n, shape, rate))                                        │
-# │     x <- numeric(n)                                                                               │
-# │     for (i in seq_len(n)) {                                                                       │
-# │         repeat {                                                                                  │
-# │             draw <- rgamma(1, shape, rate)                                                        │
-# │             if (draw <= upper) { x[i] <- draw; break }                                            │
-# │         }                                                                                         │
-# │     }                                                                                             │
-# │     x                                                                                             │
-# │ }                                                                                                 │
-# │                                                                                                   │
-# │ 2. Add c_max parameter to gen_inf_attempts_gammapoisson_contacts() in code/utils.R                │
-# │                                                                                                   │
-# │ Add c_max = Inf as a new parameter (default preserves existing behavior). Change the single line: │
-# │ levels <- rgamma(n_switches + 1, k_c, k_c)                                                        │
-# │ to:                                                                                               │
-# │ levels <- rtgamma(n_switches + 1, k_c, k_c, upper = c_max)                                        │
-# │                                                                                                   │
-# │ 3. Add mu_truncated_gamma() helper to code/utils.R                                                │
-# │                                                                                                   │
-# │ Computes μ_T for a Gamma(k_c, k_c) truncated at c_max:                                            │
-# │ mu_truncated_gamma <- function(k_c, c_max) {                                                      │
-# │     if (is.infinite(c_max)) return(1)                                                             │
-# │     pgamma(c_max, k_c + 1, k_c) / pgamma(c_max, k_c, k_c)                                         │
-# │ }                                                                                                 │
-# │                                                                                                   │
-# │ 4. Write code/gatheringsize.R                                                                     │
-# │                                                                                                   │
-# │ Structure mirrors code/overdispersion.R (same pathogen loop, same simulation infrastructure).     │
-# │                                                                                                   │
-# │ Parameters:                                                                                       │
-# │ - k_c = 1 (moderate contact heterogeneity, matching overdispersion.R epi sims)                    │
-# │ - lambda_gp = 1 (matching overdispersion.R)                                                       │
-# │ - c_max_vals: a few restriction levels, e.g. c(1.5, 2, 3, 5, Inf) — from strict to no restriction │
-# │ - psi_vals = c(0, 0.25, 0.5, 0.75, 1)                                                             │
-# │ - Use nsim_small (1000) for epidemic simulations                                                  │
-# │                                                                                                   │
-# │ For each pathogen × c_max × ψ, run three scenarios:                                               │
-# │                                                                                                   │
-# │ 1. "Restricted" — gen_inf_attempts_gammapoisson_contacts(Tgen, R0, alpha, psi, k_c, lambda_gp,    │
-# │ c_max = c_max_val)                                                                                │
-# │   - True R₀_new = R₀ · μ_T, true k_new                                                            │
-# │ 2. "R₀-only" — gen_inf_attempts_gammapoisson_contacts(Tgen, R0 * mu_T, alpha, psi, k_c,           │
-# │ lambda_gp)                                                                                        │
-# │   - Same R₀_new, but original (lower) k — overdispersion unchanged from baseline                  │
-# │ 3. "Poisson" — gen_inf_attempts_gamma(Tgen, R0 * mu_T, alpha, psi)                                │
-# │   - Same R₀_new, no contact process at all — k = ∞                                                │
-# │                                                                                                   │
-# │ For each scenario, simulate nsim_small epidemics using sim_stochastic_fast(), record whether each │
-# │  establishes (reaches establishment_threshold).                                                   │
-# │                                                                                                   │
-# │ Output figures:                                                                                   │
-# │                                                                                                   │
-# │ - Main figure (fig_gathering_pest_<pathogen>): For a fixed c_max (e.g. 2), a grouped bar chart or │
-# │  dot plot with ψ on x-axis, P_establishment on y-axis, three bars/points per ψ for the three      │
-# │ scenarios. Shows the "sandwich" effect and how the gap widens for small ψ.                        │
-# │ - Secondary figure (fig_gathering_cmax_<pathogen>): P_establishment vs c_max for each ψ, showing  │
-# │ how the restriction strength affects establishment under the full model.                          │
-# │ - Summary table: Print R₀_new, k_old, k_new, k_c^T for each c_max.                                │
-# │                                                                                                   │
-# │ Verification                                                                                      │
-# │                                                                                                   │
-# │ 1. At c_max = Inf: all three scenarios should give the same P_est (no restriction)                │
-# │ 2. For ψ = 1 (smooth): all three scenarios should be nearly identical (k is huge, overdispersion  │
-# │ irrelevant)                                                                                       │
-# │ 3. For ψ = 0 (spike): the three scenarios should show the largest spread                          │
-# │ 4. R₀_new should match the analytical μ_T formula — print both for cross-check

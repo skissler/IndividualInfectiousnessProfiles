@@ -222,90 +222,90 @@ for (i in seq_len(nrow(onset_dat))) {
 # ----------------------------------------------------------------------
 
 # --- Tianjin COVID-19 clusters (Ganyani et al. 2020 Eurosurveillance) ---
-cat("  Supplementing with Tianjin COVID-19 data (Ganyani et al. 2020)...\n")
-
-tj <- tryCatch(read.csv("data/tianjin_covid_data.csv", stringsAsFactors = FALSE),
-               error = function(e) NULL)
-if (!is.null(tj)) {
-	# Parse infection sources: extract TJ## case IDs
-	tj_pairs <- list()
-	for (i in seq_len(nrow(tj))) {
-		if (is.na(tj$Infection_source[i])) next
-		infector_ids <- regmatches(tj$Infection_source[i],
-		                           gregexpr("TJ[0-9]+", tj$Infection_source[i]))[[1]]
-		for (inf_id in infector_ids) {
-			tj_pairs[[length(tj_pairs) + 1]] <- data.frame(
-				infector = inf_id, infectee = tj$case_id[i],
-				stringsAsFactors = FALSE
-			)
-		}
-	}
-	if (length(tj_pairs) > 0) {
-		tj_pair_df <- do.call(rbind, tj_pairs)
-		onset_map <- setNames(tj$symptom_onset, tj$case_id)
-		tj_pair_df$onset_inf <- as.Date(onset_map[tj_pair_df$infector], format = "%d/%m/%Y")
-		tj_pair_df$onset_ife <- as.Date(onset_map[tj_pair_df$infectee], format = "%d/%m/%Y")
-		tj_pair_df$si <- as.numeric(tj_pair_df$onset_ife - tj_pair_df$onset_inf)
-		tj_valid <- tj_pair_df[!is.na(tj_pair_df$si), ]
-
-		tj_clusters <- split(tj_valid$si, tj_valid$infector)
-		tj_clusters <- unname(tj_clusters)
-
-		if (!("COVID-19" %in% names(all_disease_clusters))) {
-			all_disease_clusters[["COVID-19"]] <- list(clusters = list(), tree_ids = character(0))
-		}
-		all_disease_clusters[["COVID-19"]]$clusters <- c(
-			all_disease_clusters[["COVID-19"]]$clusters, tj_clusters
-		)
-		all_disease_clusters[["COVID-19"]]$tree_ids <- c(
-			all_disease_clusters[["COVID-19"]]$tree_ids, "tianjin_ganyani_2020"
-		)
-		cat(sprintf("    Added %d Tianjin clusters (%d with >=2 offspring), %d SI\n",
-		    length(tj_clusters), sum(sapply(tj_clusters, length) >= 2),
-		    sum(sapply(tj_clusters, length))))
-	}
-}
+# cat("  Supplementing with Tianjin COVID-19 data (Ganyani et al. 2020)...\n")
+# 
+# tj <- tryCatch(read.csv("data/tianjin_covid_data.csv", stringsAsFactors = FALSE),
+#                error = function(e) NULL)
+# if (!is.null(tj)) {
+# 	# Parse infection sources: extract TJ## case IDs
+# 	tj_pairs <- list()
+# 	for (i in seq_len(nrow(tj))) {
+# 		if (is.na(tj$Infection_source[i])) next
+# 		infector_ids <- regmatches(tj$Infection_source[i],
+# 		                           gregexpr("TJ[0-9]+", tj$Infection_source[i]))[[1]]
+# 		for (inf_id in infector_ids) {
+# 			tj_pairs[[length(tj_pairs) + 1]] <- data.frame(
+# 				infector = inf_id, infectee = tj$case_id[i],
+# 				stringsAsFactors = FALSE
+# 			)
+# 		}
+# 	}
+# 	if (length(tj_pairs) > 0) {
+# 		tj_pair_df <- do.call(rbind, tj_pairs)
+# 		onset_map <- setNames(tj$symptom_onset, tj$case_id)
+# 		tj_pair_df$onset_inf <- as.Date(onset_map[tj_pair_df$infector], format = "%d/%m/%Y")
+# 		tj_pair_df$onset_ife <- as.Date(onset_map[tj_pair_df$infectee], format = "%d/%m/%Y")
+# 		tj_pair_df$si <- as.numeric(tj_pair_df$onset_ife - tj_pair_df$onset_inf)
+# 		tj_valid <- tj_pair_df[!is.na(tj_pair_df$si), ]
+# 
+# 		tj_clusters <- split(tj_valid$si, tj_valid$infector)
+# 		tj_clusters <- unname(tj_clusters)
+# 
+# 		if (!("COVID-19" %in% names(all_disease_clusters))) {
+# 			all_disease_clusters[["COVID-19"]] <- list(clusters = list(), tree_ids = character(0))
+# 		}
+# 		all_disease_clusters[["COVID-19"]]$clusters <- c(
+# 			all_disease_clusters[["COVID-19"]]$clusters, tj_clusters
+# 		)
+# 		all_disease_clusters[["COVID-19"]]$tree_ids <- c(
+# 			all_disease_clusters[["COVID-19"]]$tree_ids, "tianjin_ganyani_2020"
+# 		)
+# 		cat(sprintf("    Added %d Tianjin clusters (%d with >=2 offspring), %d SI\n",
+# 		    length(tj_clusters), sum(sapply(tj_clusters, length) >= 2),
+# 		    sum(sapply(tj_clusters, length))))
+# 	}
+# }
 
 # --- Hart et al. (2022) eLife: Zhang superspreader cluster ---
-cat("  Supplementing with Hart et al. (2022) transmission pairs...\n")
+# cat("  Supplementing with Hart et al. (2022) transmission pairs...\n")
+# 
+# hart <- tryCatch(readxl::read_xlsx("data/hart_transmission_pairs.xlsx"),
+#                  error = function(e) NULL)
+# if (!is.null(hart)) {
+# 	# Zhang dataset: 35 pairs from one superspreader — one big cluster
+# 	zhang <- hart[hart$Dataset == "Zhang", ]
+# 	zhang_si <- zhang$t_s2 - zhang$t_s1
+# 	zhang_cluster <- list(zhang_si)
+# 
+# 	# Other datasets: treat each unique t_s1 as a putative infector
+# 	# This is imperfect (two infectors could share onset day) but
+# 	# provides additional data, especially for large groups
+# 	other_clusters <- list()
+# 	for (ds in setdiff(unique(hart$Dataset), "Zhang")) {
+# 		sub <- hart[hart$Dataset == ds, ]
+# 		sub$si <- sub$t_s2 - sub$t_s1
+# 		by_infector <- split(sub$si, sub$t_s1)
+# 		other_clusters <- c(other_clusters, unname(by_infector))
+# 	}
+# 
+# 	hart_clusters <- c(zhang_cluster, other_clusters)
+# 
+# 	if (!("COVID-19" %in% names(all_disease_clusters))) {
+# 		all_disease_clusters[["COVID-19"]] <- list(clusters = list(), tree_ids = character(0))
+# 	}
+# 	all_disease_clusters[["COVID-19"]]$clusters <- c(
+# 		all_disease_clusters[["COVID-19"]]$clusters, hart_clusters
+# 	)
+# 	all_disease_clusters[["COVID-19"]]$tree_ids <- c(
+# 		all_disease_clusters[["COVID-19"]]$tree_ids, "hart_2022_elife"
+# 	)
+# 	n_hart_multi <- sum(sapply(hart_clusters, length) >= 2)
+# 	cat(sprintf("    Added %d Hart clusters (%d with >=2 offspring), %d SI\n",
+# 	    length(hart_clusters), n_hart_multi,
+# 	    sum(sapply(hart_clusters, length))))
+# }
 
-hart <- tryCatch(readxl::read_xlsx("data/hart_transmission_pairs.xlsx"),
-                 error = function(e) NULL)
-if (!is.null(hart)) {
-	# Zhang dataset: 35 pairs from one superspreader — one big cluster
-	zhang <- hart[hart$Dataset == "Zhang", ]
-	zhang_si <- zhang$t_s2 - zhang$t_s1
-	zhang_cluster <- list(zhang_si)
-
-	# Other datasets: treat each unique t_s1 as a putative infector
-	# This is imperfect (two infectors could share onset day) but
-	# provides additional data, especially for large groups
-	other_clusters <- list()
-	for (ds in setdiff(unique(hart$Dataset), "Zhang")) {
-		sub <- hart[hart$Dataset == ds, ]
-		sub$si <- sub$t_s2 - sub$t_s1
-		by_infector <- split(sub$si, sub$t_s1)
-		other_clusters <- c(other_clusters, unname(by_infector))
-	}
-
-	hart_clusters <- c(zhang_cluster, other_clusters)
-
-	if (!("COVID-19" %in% names(all_disease_clusters))) {
-		all_disease_clusters[["COVID-19"]] <- list(clusters = list(), tree_ids = character(0))
-	}
-	all_disease_clusters[["COVID-19"]]$clusters <- c(
-		all_disease_clusters[["COVID-19"]]$clusters, hart_clusters
-	)
-	all_disease_clusters[["COVID-19"]]$tree_ids <- c(
-		all_disease_clusters[["COVID-19"]]$tree_ids, "hart_2022_elife"
-	)
-	n_hart_multi <- sum(sapply(hart_clusters, length) >= 2)
-	cat(sprintf("    Added %d Hart clusters (%d with >=2 offspring), %d SI\n",
-	    length(hart_clusters), n_hart_multi,
-	    sum(sapply(hart_clusters, length))))
-}
-
-cat("\n--- Extracted clusters by disease (with supplements) ---\n")
+cat("\n--- Extracted clusters by disease ---\n")
 cat(sprintf("  %-20s  %5s  %5s  %5s  %8s\n",
     "Disease", "Trees", "Clust", "Multi", "TotalSI"))
 for (d in names(all_disease_clusters)) {

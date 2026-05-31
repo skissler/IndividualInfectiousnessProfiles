@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.3.29)  30 MAY 2026 13:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.3.29)  31 MAY 2026 15:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1217,9 +1217,18 @@ File: figures//fig1/png/Fig1.pdf Graphic file (type pdf)
 <use figures//fig1/png/Fig1.pdf>
 Package pdftex.def Info: figures//fig1/png/Fig1.pdf  used on input line 186.
 (pdftex.def)             Requested size: 325.215pt x 199.19908pt.
+<figures//fig3/png/Fig3.pdf, id=96, 452.69125pt x 139.52126pt>
+File: figures//fig3/png/Fig3.pdf Graphic file (type pdf)
+<use figures//fig3/png/Fig3.pdf>
+Package pdftex.def Info: figures//fig3/png/Fig3.pdf  used on input line 197.
+(pdftex.def)             Requested size: 469.75499pt x 144.77933pt.
  [6
 
- <./figures//fig1/png/Fig1.pdf>] (./main-science.aux)
+ <./figures//fig1/png/Fig1.pdf> <./figures//fig3/png/Fig3.pdf
+
+pdfTeX warning: pdflatex (file ./figures//fig3/png/Fig3.pdf): PDF inclusion: mu
+ltiple pdfs with page group included in a single page
+>] (./main-science.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
@@ -1228,10 +1237,10 @@ Package rerunfilecheck Info: File `main-science.out' has not changed.
 (rerunfilecheck)             Checksum: F90EC86B029096B9126BDD68CF9CD717;119.
  ) 
 Here is how much of TeX's memory you used:
- 16009 strings out of 478994
- 228160 string characters out of 5858184
+ 16017 strings out of 478994
+ 228375 string characters out of 5858184
  547480 words of memory out of 5000000
- 33170 multiletter control sequences out of 15000+600000
+ 33175 multiletter control sequences out of 15000+600000
  514797 words of font info for 99 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  88i,6n,134p,1405b,502s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1251,10 +1260,10 @@ texmf-dist/fonts/type1/public/newtx/txsys.pfb></usr/local/texlive/2021/texmf-di
 st/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2021/texmf-dist/font
 s/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1
 /urw/helvetic/uhvro8a.pfb>
-Output written on main-science.pdf (6 pages, 380850 bytes).
+Output written on main-science.pdf (6 pages, 627451 bytes).
 PDF statistics:
- 190 PDF objects out of 1000 (max. 8388607)
- 146 compressed objects within 2 object streams
- 24 named destinations out of 1000 (max. 500000)
- 14 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 213 PDF objects out of 1000 (max. 8388607)
+ 162 compressed objects within 2 object streams
+ 25 named destinations out of 1000 (max. 500000)
+ 19 words of extra memory for PDF output out of 10000 (max. 10000000)
 

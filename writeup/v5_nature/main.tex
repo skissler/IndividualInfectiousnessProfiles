@@ -192,6 +192,11 @@ Looking ahead, the most pressing open question is measurement: without better es
 
 \paragraph{Figure 3 $|$ Coincidence overdispersion}
 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=6.5in]{fig3/png/Fig3.pdf} 
+\end{figure}
+
 \paragraph{Figure 4 $|$ The epidemic latent period}
 
 \paragraph{Figure 5 $|$ Interventions}
@@ -245,7 +250,7 @@ Looking ahead, the most pressing open question is measurement: without better es
   % - Panel b: Heatmaps of k as a function of ψ and ω (or ρ) for the three benchmark
   % pathogens. The weekly contact variation zone deserves visual emphasis.
   % - Panel c: Extinction probability as a function of ψ — directly links the
-  % overdispersion result to biological consequences and bridges to Figure 4.
+  % overdispersion result to biological consequences and bridges to Figure 4.
 
   % Leave out: Stochastic contact process results (Supplementary). Separate panels for
   % each pathogen's extinction curve — overlay on one panel.
@@ -328,5 +333,57 @@ Looking ahead, the most pressing open question is measurement: without better es
 % \textbf{a}, Testing effectiveness (TE) under symptom-based detection as a function of the mean symptom-to-peak offset $\delta_\text{symp}$, for three values of $\psi$. Rows: benchmark pathogens.
 % \textbf{b}, As in \textbf{a}, for test-based screening as a function of test interval $\Delta_\text{test}$.
 % \textbf{c}, Epidemic extinction probability under gathering size restrictions (truncated stochastic contacts, solid lines) compared with $R_\text{eff}$-matched epidemics without contact-process adjustment (dashed lines), for three values of $\psi$.
+
+  % Is the Poisson GLM approach scientifically validated?
+
+  % Yes — it's the specifically-recommended fix for the bias you're avoiding. The canonical reference
+  % is:
+
+  % Ma, Dushoff, Bolker & Earn (2014) "Estimating initial epidemic growth rates." Bull Math Biol
+  % 76:245–260. [DOI:10.1007/s11538-013-9918-2] — retrieved from PubMed (PMID 24272389).
+
+  % This paper directly addresses your concern: fitting to cumulative cases introduces bias because the
+  %  cumulative curve's early values are autocorrelated and the fitted slope is pulled upward. Their
+  % conclusion is that fitting to incidence data is appropriate. The Poisson GLM is exactly a maximum
+  % likelihood fit of an exponential model with Poisson observation error on daily incidence — it is
+  % the natural implementation of what they recommend.
+
+  % Two caveats worth knowing:
+  % - Daily counts during an outbreak are autocorrelated (tomorrow depends on today), so standard
+  % errors from the GLM are too small. Since you're using it for the point estimate of r, not for CIs,
+  % this doesn't matter.
+  % - Daily counts are typically overdispersed (variance > mean), so quasi-Poisson or negative-binomial
+  %  GLM would give better SEs. Again, the slope coefficient (the growth rate) is unaffected — the
+  % point estimate is identical.
+
+  % So: the approach is well-founded, and your specific motivation for switching from cumulative-case
+  % log-linear fitting is directly validated by Ma et al. (2014).
+
+  %  ---
+  % Literature question: are sibling serial intervals treated as independent draws from g(τ)?
+
+  % The short answer is: the majority of papers do treat them as independent, but this is nuanced.
+  % Based on articles retrieved from PubMed:
+
+  % Most papers — yes, independent. The standard approach (e.g. Nishiura et al. 2020, PMID 32145466,
+  % DOI) pools all infector-infectee pairs and fits a distribution treating each pair as an independent
+  %  draw. There is no accounting for the fact that pairs sharing a common infector are correlated.
+
+  % More sophisticated methods — partial accounting. The Ganyani et al. 2020 paper (PMID 32372755, DOI)
+  %  — which is actually the source of the COVID-19 generation interval parameters you use in
+  % psi_empirical_litgi.R — uses a latent-variable approach that marginalizes over the infector's
+  % (unknown) infection time. This means that within a cluster, the serial intervals of siblings do
+  % share IP_infector in the likelihood, so their within-cluster correlation is correctly accounted
+  % for. However, the generation intervals themselves (τ_j) are still assumed to be independent draws
+  % from g(τ) for each infectee, regardless of the infector. So Ganyani accounts for the
+  % IP_infector-induced correlation but not for any punctuation-induced correlation in the generation
+  % intervals themselves.
+
+  % So your claim holds with a useful nuance to add: the dominant approach in the literature (even the
+  % more careful latent-variable methods like Ganyani) assumes that the generation intervals from a
+  % common infector are independent draws from g(τ). Your paper's contribution is to show that this
+  % assumption fails when infectiousness is punctuated — under psi < 1, τ_shared creates positive
+  % within-cluster correlation in the generation intervals that no existing estimation method accounts
+  % for, leading to overconfident posteriors for the GI parameters.
 
 \end{document}

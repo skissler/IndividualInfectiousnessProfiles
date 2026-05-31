@@ -2,6 +2,8 @@ library(tidyverse)
 source("code/utils.R")
 source("code/parameters.R")
 
+set.seed(42)
+
 # ==============================================================================
 # Infinite-population growth rate analysis
 #

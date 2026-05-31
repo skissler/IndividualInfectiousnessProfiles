@@ -4,6 +4,8 @@ library(patchwork)
 source("code/utils.R")
 source("code/parameters.R")
 
+set.seed(42)
+
 # ==============================================================================
 # Isolation effects on TE and epidemic dynamics, across all pathogens
 #
@@ -63,7 +65,7 @@ od_k_list             <- list()
 for (pars in parslist) {
 
 pathogen <- pars$pathogen
-T        <- pars$Tgen
+Tgen     <- pars$Tgen
 alpha    <- pars$alpha
 beta     <- pars$beta
 R0       <- pars$R0
@@ -213,7 +215,7 @@ for (sim in 1:nsim) {
 		# (1) Fixed isolation at tau_offset relative to peak
 		tinf <- sim_stochastic_fast(n = popsize,
 			gen_inf_attempts = gen_inf_attempts_gamma_symptoms(
-				T, R0, alpha, psi,
+				Tgen, R0, alpha, psi,
 				mu_sym     = tau_offset_sim,
 				p_sym      = p_adhere))
 		infected <- sort(tinf[is.finite(tinf)])
@@ -224,7 +226,7 @@ for (sim in 1:nsim) {
 		# (2) Naive TE adjustment (same GI, reduced R0)
 		tinf <- sim_stochastic_fast(n = popsize,
 			gen_inf_attempts = gen_inf_attempts_gamma(
-				T, R0*(1 - te), alpha, psi))
+				Tgen, R0*(1 - te), alpha, psi))
 		infected <- sort(tinf[is.finite(tinf)])
 		results[[idx]] <- tibble(tinf = infected, cuminf = seq_along(infected),
 		                         sim = sim, psi = psi, type = "reduced_R0")
@@ -329,7 +331,7 @@ od_idx <- 0L
 
 # --- Strategy 1: Fixed isolation (deterministic timing, matches Section 4) ---
 for (psi_val in psi_vals_od) {
-	gfun <- gen_inf_attempts_gamma_symptoms(T, R0, alpha, psi_val,
+	gfun <- gen_inf_attempts_gamma_symptoms(Tgen, R0, alpha, psi_val,
 		mu_sym = tau_offset_sim, sigma_sym = 0,
 		lambda_act = Inf, p_sym = p_adhere, eta = 1)
 	n_off <- sapply(rep(0, n_index_od), function(t) length(gfun(t)))
@@ -343,7 +345,7 @@ cat(sprintf("    Fixed isolation done\n"))
 
 # --- Strategy 2: Screening (Delta = 3) ---
 for (psi_val in psi_vals_od) {
-	gfun <- gen_inf_attempts_gamma_screening(T, R0, alpha, psi_val,
+	gfun <- gen_inf_attempts_gamma_screening(Tgen, R0, alpha, psi_val,
 		d_pre = d_pre, d_post = d_post, Delta = 3,
 		lambda_act = lambda_act, p_sens = 1, eta = 1)
 	n_off <- sapply(rep(0, n_index_od), function(t) length(gfun(t)))
@@ -357,7 +359,7 @@ cat(sprintf("    Screening D=3 done\n"))
 
 # --- Strategy 3: Screening (Delta = 7) ---
 for (psi_val in psi_vals_od) {
-	gfun <- gen_inf_attempts_gamma_screening(T, R0, alpha, psi_val,
+	gfun <- gen_inf_attempts_gamma_screening(Tgen, R0, alpha, psi_val,
 		d_pre = d_pre, d_post = d_post, Delta = 7,
 		lambda_act = lambda_act, p_sens = 1, eta = 1)
 	n_off <- sapply(rep(0, n_index_od), function(t) length(gfun(t)))
@@ -371,7 +373,7 @@ cat(sprintf("    Screening D=7 done\n"))
 
 # --- Strategy 4: Symptom-triggered (stochastic timing, sigma=2) ---
 for (psi_val in psi_vals_od) {
-	gfun <- gen_inf_attempts_gamma_symptoms(T, R0, alpha, psi_val,
+	gfun <- gen_inf_attempts_gamma_symptoms(Tgen, R0, alpha, psi_val,
 		mu_sym = tau_offset_sim, sigma_sym = 2,
 		lambda_act = Inf, p_sym = p_adhere, eta = 1)
 	n_off <- sapply(rep(0, n_index_od), function(t) length(gfun(t)))
@@ -433,7 +435,7 @@ od_k_list[[pathogen]] <- fig_od_k
 psi_hist_vals <- c(0, 0.5, 1)
 hist_data <- list()
 for (psi_val in psi_hist_vals) {
-	gfun <- gen_inf_attempts_gamma_symptoms(T, R0, alpha, psi_val,
+	gfun <- gen_inf_attempts_gamma_symptoms(Tgen, R0, alpha, psi_val,
 		mu_sym = tau_offset_sim, sigma_sym = 0,
 		lambda_act = Inf, p_sym = p_adhere, eta = 1)
 	n_off <- sapply(rep(0, n_index_od), function(t) length(gfun(t)))

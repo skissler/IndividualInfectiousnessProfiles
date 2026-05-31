@@ -569,3 +569,12 @@ for (path in pathogen_order) {
 }
 
 cat("\n=== GI parameter identifiability (all pathogens) complete ===\n")
+
+
+
+  # One approximation to note: gi_mean_ci_lo = alpha_ci_lo / beta_ci_hi and gi_mean_ci_hi = alpha_ci_hi
+  #  / beta_ci_lo (lines 154–155) use marginal CI corners rather than the joint posterior. The code
+  # comment flags this as "conservative," which holds when alpha and beta are negatively correlated in
+  # the posterior (the expected case when the GI mean is constrained), but is not guaranteed. This is a
+  #  known approximation and is fine for a coverage study, but worth documenting.
+  #  

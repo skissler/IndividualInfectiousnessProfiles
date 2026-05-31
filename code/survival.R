@@ -39,13 +39,11 @@ set.seed(42)
 #'
 #' @param R0    Basic reproduction number
 #' @param alpha Shape parameter of Gamma generation interval
-#' @param beta  Rate parameter of Gamma generation interval
-#' @param r     Malthusian growth rate
 #' @param psi   Punctuation parameter (0 = spike, 1 = smooth)
-compute_var_W <- function(R0, alpha, beta, r, psi) {
+compute_var_W <- function(R0, alpha, psi) {
 	z <- R0^(1 / alpha) - 1
-	rho_1 <- (1 + z) / (1 + 2 * z)
-	rho_2 <- (1 + z)^2 / (1 + 2 * z)
+	rho_1 <- (1 + z) / (1 + 2*z)
+	rho_2 <- (1 + z)^2 / (1 + 2*z)
 
 	rho_1_a <- rho_1^alpha
 	(rho_1_a + rho_2^((1 - psi) * alpha) - 1) / (1 - rho_1_a)
@@ -55,9 +53,9 @@ compute_var_W <- function(R0, alpha, beta, r, psi) {
 #'
 #' Unconditional: E[W] = 1, E[W^2] = 1 + CV^2(W)
 #' Conditional on survival (W > 0): E_cond = 1/(1-q), Var_cond from above
-fit_W_gamma <- function(R0, alpha, beta, r, psi) {
+fit_W_gamma <- function(R0, alpha, psi) {
 	q <- extinction_prob(R0)
-	var_W <- compute_var_W(R0, alpha, beta, r, psi)
+	var_W <- compute_var_W(R0, alpha, psi)
 	EW2 <- 1 + var_W  # E[W^2] = Var(W) + (E[W])^2 = Var(W) + 1
 
 	E_cond   <- 1 / (1 - q)
@@ -112,7 +110,7 @@ theory_surv_list_g  <- list()
 for (psi in psivals) {
 
 	# Compute 2-moment Gamma
-	fit_g <- fit_W_gamma(R0, alpha, beta, r, psi)
+	fit_g <- fit_W_gamma(R0, alpha, psi)
 
 	# Sample W | survival from fitted 2-moment Gamma
 	W_g <- rgamma(n_draws, shape = fit_g$shape, rate = fit_g$rate)
@@ -187,9 +185,10 @@ save_fig(fig_survival, paste0("fig_survival_v2_", pathogen))
 
 # Output the survival at weekly intervals: 
 empirical_surv_summary <- empirical_surv %>% 
-	mutate(week=floor(t/7)) %>% 
-	group_by(week) %>% 
+	mutate(week=floor(t/7)) %>%
+	group_by(psi, week) %>%
 	filter(t==max(t))
+cat(sprintf("  %s: Weekly survival values:\n", pathogen))
 print(empirical_surv_summary, n=Inf)
 
 # Output the time each curve takes to reach 5% survival: 
@@ -197,11 +196,12 @@ empirical_surv_summary_pct <- empirical_surv %>%
 	filter(prop_below < 0.05) %>% 
 	group_by(psi) %>% 
 	slice(1) 
-print(empirical_surv_summary, n=Inf)
+cat(sprintf("  %s: Time to reach 5pct survival:\n", pathogen))
+print(empirical_surv_summary_pct, n=Inf)
 
 # Find the date of the max deviation between psi=0 and psi=1 survival curves:
 empirical_surv_summary_max <- empirical_surv %>% 
-	filter(psi %in% c(0,1)) %>% 
+	filter(psi %in% c("0", "1")) %>%
 	mutate(day=floor(t)) %>% 
 	group_by(psi, day) %>% 
 	summarise(prop_below=max(prop_below)) %>% 
@@ -209,7 +209,7 @@ empirical_surv_summary_max <- empirical_surv %>%
 	mutate(diff=abs(`1`-`0`)) %>% 
 	filter(diff==max(diff))
 
-cat(sprintf("  %s: Day of max difference.\n", pathogen))
+cat(sprintf("  %s: Day of max difference:\n", pathogen))
 print(empirical_surv_summary_max, n=Inf)
 
 cat(sprintf("  %s: theory overlays saved (GG + Gamma).\n", pathogen))
@@ -224,19 +224,20 @@ W_empirical <- time_to_establishment %>%
 
 # Theoretical density functions for each psi
 W_density_list <- list()
-w_grid <- seq(1e-4, quantile(W_empirical$W, 0.995), length.out = 500)
+w_range <- sapply(psivals, function(p) {
+	fit_g <- fit_W_gamma(R0, alpha, p)
+	qgamma(c(0.001, 0.999), shape = fit_g$shape, rate = fit_g$rate)
+})
+w_grid <- seq(max(1e-4, min(w_range)), max(w_range), length.out = 500)
 
 for (psi in psivals) {
-	fit_g  <- fit_W_gamma(R0, alpha, beta, r, psi)
+	fit_g  <- fit_W_gamma(R0, alpha, psi)
 
 	# Gamma density
 	d_g <- dgamma(w_grid, shape = fit_g$shape, rate = fit_g$rate)
 
 	W_density_list[[as.character(psi)]] <- tibble(
-		psi = factor(psi), w = w_grid,
-		Gamma = d_g) %>%
-		pivot_longer(cols = c(Gamma),
-		             names_to = "fit", values_to = "density")
+		psi = factor(psi), w = w_grid, density = d_g)
 }
 
 W_density_df <- bind_rows(W_density_list)
@@ -245,17 +246,12 @@ fig_W_hist <- ggplot(W_empirical, aes(x = W)) +
 	geom_histogram(aes(y = after_stat(density)), bins = 60,
 	               fill = "white", col = "darkgrey") +
 	geom_line(data = W_density_df,
-	          aes(x = w, y = density, col = fit, linetype = fit),
-	          linewidth = 0.8) +
-	scale_color_manual(values = c("Gamma" = "blue", "Gen. Gamma" = "red")) +
-	scale_linetype_manual(values = c("Gamma" = "dashed", "Gen. Gamma" = "solid")) +
+	          aes(x = w, y = density),
+	          col = "blue", linetype = "dashed", linewidth = 0.8) +
 	facet_wrap(~psi, nrow = 1, scales = "free_y",
 	           labeller = label_bquote(psi == .(as.numeric(as.character(psi))))) +
-	labs(x = "W | survival", y = "Density",
-	     col = "Fit", linetype = "Fit",
-	     title = pathogen) +
-	theme_classic() +
-	theme(legend.position = "bottom")
+	labs(x = "W | survival", y = "Density", title = pathogen) +
+	theme_classic()
 
 save_fig(fig_W_hist, paste0("fig_W_hist_", pathogen))
 
@@ -274,8 +270,7 @@ fig_W_overlay <- ggplot() +
 	          linewidth = 0.8) +
 	scale_fill_manual(values = psi_colors) +
 	scale_color_manual(values = psi_colors) +
-	scale_x_continuous(limits=c(0, 5)) + 
-	scale_y_continuous(limits=c(0, 1.5)) + 
+	coord_cartesian(xlim = c(0, quantile(W_empirical$W, 0.995))) +
 	labs(x = "W | survival", y = "Density",
 	     col = expression(psi), fill = expression(psi),
 	     title = pathogen) +
@@ -296,13 +291,17 @@ varsigma_empirical <- W_empirical %>%
 # Theoretical density of varsigma = log(W)/r where W ~ Gamma(k, lambda):
 #   f_varsigma(s) = f_W(e^{rs}) * r * e^{rs}
 varsigma_density_list <- list()
-s_grid <- seq(
-	quantile(varsigma_empirical$varsigma, 0.005),
-	quantile(varsigma_empirical$varsigma, 0.995),
-	length.out = 500)
+# Derive grid from theoretical distributions so tails aren't clipped by
+# the empirical range of any particular psi value.
+s_range <- sapply(psivals, function(p) {
+	fit_g  <- fit_W_gamma(R0, alpha, p)
+	w_edge <- qgamma(c(0.001, 0.999), shape = fit_g$shape, rate = fit_g$rate)
+	log(w_edge) / r
+})
+s_grid <- seq(min(s_range), max(s_range), length.out = 500)
 
 for (psi in psivals) {
-	fit_g <- fit_W_gamma(R0, alpha, beta, r, psi)
+	fit_g <- fit_W_gamma(R0, alpha, psi)
 	w_vals <- exp(r * s_grid)
 	d_s <- dgamma(w_vals, shape = fit_g$shape, rate = fit_g$rate) * r * w_vals
 
@@ -320,7 +319,7 @@ varsigma_emp_means <- varsigma_empirical %>%
 varsigma_theo_means <- tibble(
 	psi = factor(psivals),
 	mean_varsigma = sapply(psivals, function(p) {
-		fit_g <- fit_W_gamma(R0, alpha, beta, r, p)
+		fit_g <- fit_W_gamma(R0, alpha, p)
 		(digamma(fit_g$shape) - log(fit_g$rate)) / r
 	}))
 
@@ -348,52 +347,63 @@ save_fig(fig_varsigma_overlay, paste0("fig_varsigma_overlay_", pathogen))
 
 cat(sprintf("  %s: varsigma overlay saved.\n", pathogen))
 
+# --------------------------------------------------------------------------
+# 3i. Combined cuminf + varsigma overlay (Omicron only)
+# --------------------------------------------------------------------------
+
+if (pathogen == "omicron") {
+
+	plot_df <- cache$plot
+	lastday <- ceiling(max(plot_df$tinf))
+
+	# Transform varsigma density to time: t = t_det - s (mirror flip so
+	# negative s -> times after t_det, matching the trajectory spray).
+	# Scale so the tallest peak reaches 50% of popsize on the y-axis.
+	density_height <- popsize * 0.50
+	max_density    <- max(varsigma_density_df$density)
+
+	time_density_df <- varsigma_density_df %>%
+		mutate(
+			t              = t_det - s,
+			scaled_density = density / max_density * density_height
+		)
+
+	# Replicate all three distributions into every panel by crossing with
+	# psi_panel (the faceting variable), keeping psi for fill/color.
+	psi_panels <- levels(plot_df$psi)
+	time_density_all <- time_density_df %>%
+		crossing(psi_panel = factor(psi_panels, levels = psi_panels))
+
+	# Replicate the renewal curve across panels the same way.
+	ren_all <- filter(ren_out, t <= lastday) %>%
+		mutate(cuminf_n = cuminf * popsize) %>%
+		crossing(psi_panel = factor(psi_panels, levels = psi_panels))
+
+	fig_cuminf_varsigma <- ggplot() +
+		geom_line(data = plot_df %>% mutate(psi_panel = psi),
+		          aes(x = tinf, y = cuminf, group = sim),
+		          alpha = 0.2, col = "grey") +
+		geom_line(data = ren_all,
+		          aes(x = t, y = cuminf_n),
+		          alpha = 0.8, linewidth = 1, col = "black") +
+		geom_hline(yintercept = establishment_threshold,
+		           linetype = "dashed", linewidth = 0.5, col = "black") +
+		geom_ribbon(data = time_density_all,
+		            aes(x = t, ymin = 0, ymax = scaled_density,
+		                fill = psi, col = psi),
+		            alpha = 0.3, linewidth = 0.5) +
+		scale_fill_manual(values = psi_colors) +
+		scale_color_manual(values = psi_colors) +
+		facet_wrap(~psi_panel, nrow = 1,
+		           labeller = label_bquote(psi == .(as.numeric(as.character(psi_panel))))) +
+		labs(x = "Days", y = "Cumulative infections",
+		     fill = expression(psi), col = expression(psi),
+		     title = "Omicron") +
+		theme_classic() +
+		theme(legend.position = "bottom")
+
+	save_fig(fig_cuminf_varsigma, "fig_cuminf_varsigma_omicron")
+	cat("  omicron: cuminf + varsigma overlay saved.\n")
+}
+
 } # end pathogen loop
-
-# # ==============================================================================
-# # 4. Var(W) and E[varsigma] +/- SD[varsigma] as functions of psi
-# # ==============================================================================
-
-# psi_grid <- seq(0, 1, length.out = 201)
-
-# theory_curves <- map_dfr(parslist, function(pars) {
-# 	R0 <- pars$R0; alpha <- pars$alpha; beta <- pars$beta; r <- pars$r
-
-# 	tibble(
-# 		pathogen = pars$pathogen,
-# 		psi = psi_grid,
-# 		var_W = sapply(psi_grid, function(p)
-# 			compute_var_W(R0, alpha, beta, r, p))
-# 	) %>% mutate(
-# 		# Gamma shape k for W|surv, using k = (1 - c^alpha) / (c^alpha + p*sigma^((1-psi)*alpha) - 1)
-# 		k = {
-# 			fit <- sapply(psi_grid, function(p) fit_W_gamma(R0, alpha, beta, r, p)$shape)
-# 			fit
-# 		},
-# 		E_varsigma  = (digamma(k) - log(k) + log(1 / (1 - extinction_prob(R0)))) / r,
-# 		SD_varsigma = sqrt(trigamma(k)) / r
-# 	)
-# })
-
-# # --- Var(W) vs psi ---
-# fig_var_W <- ggplot(theory_curves, aes(x = psi, y = var_W, col = pathogen)) +
-# 	geom_line(linewidth = 0.8) +
-# 	labs(x = expression(psi), y = expression(Var(W)), col = "Pathogen") +
-# 	theme_classic()
-
-# save_fig(fig_var_W, "fig_var_W_vs_psi")
-
-# # --- E[varsigma] +/- SD[varsigma] vs psi ---
-# fig_E_varsigma <- ggplot(theory_curves, aes(x = psi, col = pathogen, fill = pathogen)) +
-# 	geom_ribbon(aes(ymin = E_varsigma - SD_varsigma,
-# 	                 ymax = E_varsigma + SD_varsigma),
-# 	            alpha = 0.15, colour = NA) +
-# 	geom_line(aes(y = E_varsigma), linewidth = 0.8) +
-# 	labs(x = expression(psi),
-# 	     y = expression(E(varsigma) %+-% SD(varsigma) ~~ "(days)"),
-# 	     col = "Pathogen", fill = "Pathogen") +
-# 	theme_classic()
-
-# save_fig(fig_E_varsigma, "fig_E_varsigma_vs_psi")
-
-# cat("Var(W) and E[varsigma] vs psi figures saved.\n")
